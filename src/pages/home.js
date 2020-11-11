@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <>
       <HomeHeader />
+      <h1>Home</h1>
     </>
   )
 }
