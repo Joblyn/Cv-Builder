@@ -1,12 +1,12 @@
 import React from 'react';
-import HomeHeader from '../containers/home-header';
-import HeroContainer from '../containers/hero';
+import { HomeHeader, HeroContainer, BenefitsSection }from '../containers';
 
 export default function Home() {
   return (
     <>
       <HomeHeader />
       <HeroContainer />
+      <BenefitsSection />
     </>
   )
 }

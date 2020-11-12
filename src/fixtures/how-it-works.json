@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Create an account",
+    "text": "Sign up for an account with full details"
+  }, 
+  {
+    "id": 2,
+    "title": "Select template",
+    "text": "Choose from our various professional templates and start building"
+  }, 
+  {
+    "id": 3,
+    "title": "Add some content ",
+    "text": "Edit and change contents as you build your CV"
+  }, 
+  {
+    "id": 4,
+    "title": "Choose your style",
+    "text": "Style your CV using our awesome design themes"
+  }, 
+  {
+    "id": 5,
+    "title": "Download",
+    "text": "Download your CV and get the dream job you deserve"
+  }
+]

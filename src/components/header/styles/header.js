@@ -62,7 +62,7 @@ export const NavButton = styled(Button)`
   padding: 1rem 2rem;
   background-color: #216DE0;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 29px;
   border-radius: 6px;
   color: #fff;

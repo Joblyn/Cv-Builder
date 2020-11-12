@@ -8,8 +8,7 @@ export const LockBody = createGlobalStyle`
     overflow: hidden;
     position: relative;
     width: 100vw;
-    height: 100vh;
-    font-family: Montserrat; 
+    height: 100vh; 
   }
 `;
 

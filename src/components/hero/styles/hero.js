@@ -49,8 +49,8 @@ export const Text = styled.p`
 export const Button = styled(BootstrapButton)`
   text-align: center;
   padding: 1.4rem 1.8rem;
-  font-size: 20px;
-  font-weight: 500;
+  font-size:1.18rem;
+  font-weight: 600;
   line-height: 20px;
   background-color: #216DE0;
   border-radius: 6px;

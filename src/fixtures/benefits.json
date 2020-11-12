@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "icon": "./icons/benefit1.svg",
+    "title": "Easy to Use",
+    "text": "You can choose a theme & update informations in our inout fields. Save and your resume will be ready."
+  },
+  {
+    "id": 2,
+    "icon": "./icons/benefit2.svg",
+    "title": "Access to Templates",
+    "text": "You can choose a theme & update informations in our inout fields. Save and your resume will be ready."
+  },
+  {
+    "id": 3,
+    "icon": "./icons/benefit3.svg",
+    "title": "Support & Feedback",
+    "text": "You can choose a theme & update informations in our inout fields. Save and your resume will be ready."
+  }
+]
