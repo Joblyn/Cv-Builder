@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import "./app.css";
 
 import  * as ROUTES  from './constants/routes';
 import { Loading } from './components'; 

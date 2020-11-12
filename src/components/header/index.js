@@ -1,10 +1,6 @@
 import React from 'react';
 import { NavBar, Brand, Collapse, Link, Toggle, NavButton, Group } from './styles/header';
 
-const activeStyle = {
-  color: '#216DE0',
-}
-
 export default function Header({ expand, bg, children, restProps }) {
   return <NavBar expand={expand} bg={bg} {...restProps}>{children}</NavBar>
 }

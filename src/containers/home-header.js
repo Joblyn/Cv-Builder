@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import * as ROUTES from '../constants/routes';
 import { Header } from '../components';
-
 
 export default function HomeHeader(){
   const location = window.location.pathname;
@@ -31,7 +30,7 @@ export default function HomeHeader(){
               to={ROUTES.CONTACT}>
               Contact
             </Header.Link>
-            <Header.NavButton to={ROUTES.SIGN_IN}>Get Started</Header.NavButton>
+            <Header.NavButton href={ROUTES.SIGN_IN}>Get Started</Header.NavButton>
           </Header.Group>
         </Header.Collapse>
       </Header>

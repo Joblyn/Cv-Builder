@@ -2,9 +2,16 @@ import styled from 'styled-components/macro';
 import { Link as ReactRouterLink, NavLink } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 
-
 export const NavBar = styled(Navbar)`
   padding: .8rem 4%;
+`;
+
+export const Collapse = styled(Navbar.Collapse)`
+  &.show {
+    ${NavBar} {
+      background: #f8f9fa;
+    }
+  }
 `;
 
 export const Brand = styled(ReactRouterLink)`
@@ -23,12 +30,11 @@ export const Brand = styled(ReactRouterLink)`
 
 export const Toggle = styled(Navbar.Toggle)``;
 
-export const Collapse = styled(Navbar.Collapse)``;
 
 export const Group = styled(Nav)`
   margin-left: auto;
   display: flex;
-  align-items: center;7
+  align-items: center;
 `;
 
 export const Link = styled(NavLink)`
@@ -36,7 +42,7 @@ export const Link = styled(NavLink)`
   font-size: 1.2rem;
   padding: .36rem .53rem;
   margin: 0 1rem; 
-  ${({ active }) => active === 'true' ? 'color:#216DE0;' : 'color:#020202'};
+  ${({ active }) => active === 'true' ? 'color:#216DE0;' : 'color:#020202;'};
 
   @media(max-width: 768px) {
     padding: .76rem .53rem;
@@ -46,13 +52,9 @@ export const Link = styled(NavLink)`
   &:hover {
     color: #216DE0!important;
     text-decoration: none;
+  }
 `;
 
-{ /* 
-export const activeStyle = {
-  color: '#216DE0',
-  borderBottom: '2px solid #216DE0'
-}; */}
 
 export const NavButton = styled(Button)`
   margin: 0 1rem;
@@ -64,4 +66,10 @@ export const NavButton = styled(Button)`
   line-height: 29px;
   border-radius: 6px;
   color: #fff;
+  box-shadow: 0px 1px 20px -10px #216DE0;
+  border: none;
+
+  @media(max-width: 768px) {
+    box-shadow: none;
+  }
 `;
