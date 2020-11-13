@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeHeader, HeroContainer, BenefitsSection }from '../containers';
+import { HomeHeader, HeroContainer, BenefitsSection, HowItWorksSection }from '../containers';
 
 export default function Home() {
   return (
@@ -7,6 +7,7 @@ export default function Home() {
       <HomeHeader />
       <HeroContainer />
       <BenefitsSection />
+      <HowItWorksSection />
     </>
   )
 }

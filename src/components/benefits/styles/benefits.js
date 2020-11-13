@@ -1,14 +1,14 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 import { Container as BootstrapContainer, Button as BootstrapButton} from 'react-bootstrap';
 
 export const Container = styled(BootstrapContainer)`
-  margin: 7em 0!important;
+  margin: 10em 0!important;
   max-width: 100vw;
   padding: 0 1.5rem!important;
   
   @media(max-width: 768px) {
-    margin: -2.5em 0 0 0!important;
+    margin: -6em 0 0 0!important;
   }
 `;
 
@@ -27,6 +27,13 @@ export const Heading = styled.h3`
 export const Item = styled.div`
   margin-top: 4rem;
   padding: 0 1.4rem!important;
+  transition: all 0.3s;
+
+  &:hover {
+    box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    cursor: default;
+  }
 `;
 
 export const Icon = styled.img`
