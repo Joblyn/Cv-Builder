@@ -2,6 +2,7 @@ import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import { Testimonials } from '../components';
 import testimonials from '../fixtures/testimonials.json';
+import * as ROUTES from '../constants/routes';
 
 export default function TestimonialsSection(){
   return (
@@ -22,6 +23,7 @@ export default function TestimonialsSection(){
           ))
           }
         </Carousel>
+        <Testimonials.Button href={ROUTES.SIGN_IN}>Build your resume</Testimonials.Button>
       </Testimonials>
     </>
   )

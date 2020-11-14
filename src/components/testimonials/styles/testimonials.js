@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-
+import styled from 'styled-components/macro';
+import { Button as BootstrapButton } from 'react-bootstrap';
 export const Container = styled.div`
   position: relative;
   padding: 2rem;
@@ -35,7 +35,22 @@ export const Heading = styled.h3`
     margin-top: 4rem;
   }
 `;
-export const Button = styled.button``;
+
+export const Button = styled(BootstrapButton)`
+  text-align: center;
+  margin-top: 5.5rem!important;
+  padding: 1.4rem 1.8rem;
+  font-size:1.18rem;
+  font-weight: 600;
+  line-height: 20px;
+  background-color: #216DE0;
+  border-radius: 6px;
+  margin-top: 30px;
+  box-shadow: 0px 1px 20px -10px #216DE0;
+  border: none;
+  color: #fff;
+`;
+
 export const Inner = styled.div`
   background: #216DE0; 
   padding: 2.5rem;
@@ -63,7 +78,6 @@ export const Text = styled.p`
 
   @media (max-width: 800px) {
     font-size: normal!important;
-
   }
 `;
 

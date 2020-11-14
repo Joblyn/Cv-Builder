@@ -7,7 +7,7 @@ export const Container = styled(BootstrapContainer)`
   max-width: 100vw;
   padding: 0 1.5rem!important;
   over-flow-x: hidden!important;
-  
+
   @media(max-width: 768px) {
     margin: -6em 0 0 0!important;
   }
@@ -65,7 +65,7 @@ export const Button = styled(BootstrapButton)`
   line-height: 20px;
   background-color: #216DE0;
   border-radius: 6px;
-  margin-top: 5.5rem;
+  margin-top: 6rem;
   box-shadow: 0px 1px 20px -10px #216DE0;
   border: none;
   color: #fff;

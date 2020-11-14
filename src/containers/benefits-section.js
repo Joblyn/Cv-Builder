@@ -1,6 +1,7 @@
 import React from "react";
 import benefits from "../fixtures/benefits";
 import { Benefits } from '../components';
+import * as ROUTES from '../constants/routes';
 
 export default function BenefitsSection() {
   return (
@@ -14,7 +15,7 @@ export default function BenefitsSection() {
         </Benefits.Item>
       ))
       }
-      <Benefits.Button>Build your resume</Benefits.Button>
+      <Benefits.Button href={ROUTES.SIGN_IN}>Build your resume</Benefits.Button>
     </Benefits>
   )
 }

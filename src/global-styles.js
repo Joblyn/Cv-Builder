@@ -13,6 +13,15 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden!important;
     -moz-osx-font-smoothing: grayscale;
     font-smooth: auto;
+    
+    &::-webkit-scrollbar {
+      width: 5px;
+      background-color: #fff;    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(33, 109, 224, 1);
+      border-radius: 10px;
+    }
   }
 
   html {
