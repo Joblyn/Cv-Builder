@@ -6,6 +6,7 @@ export const Container = styled(BootstrapContainer)`
   margin: 10em 0!important;
   max-width: 100vw;
   padding: 0 1.5rem!important;
+  over-flow-x: hidden!important;
   
   @media(max-width: 768px) {
     margin: -6em 0 0 0!important;

@@ -1,0 +1,23 @@
+[
+  { 
+    "id": 1,
+    "name":"Michael James",
+    "img":"../images/client-1.svg",
+    "job": "Product Designer",
+    "testimony": "“I created my CV with Resume Builder, and everything was perfect. It was easy to use, funtional and helped me get the job I wanted. Recommended it to few of my friends and they loved as much I did.”"
+  },
+  {
+    "id": 2,
+    "name": "James Oluwaseun",
+    "img":"../images/client-2.svg",
+    "job": "Brand Manager",
+    "testimony": "“I created my CV with Resume Builder, and everything was perfect. It was easy to use, funtional and helped me get the job I wanted. Recommended it to few of my friends and they loved as much I did.”"
+  },
+  {
+    "id": 3,
+    "name": "Mary Jane",
+    "img":"../images/client-3.svg",
+    "job": "UI/UX Designer",
+    "testimony": "“So many resume bulders out there, but none I’ve fount as funtional as Resume Builder. This has become my main go-to tool.”"
+  }
+]

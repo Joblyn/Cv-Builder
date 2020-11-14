@@ -1,1 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+.carousel-indicators li {
+  position: relative !important;
+  top: 2em;
+  width: 10px!important;
+  height: 10px!important;
+  background: #216DE0!important;
+  border-radius: 50%;
+  border: none!important;
+  margin: 0 5px!important;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  width: 45px!important;
+  height: 45px!important;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-control-prev, .carousel-control-next {
+  opacity: 1!important;
+}
+.carousel-control-prev {
+  left: -10rem!important;
+  transform: scale(1.35);
+}
+.carousel-control-next {
+  right: -10rem!important;
+}
+@media (max-width:768px) {
+  .carousel-control-prev, .carousel-control-next {
+    visibility: hidden!important;
+  }
+}
+.carousel-control-prev-icon {
+  background-image: url("/icons/prev-cont.svg")!important;
+}
+.carousel-control-next-icon {
+  background-image: url("/icons/next-cont.svg")!important;
+}
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  margin-top: -1rem;
+}

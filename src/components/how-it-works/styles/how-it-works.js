@@ -4,6 +4,7 @@ export const Container = styled.div`
   margin: 10em 0!important;
   max-width: 100vw;
   padding: 0 1.5rem!important;
+  over-flow-x: hidden!important;
   
   @media(max-width: 768px) {
     margin: 9em 0 0 0!important;
@@ -23,7 +24,9 @@ export const Heading = styled.h3`
 
 export const Image = styled.img``;
 
-export const Steps = styled.div``;
+export const Steps = styled.div`
+  padding-left: 0;
+`;
 
 export const Step = styled.div`
   margin: 2.5rem 0;
@@ -35,7 +38,7 @@ export const Indicator = styled.div`
   justify-content:center;
   align-items: center;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
