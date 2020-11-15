@@ -5,3 +5,4 @@ export {default as Benefits } from './benefits';
 export { default as HowItWorks } from './how-it-works';
 export { default as Testimonials } from './testimonials';
 export { default as Footer } from './footer';
+export { default as About } from './about';

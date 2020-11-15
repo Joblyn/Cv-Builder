@@ -1,11 +1,12 @@
 import React from 'react';
-import HomeHeader from '../containers/home-header';
+import { HomeHeader, FooterContainer, AboutContainer } from '../containers';
 
 export default function About() {
   return (
     <>
       <HomeHeader/>
-      <h1>About</h1>
+      <AboutContainer />
+      <FooterContainer />
     </>
   )
 }
