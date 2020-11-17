@@ -32,8 +32,8 @@ export default function AboutContainer(){
           <About.Image src="./images/about.svg"/>
         </About.Inner>
         <About.Inner className="px-3 my-4 col-12" marginTop="6rem">
-          <About.Title className="text-center my-5 col-12">Meet Our Team</About.Title>
-          <About.Team className="col-12 d-flex px-5 py-4 text-center mt-5">
+          <About.Title className="text-center my-5 col-12" marginTop=".5rem">Meet Our Team</About.Title>
+          <About.Team className="col-12 row px-5 py-4 text-center mt-5">
             <About.Member className="col-lg-3 col-md-3 col-sm-12">
               <About.Portrait src="./images/team-1.svg"/>
               <About.Name>Olowookere Emmanuel</About.Name>

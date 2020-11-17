@@ -7,7 +7,7 @@ export const Container = styled(BootstrapContainer)`
   color: #ffffff;
   max-width:100%!important;
   padding: 2rem 0;
-  margin-top: 10rem;
+  margin-top: 1rem;
 `;
 export const Row = styled(BootstrapRow)`
   margin: 0!important;

@@ -8,6 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   over-flow-x: hidden;
+  margin-bottom: 4rem;
 `;
 
 export const Background = styled.img`
