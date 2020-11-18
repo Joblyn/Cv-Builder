@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "./app.css";
 
 import  * as ROUTES  from './constants/routes';
-import { Loading } from './components'; 
+import { Loading } from './components/loading'; 
 
 const Home = lazy(() => import('./pages/home'));
 const About = lazy(() => import('./pages/about'));

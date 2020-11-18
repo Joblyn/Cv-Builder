@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Wrap, BounceBall, Text, LockBody } from './styles/loading';
+import './styles/spinner.css';
 
-export default function Loading() {
+export function Loading() {
   return ( 
      <Container>
         <LockBody />
@@ -12,3 +13,14 @@ export default function Loading() {
       </Container>
   )
 };
+
+export function Spinner(){
+  return (
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  )
+}

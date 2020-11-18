@@ -44,3 +44,26 @@
 .carousel-control-next-icon, .carousel-control-prev-icon {
   margin-top: -1rem;
 }
+
+.abt-page {
+  position: relative;
+  padding: 2rem 5%;
+}
+.abt-page .bg-img {
+  width: 100%;
+  position: absolute;
+  right: -5rem;
+  top: -5em;
+  width: 550px;
+}
+
+.abt-cont {
+  display: flex;
+  flex-direction: row;
+
+}
+@media(max-width: 768px) {
+  .abt-cont {
+    flex-direction: column!important;
+  }
+}
