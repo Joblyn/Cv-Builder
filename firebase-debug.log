@@ -1,0 +1,55 @@
+[debug] [2020-11-19T01:57:46.745Z] ----------------------------------------------------------------------
+[debug] [2020-11-19T01:57:46.752Z] Command:       /usr/local/bin/node /usr/local/bin/firebase init
+[debug] [2020-11-19T01:57:46.752Z] CLI Version:   8.11.2
+[debug] [2020-11-19T01:57:46.752Z] Platform:      linux
+[debug] [2020-11-19T01:57:46.752Z] Node Version:  v14.5.0
+[debug] [2020-11-19T01:57:46.869Z] Time:          Thu Nov 19 2020 02:57:46 GMT+0100 (West Africa Standard Time)
+[debug] [2020-11-19T01:57:46.870Z] ----------------------------------------------------------------------
+[debug] [2020-11-19T01:57:46.871Z] 
+[debug] [2020-11-19T01:57:46.931Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-11-19T01:57:46.933Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/joblyn/Desktop/i4g-Community-Challenge/cv-builder
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2020-11-19T01:58:46.096Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-11-19T01:58:46.097Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-11-19T01:58:56.277Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2020-11-19T01:59:06.301Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at Object.<anonymous> (/usr/local/lib/node_modules/firebase-tools/lib/auth.js:23:32)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (/usr/local/lib/node_modules/firebase-tools/lib/init/features/hosting/github.js:20:16)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Module.load (internal/modules/cjs/loader.js:1050:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:938:14)
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (/usr/local/lib/node_modules/firebase-tools/lib/init/features/hosting/index.js:7:22)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+[error] 
+[error] Error: Failed to list Firebase projects. See firebase-debug.log for more info.

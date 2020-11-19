@@ -95,3 +95,12 @@ export const TextArea = styled.textarea`
     font-weight: 300;
   }
 `;
+
+export const Error = styled.p`
+  font-size: 0.8rem;
+  color: red;
+  transform: 0.2s all;
+  opacity: 1;
+  margin-bottom: 0!important;
+  display: ${({display}) => display ? display : 'none'};
+`;

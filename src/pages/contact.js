@@ -1,22 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FooterContainer, HomeHeader } from '../containers';
 import { Info, Form } from "../components";
-import { Spinner } from '../components/loading'; 
+import { Spinner } from '../components/loading'
+import { FirebaseContext } from '../context/firebase';
 
 export default function Contact() {
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [invalidPhoneNo, setInvalidPhoneNo] = useState(false);
+  const { firebase } = useContext(FirebaseContext);
   
-  const handleSend = (e) => {
+  const onSend = (e) => {
     e.preventDefault();
-    const isEmpty = email === '' || phoneNumber === '' || message === '';
+    const isEmpty = email === '' || phoneNo === '' || message === '';
+    const emailIsInvalid = email === (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gm);
+    const phoneNoIsInvalid = phoneNo === (/^[0-9]*$/gm);
+
     if(isEmpty) {
       setIsEmpty(true);
+    } else if (emailIsInvalid) {
+      setInvalidEmail(true);
+    } else if (phoneNoIsInvalid) {
+      setInvalidPhoneNo(true);
+    } else {
+      setInvalidEmail(false);
+      setInvalidPhoneNo(false);
+      setIsSending(true);
+      const info = {
+        email, 
+        phoneNo,
+        message
+      };
+      firebase.firestore().collection('requests').add(info)
+        .then(() => {
+          setIsSending(false);
+          setMessage('');
+          setPhoneNo('');
+          setEmail('');
+          console.log('message sent successfully');
+        })
+        .catch(error => {
+          setIsSending(false);
+          console.log('error:', error);
+          alert('An error occurred, please try again');
+        })
     }
   }
+
   return (
     <>
       <HomeHeader/>
@@ -50,20 +84,22 @@ export default function Contact() {
                 type="email"
                 value={email}
                 onChange={({ target }) => setEmail(target.value)}
-                placeholder = 'cannot be empty'
+                placeholder = { isEmpty ? 'cannot be empty' : '' }
                 required
               />
+              {!invalidEmail && <Form.Error>Please input a valid email</Form.Error>}
             </Form.Group>
               <Form.Group>
               <Form.Label htmlFor="phoneNo">Phone number</Form.Label>
               <Form.Input 
                 id = "phoneNo"
                 type = "text"
-                value = {phoneNumber}
-                onChange={({ target }) => setPhoneNumber(target.value)}
-                placeholder = 'cannot be empty'
+                value = {phoneNo}
+                onChange={({ target }) => setPhoneNo(target.value)}
+                placeholder = { isEmpty ? 'cannot be empty' : '' }
                 required
               />
+              {!invalidPhoneNo && <Form.Error>Please input a valid phone number</Form.Error>}
             </Form.Group>
             <Form.Group>
               <Form.Label htmlFor="message">Message</Form.Label>
@@ -71,7 +107,7 @@ export default function Contact() {
                 id="message"
                 value = {message}
                 onChange = {({ target }) => setMessage(target.value)}
-                placeholder="cannot be empty"
+                placeholder = { isEmpty ? 'cannot be empty' : '' }
                 required
                 height="10rem"
               />
@@ -80,8 +116,7 @@ export default function Contact() {
               disabled = {isSending}
               type = 'submit' 
               form = "form" 
-              isSending = {isSending}
-              onClick = {handleSend}
+              onClick = {onSend}
             >
               {isSending ? <Spinner /> : 'Send'}
             </Form.Button> 
