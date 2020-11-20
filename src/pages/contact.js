@@ -41,7 +41,6 @@ export default function Contact() {
           setMessage('');
           setPhoneNo('');
           setEmail('');
-          console.log('message sent successfully');
         })
         .catch(error => {
           setIsSending(false);
