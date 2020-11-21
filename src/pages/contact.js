@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { FooterContainer, HomeHeader } from '../containers';
-import { Info, Form } from "../components";
+import { Info, Form, RequestSuccessful } from "../components";
 import { Spinner } from '../components/loading'
 import { FirebaseContext } from '../context/firebase';
 
@@ -12,9 +12,10 @@ export default function Contact() {
   const [isEmpty, setIsEmpty] = useState(false);
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidPhoneNo, setInvalidPhoneNo] = useState(false);
+  const [isSent, setIsSent] = useState(false);
   const { firebase } = useContext(FirebaseContext);
   
-  const onSend = (e) => {
+  const onSend = e => {
     e.preventDefault();
     const isEmpty = email === '' || phoneNo === '' || message === '';
     const emailIsInvalid = email === (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gm);
@@ -41,19 +42,19 @@ export default function Contact() {
           setMessage('');
           setPhoneNo('');
           setEmail('');
+          setIsSent(true);
         })
         .catch(error => {
           setIsSending(false);
           console.log('error:', error);
           alert('An error occurred, please try again');
         })
+      }
     }
-  }
 
-  return (
-    <>
+    return <>
       <HomeHeader/>
-       <div className="abt-page">
+      <div className="abt-page">
        <img src="./images/contact.svg" alt='' className="bg-img"/>
          <div className="abt-cont">
           <Info>
@@ -120,9 +121,9 @@ export default function Contact() {
               {isSending ? <Spinner /> : 'Send'}
             </Form.Button> 
           </Form>
-        </div>  
+        </div>
+        {isSent ? <RequestSuccessful isSent={isSent} setIsSent={setIsSent} /> : null }
       </div> 
       <FooterContainer/>
     </>
-  )
 }
