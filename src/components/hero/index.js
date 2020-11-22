@@ -26,5 +26,5 @@ Hero.Right =function HeroRight({ children, ...restProps }) {
 }
 
 Hero.Image =function HeroImage({ src, ...restProps }) {
-  return <Image src={src} {...restProps} />
+  return <Image src={src} {...restProps} alt=''/>
 }

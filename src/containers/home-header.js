@@ -10,29 +10,33 @@ export default function HomeHeader(){
     <>
       <Header expand="lg">
         <Header.Brand to={ROUTES.HOME}/>
-        <Header.Toggle aria-controls="basic-navbar-nav"/>
-        <Header.Collapse id="basic-navbar-nav">
-          <Header.Group>
-            <Header.Link 
-              active={location === ROUTES.HOME ? 'true' : 'false'} 
-              to={ROUTES.HOME}
-              >
-              Home
-            </Header.Link>
-            <Header.Link 
-              active={location === ROUTES.ABOUT ? 'true' : 'false'} 
-              to={ROUTES.ABOUT}
-              >
-              About
-            </Header.Link>
-            <Header.Link 
-              active={location === ROUTES.CONTACT ? 'true' : 'false'} 
-              to={ROUTES.CONTACT}>
-              Contact
-            </Header.Link>
-            <Header.NavButton href={ROUTES.SIGN_IN}>Get Started</Header.NavButton>
-          </Header.Group>
-        </Header.Collapse>
+        {(location === ROUTES.SIGN_IN || location === ROUTES.SIGN_UP) ?
+         null :
+        <>
+          <Header.Toggle aria-controls="basic-navbar-nav"/>
+          <Header.Collapse id="basic-navbar-nav">
+            <Header.Group>
+              <Header.Link 
+                active={location === ROUTES.HOME ? 'true' : 'false'} 
+                to={ROUTES.HOME}
+                >
+                Home
+              </Header.Link>
+              <Header.Link 
+                active={location === ROUTES.ABOUT ? 'true' : 'false'} 
+                to={ROUTES.ABOUT}
+                >
+                About
+              </Header.Link>
+              <Header.Link 
+                active={location === ROUTES.CONTACT ? 'true' : 'false'} 
+                to={ROUTES.CONTACT}>
+                Contact
+              </Header.Link>
+              <Header.NavButton href={ROUTES.SIGN_UP}>Get Started</Header.NavButton>
+            </Header.Group>
+          </Header.Collapse>
+        </>}
       </Header>
     </>
   )

@@ -8,3 +8,4 @@ export { default as About } from './about';
 export { default as Info } from './Info';
 export { default as Form } from './form';
 export { default as RequestSuccessful } from './request-success';
+export { default as Aside } from './aside';

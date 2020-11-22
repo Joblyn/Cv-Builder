@@ -14,7 +14,7 @@ Info.Text = function InfoText({ children, ...restProps }) {
 }
 
 Info.Icon = function InfoIcon({ children, ...restProps }) {
-  return <Image {...restProps} />
+  return <Image {...restProps} alt=''/>
 }
 
 Info.Contact = function InfoContact({ children, ...restProps }) {

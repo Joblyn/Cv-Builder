@@ -68,6 +68,7 @@ export const NavButton = styled(Button)`
   color: #fff;
   box-shadow: 0px 1px 20px -10px #216DE0;
   border: none;
+  cursor: pointer;
 
   @media(max-width: 768px) {
     box-shadow: none;

@@ -55,6 +55,7 @@
   right: -5rem;
   top: -5em;
   width: 550px;
+  z-index: -10;
 }
 
 .abt-cont {
@@ -66,4 +67,14 @@
   .abt-cont {
     flex-direction: column!important;
   }
+}
+.sign-up{
+  position: relative;
+}
+.sign-up .bg-img {
+  position: absolute;
+  top: 5rem;
+  width: 400px;
+  height: auto;
+  z-index: -10;
 }

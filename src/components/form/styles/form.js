@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 import { Button as BootstrapButton } from 'react-bootstrap';
+import * as ROUTES from '../../../constants/routes';
 
-export const Container = styled.div`
+export const Container = styled.form`
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   margin-left: ${({ marginLeft }) => marginLeft ? marginLeft : '0'};
   position: relative;
   margin-bottom: 8rem;
+  
 
   @media (max-width: 768px) {
     margin-left: 0;
-    margin-top: 3rem;
+    margin-top: ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '1rem' : '3rem' };
+    padding: 0 1rem;
   }
 `;
 export const Label = styled.label`
@@ -41,20 +44,18 @@ export const Input = styled.input`
   }
 `;
 export const Button = styled(BootstrapButton)`
-  margin-left: auto;
+  margin-left: ${({ position }) => position === 'right' ? 'auto' : '0'};
   border-radius: 6px;
   text-align: center;
   width: 9rem;
-  height: 3rem;
-  font-size:1.18rem;
+  height: 3rem; 
+  font-size:1.1rem;
   font-weight: 600;
   line-height: 20px;
   background-color: #216DE0;
   margin-top: 30px;
   border: none;
   color: #fff;
-  position: absolute;
-  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +72,7 @@ export const Group = styled.div`
 
 
   &:first-of-type {
-    margin-top: 0;
+    margin-top: ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_UP) ? '2rem' : '0'};
   }
 `;
 
@@ -103,4 +104,20 @@ export const Error = styled.p`
   opacity: 1;
   margin-bottom: 0!important;
   display: ${({display}) => display ? display : 'none'};
+`;
+
+export const Title = styled.p`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  color: #2E2E2E;
+`;
+
+export const Text = styled.p`
+  font-style: normal;
+  font-weight: normal;
+  font-size: ${({ type }) => type === 'note' ? '15px' : '20px'};
+  line-height: 22px;
+  color: #474747;
 `;

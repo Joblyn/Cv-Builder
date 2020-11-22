@@ -117,6 +117,7 @@ export default function Contact() {
               type = 'submit' 
               form = "form" 
               onClick = {onSend}
+              position = 'right'
             >
               {isSending ? <Spinner /> : 'Send'}
             </Form.Button> 

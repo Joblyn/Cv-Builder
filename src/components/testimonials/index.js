@@ -22,7 +22,7 @@ Testimonials.Text = function TestimonialText({ children, ...restProps }){
 }
 
 Testimonials.Image = function TestimonialImage({ src, ...restProps }){
-  return <Image {...restProps} src={src} />
+  return <Image {...restProps} src={src} alt=''/>
 }
 
 Testimonials.Profession = function TestimonialProfession({ children, ...restProps }){

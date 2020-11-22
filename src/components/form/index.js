@@ -1,12 +1,22 @@
 import React from 'react';
-import { Container, Label, Input, Button, Group, TextArea, Error } from './styles/form';
+import { Container, Label, Input, Button, Group, TextArea, Error, Title, Text } from './styles/form';
+
+const location = window.location.pathname
 
 export default function Form({ children, ...restProps }){
-  return <Container {...restProps}>{children}</Container>
+  return <Container {...restProps} location={location}>{children}</Container>
 }
 
 Form.Label = function FormLabel({ children, ...restProps }){
   return <Label {...restProps}>{children}</Label>
+}
+
+Form.Title = function FormTitle({ children, ...restProps }){
+  return <Title {...restProps}>{children}</Title>
+}
+
+Form.Text = function FormText({ children, ...restProps }){
+  return <Text {...restProps}>{children}</Text>
 }
 
 Form.Input = function FormInput({ ...restProps }){
@@ -18,7 +28,7 @@ Form.Button = function FormButton({ children, ...restProps }){
 }
 
 Form.Group = function FormGroup({ children, ...restProps }) {
-  return <Group {...restProps}>{children}</Group>
+  return <Group {...restProps} location={location}>{children}</Group>
 }
 
 Form.TextArea = function FormTextArea({ ...restProps }){

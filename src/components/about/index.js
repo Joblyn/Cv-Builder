@@ -42,7 +42,7 @@ About.Name = function AboutName({ children, ...restProps }) {
 }
 
 About.Image = function AboutImage({ src, ...restProps }) {
-  return <Image src={src} {...restProps} />
+  return <Image src={src} {...restProps} alt=''/>
 }
 
 About.Break = function AboutBreak({ ...restProps }) {

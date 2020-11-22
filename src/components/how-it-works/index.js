@@ -11,7 +11,7 @@ HowItWorks.Heading = function HowItWorksHeading({ children, ...restProps }) {
 }
 
 HowItWorks.Image = function HowItWorksImage({ src, ...restProps }) {
-  return <Image src={src} {...restProps} />
+  return <Image src={src} {...restProps} alt=''/>
 }
 
 HowItWorks.Steps = function HowItWorksSteps({ children, ...restProps }) {
