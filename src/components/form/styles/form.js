@@ -4,11 +4,12 @@ import * as ROUTES from '../../../constants/routes';
 
 export const Container = styled.form`
   width: 100%;
-  max-width: 550px;
+  max-width: 650px;
   margin-left: ${({ marginLeft }) => marginLeft ? marginLeft : '0'};
   position: relative;
-  margin-bottom: 8rem;
-  
+  margin-bottom: ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '3.4rem' : '8rem'};
+  padding-left:1.2rem;
+  ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? 'margin-top: 1.5rem' : null};
 
   @media (max-width: 768px) {
     margin-left: 0;

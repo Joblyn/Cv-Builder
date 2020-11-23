@@ -7,7 +7,7 @@ export const Container = styled.div`
   right: 0;
   width: 40%;
   height: 100%;
-  max-width: 600px;
+  max-width: 500px;
   padding: 0.5rem 0.5rem;
   background: #F2F6FB;
   z-index: 10;
@@ -23,7 +23,9 @@ export const Group = styled.div`
 `;
 export const Button = styled(BootstrapButton)`
   text-align: center;
-  padding: 0.9rem 3.8rem;
+  ${'' /* padding: 0.9rem 3.8rem; */}
+  width: 10rem;
+  height: 3rem;
   font-size:1rem;
   font-weight: 600;
   line-height: 20px;
@@ -35,7 +37,7 @@ export const Button = styled(BootstrapButton)`
 export const Text = styled.p`
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 20px;
   color: #2E2E2E;
   margin-bottom: 0;

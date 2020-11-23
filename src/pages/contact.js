@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { FooterContainer, HomeHeader } from '../containers';
-import { Info, Form, RequestSuccessful } from "../components";
+import { Info, Form } from "../components";
+import { RequestSuccessful } from '../components/request-success';
 import { Spinner } from '../components/loading'
 import { FirebaseContext } from '../context/firebase';
 

@@ -68,8 +68,15 @@
     flex-direction: column!important;
   }
 }
+
 .sign-up{
-  position: relative;
+  position: relative; 
+  margin-bottom: 3rem;
+}
+@media (min-width: 768px) {
+  .sign-up {
+    width: 55%
+  }
 }
 .sign-up .bg-img {
   position: absolute;
@@ -77,4 +84,32 @@
   width: 400px;
   height: auto;
   z-index: -10;
+}
+
+.alt {
+  margin-left: calc(5% + 1.2rem);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.alt p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  .alt {
+    margin-left: 1.2rem;
+  }
+  .alt p {
+    font-size: 1.2rem;
+  }
+}
+.alt div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
