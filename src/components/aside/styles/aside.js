@@ -33,6 +33,9 @@ export const Button = styled(BootstrapButton)`
   border-radius: 6px;
   border: none;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export const Text = styled.p`
   font-style: normal;

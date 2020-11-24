@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 
+import { FirebaseContext } from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 import { Header } from '../components';
 
 export default function HomeHeader(){
   const location = window.location.pathname;
+  const { firebase } = useContext(FirebaseContext);
+  const [active, setActive] = useState(false);
+  const user = firebase.auth().currentUser; 
 
   return (
     <>
@@ -33,7 +37,18 @@ export default function HomeHeader(){
                 to={ROUTES.CONTACT}>
                 Contact
               </Header.Link>
-              <Header.NavButton href={ROUTES.SIGN_UP}>Get Started</Header.NavButton>
+              {user ? 
+                <>
+                  <Header.User displayName={user.displayName} 
+                    onClick={() => setActive(active => !active)}
+                  />  
+                  <Header.UserNav active = {active} >
+                    <Header.TextLink to={ROUTES.DASHBOARD}>Dashboard</Header.TextLink>
+                    <Header.TextLink onClick={() => firebase.auth().signOut()} to='#'>Log out</Header.TextLink>
+                  </Header.UserNav>
+                </>
+                : <Header.NavButton href={ROUTES.SIGN_UP}>Get Started</Header.NavButton>
+              } 
             </Header.Group>
           </Header.Collapse>
         </>}

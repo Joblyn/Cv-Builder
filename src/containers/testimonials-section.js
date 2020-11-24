@@ -4,7 +4,7 @@ import { Testimonials } from '../components';
 import testimonials from '../fixtures/testimonials.json';
 import * as ROUTES from '../constants/routes';
 
-export default function TestimonialsSection(){
+export default function TestimonialsSection({ user }){
   return (
     <>
       <Testimonials>
@@ -23,7 +23,7 @@ export default function TestimonialsSection(){
           ))
           }
         </Carousel>
-        <Testimonials.Button href={ROUTES.SIGN_IN}>Build your resume</Testimonials.Button>
+        <Testimonials.Button href={user ? ROUTES.DASHBOARD : ROUTES.SIGN_IN}>Build your resume</Testimonials.Button>
       </Testimonials>
     </>
   )

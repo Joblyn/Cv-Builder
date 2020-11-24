@@ -1,9 +1,11 @@
 import styled from 'styled-components/macro';
 import { Link as ReactRouterLink, NavLink } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
+import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 
 export const NavBar = styled(Navbar)`
   padding: .8rem 4%;
+  
 `;
 
 export const Collapse = styled(Navbar.Collapse)`
@@ -30,9 +32,8 @@ export const Brand = styled(ReactRouterLink)`
 
 export const Toggle = styled(Navbar.Toggle)``;
 
-
 export const Group = styled(Nav)`
-  margin-left: auto;
+  margin-left: ${({ type }) => type === 'user' ? '0' : 'auto'};
   display: flex;
   align-items: center;
 `;
@@ -55,7 +56,17 @@ export const Link = styled(NavLink)`
   }
 `;
 
-
+export const TextLink = styled(ReactRouterLink)`
+  text-decoration: none;
+  color: #020202;
+  display: block;
+  
+  &:hover {
+    color:#216DE0; 
+    text-decoration: none;
+  }
+  
+`;
 export const NavButton = styled(Button)`
   margin: 0 1rem;
   text-decoration: none;
@@ -73,4 +84,59 @@ export const NavButton = styled(Button)`
   @media(max-width: 768px) {
     box-shadow: none;
   }
+`;
+
+export const UserNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-start;
+  border: 1px solid #216DE0;
+  width: 249.27px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  background: #F2F6FB;
+  position: absolute;
+  right: 4%;
+  top: 65px;
+  visibility: ${({ active }) => active ? 'visible' : 'hidden'};
+  height: ${({ active }) => active ? '50px' : '0'};
+  transition: height .3s ease;
+  z-index: 10;
+
+  & > ${TextLink} {
+    opacity: ${({ active }) => active ? '1' : '0'};
+    transition: opacity .1s .3s;
+  }
+
+  @media(max-width: 768px) {
+    position: relative;
+    right: 0;
+    top: 0;
+  }
+`;
+
+export const User = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #216DE0;
+  padding: .8rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+`;
+
+export const Avatar = styled(FontAwesomeIcon)`
+  background: #216DE0;
+  color: #fff;
+  font-size: 2rem;
+`; 
+export const UserName = styled.p`
+  margin-left: .6rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2rem;
+  line-height: normal;
+  color: #FFFFFF;
+  margin-bottom: 0;
 `;

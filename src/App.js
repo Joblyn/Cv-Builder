@@ -4,15 +4,19 @@ import "./app.css";
 
 import  * as ROUTES  from './constants/routes';
 import { Loading } from './components/loading'; 
+import { useAuthListener } from './hooks';
+import { IsUserRedirect, ProtectedRoute } from './helpers/routes';
 
 const Home = lazy(() => import('./pages/home'));
 const About = lazy(() => import('./pages/about'));
 const Contact = lazy(() => import('./pages/contact'));
 const SignUp = lazy(() => import('./pages/signup'));
 const SignIn = lazy(() => import('./pages/signin'));
+const Dashboard = lazy(() => import('./pages/dashboard'));
 
 export default function App() {
-  
+  const { user } = useAuthListener();
+
   return (
     <Router>
       <Suspense fallback={<Loading />}>
@@ -26,12 +30,26 @@ export default function App() {
           <Route exact path={ROUTES.CONTACT}>
             <Contact />
           </Route>
-          <Route exact path={ROUTES.SIGN_UP}>
+          <IsUserRedirect 
+            user={user} 
+            loggedInPath={ROUTES.DASHBOARD}
+            path={ROUTES.SIGN_UP}
+          >
             <SignUp />
-          </Route>
-          <Route exact path={ROUTES.SIGN_IN}>
+          </IsUserRedirect>
+          <IsUserRedirect 
+            user={user} 
+            loggedInPath={ROUTES.DASHBOARD}
+            path={ROUTES.SIGN_IN}
+          >
             <SignIn />
-          </Route>
+          </IsUserRedirect>
+          <ProtectedRoute
+            user={user}
+            path={ROUTES.DASHBOARD}
+          >
+            <Dashboard />
+          </ProtectedRoute>
         </Switch>
       </Suspense>
     </Router>

@@ -3,7 +3,7 @@ import benefits from "../fixtures/benefits";
 import { Benefits } from '../components';
 import * as ROUTES from '../constants/routes';
 
-export default function BenefitsSection() {
+export default function BenefitsSection({ user }) {
   return (
     <Benefits className="row d-flex justify-content-center">
       <Benefits.Heading className="text-center col-12">Some of our benefits</Benefits.Heading>
@@ -15,7 +15,7 @@ export default function BenefitsSection() {
         </Benefits.Item>
       ))
       }
-      <Benefits.Button href={ROUTES.SIGN_IN}>Build your resume</Benefits.Button>
+      <Benefits.Button href={user ? ROUTES.DASHBOARD : ROUTES.SIGN_IN}>Build your resume</Benefits.Button>
     </Benefits>
   )
 }

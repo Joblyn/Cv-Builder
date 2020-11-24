@@ -47,7 +47,7 @@ export default function Contact() {
         })
         .catch(error => {
           setIsSending(false);
-          console.log('error:', error);
+          console.log( error);
           alert('An error occurred, please try again');
         })
       }
@@ -124,7 +124,7 @@ export default function Contact() {
             </Form.Button> 
           </Form>
         </div>
-        {isSent ? <RequestSuccessful isSent={isSent} setIsSent={setIsSent} /> : null }
+        {isSent && <RequestSuccessful setIsSent={setIsSent} />}
       </div> 
       <FooterContainer/>
     </>

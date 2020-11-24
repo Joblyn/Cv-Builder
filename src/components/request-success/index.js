@@ -2,9 +2,9 @@ import React from 'react';
 import { faCheckCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Container, Image, Icon, Notice, Text, Link, Overlay } from './styles/request-success';
 
-export function RequestSuccessful({ setIsSent, isSent, ...restProps }) {
+export function RequestSuccessful({ setIsSent, ...restProps }) {
   return (
-    <Overlay isSent={isSent} {...restProps}>
+    <Overlay {...restProps}>
       <Container>
         <Image src="./images/request-success.svg" alt=''/>
         <Icon icon={faTimes} type="times" onClick={() => setIsSent(false)}/>

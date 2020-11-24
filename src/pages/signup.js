@@ -11,11 +11,12 @@ import { useHistory } from 'react-router';
 export default function SignUp() {
   const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+
+  const [fullName, setFullName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
 
   const handleSignup = e => {
@@ -23,35 +24,33 @@ export default function SignUp() {
     setIsLoading(true);
 
     firebase 
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(result => result.user.updateProfile(
-        {
-          displayName: fullName
-        }
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(result => result.user.updateProfile(
+          { displayName: fullName }
+        ) 
+        .then(() => {
+          setSuccess(true);
+          setError(false);
+          setIsLoading(false);
+        })
       )
-      .then(() => {
-        setSuccess(true);
-        setError(false);
-        console.log('success');
+      .catch(error => {
+        console.log(error.message);
+        setFullName('');
+        setEmail('');
+        setPassword('');
+        setError(error.message);
+        setIsLoading(false);
+        setSuccess(false);
       })
-      .catch(error => setError(error.message))
-    )
-    .catch(error => {
-      setFullName('');
-      setEmail('');
-      setPassword('');
-      setError(error.message);
-      setIsLoading(false);
-      setSuccess(false);
-    })
   } 
 
   useEffect(() => {
     if(success) {
       setTimeout(() =>{
         setSuccess(false);
-        history.push(ROUTES.HOME);
+        history.push(ROUTES.DASHBOARD);
       }, 1500);
     }
   }, [success]);
@@ -61,10 +60,10 @@ export default function SignUp() {
       <HomeHeader />
       <div className="sign-up">
         <img src="./images/sign-up-bg.svg" className="bg-img" alt=''/>
-        <Form id="sign-up" onSubmit={handleSignup} marginLeft="5%" method="POST">
+        <Form id="sign-up" onSubmit={handleSignup} marginLeft="5%">
           <Form.Title>Create Account</Form.Title>
           <Form.Text>Register your account!</Form.Text>
-          {error && <Form.Error>{error}</Form.Error>}
+          {error && <Form.Error fontSize='1.05rem'>{error}</Form.Error>}
           <Form.Group>
             <Form.Label htmlFor="full-name">Full name</Form.Label>
             <Form.Input 
@@ -113,7 +112,7 @@ export default function SignUp() {
       <Aside>
         <Aside.Group>
           <Aside.Text>Already have an account?</Aside.Text>
-          <Aside.Button to={ROUTES.SIGN_IN}>Log In</Aside.Button>
+          <Aside.Button href={ROUTES.SIGN_IN}>Log In</Aside.Button>
         </Aside.Group>
         <Aside.Image src="./images/sign-up-aside.svg"/>
       </Aside>

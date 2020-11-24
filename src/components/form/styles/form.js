@@ -4,10 +4,10 @@ import * as ROUTES from '../../../constants/routes';
 
 export const Container = styled.form`
   width: 100%;
-  max-width: 650px;
+  max-width: 600px;
   margin-left: ${({ marginLeft }) => marginLeft ? marginLeft : '0'};
   position: relative;
-  margin-bottom: ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '3.4rem' : '8rem'};
+  margin-bottom: ${({ location }) => (location === ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '3.4rem' : '8rem'};
   padding-left:1.2rem;
   ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? 'margin-top: 1.5rem' : null};
 
@@ -73,7 +73,7 @@ export const Group = styled.div`
 
 
   &:first-of-type {
-    margin-top: ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_UP) ? '2rem' : '0'};
+    margin-top: ${({ location }) => (location === ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : '0'};
   }
 `;
 
@@ -99,12 +99,11 @@ export const TextArea = styled.textarea`
 `;
 
 export const Error = styled.p`
-  font-size: 0.8rem;
+  font-size: ${({ fontSize }) => fontSize ? fontSize : '0.8rem'};
   color: red;
   transform: 0.2s all;
   opacity: 1;
   margin-bottom: 0!important;
-  display: ${({display}) => display ? display : 'none'};
 `;
 
 export const Title = styled.p`

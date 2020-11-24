@@ -3,27 +3,27 @@ import { Container, Label, Input, Button, Group, TextArea, Error, Title, Text } 
 
 const location = window.location.pathname
 
-export default function Form({ children, ...restProps }){
+export default function Form({ children, ...restProps }) {
   return <Container {...restProps} location={location}>{children}</Container>
 }
 
-Form.Label = function FormLabel({ children, ...restProps }){
+Form.Label = function FormLabel({ children, ...restProps }) {
   return <Label {...restProps}>{children}</Label>
 }
 
-Form.Title = function FormTitle({ children, ...restProps }){
+Form.Title = function FormTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>
 }
 
-Form.Text = function FormText({ children, ...restProps }){
+Form.Text = function FormText({ children, ...restProps }) {
   return <Text {...restProps}>{children}</Text>
 }
 
-Form.Input = function FormInput({ ...restProps }){
+Form.Input = function FormInput({ ...restProps }) {
   return <Input {...restProps} />
 }
 
-Form.Button = function FormButton({ children, ...restProps }){
+Form.Button = function FormButton({ children, ...restProps }) {
   return <Button {...restProps}>{children}</Button>
 }
 
@@ -31,7 +31,7 @@ Form.Group = function FormGroup({ children, ...restProps }) {
   return <Group {...restProps} location={location}>{children}</Group>
 }
 
-Form.TextArea = function FormTextArea({ ...restProps }){
+Form.TextArea = function FormTextArea({ ...restProps }) {
   return <TextArea {...restProps} />
 }
 
