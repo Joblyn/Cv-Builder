@@ -37,16 +37,20 @@ export default function HomeHeader(){
                 to={ROUTES.CONTACT}>
                 Contact
               </Header.Link>
-              {user ? 
+              {user ?  
                 <>
                   <Header.User displayName={user.displayName} 
                     onClick={() => setActive(active => !active)}
                   />  
                   <Header.UserNav active = {active} >
-                    <Header.TextLink to={ROUTES.DASHBOARD}>Dashboard</Header.TextLink>
-                    <Header.TextLink onClick={() => firebase.auth().signOut()} to='#'>Log out</Header.TextLink>
+                    <Header.Item>
+                      <Header.TextLink to={ROUTES.DASHBOARD} type="user">Dashboard</Header.TextLink>
+                    </Header.Item>
+                    <Header.Item>
+                      <Header.TextLink onClick={() => firebase.auth().signOut()} to='#' type="user">Log out</Header.TextLink>
+                    </Header.Item>
                   </Header.UserNav>
-                </>
+                </> 
                 : <Header.NavButton href={ROUTES.SIGN_UP}>Get Started</Header.NavButton>
               } 
             </Header.Group>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Label, Input, Button, Group, TextArea, Error, Title, Text } from './styles/form';
+import { Container, Label, Input, Button, Group, TextArea, Error, Title, Text, Link } from './styles/form';
 
 const location = window.location.pathname
 
@@ -13,6 +13,10 @@ Form.Label = function FormLabel({ children, ...restProps }) {
 
 Form.Title = function FormTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>
+}
+
+Form.Link = function FormLink({ children, ...restProps }) {
+  return <Link {...restProps}>{children}</Link>
 }
 
 Form.Text = function FormText({ children, ...restProps }) {

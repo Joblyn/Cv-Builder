@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavBar, Brand, Collapse, Link, Toggle, NavButton, Group, Avatar, User, UserName, TextLink, UserNav } from './styles/header';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { NavBar, Brand, Collapse, Link, Toggle, NavButton, Group, Avatar, User, UserName, TextLink, UserNav, Icon, Item } from './styles/header';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 export default function Header({ expand, bg, children, restProps }) {
   return <NavBar expand={expand} bg={bg} {...restProps}>{children}</NavBar>
@@ -11,7 +12,7 @@ Header.Brand = function HeaderBrand({to, ...restProps}) {
 } 
 
 Header.Toggle = function HeaderToggle({...restProps}) {
-  return <Toggle {...restProps}/>
+  return <Toggle {...restProps}><AiOutlineMenu/></Toggle>
 } 
 
 Header.Collapse = function HeaderCollapse({ children, ...restProps }) {
@@ -21,8 +22,17 @@ Header.Collapse = function HeaderCollapse({ children, ...restProps }) {
 Header.Link = function HeaderLink({ children, ...restProps }) {
   return <Link {...restProps}>{children}</Link>
 }
+
 Header.TextLink = function HeaderTextLink({ children, ...restProps }) {
   return <TextLink {...restProps}>{children}</TextLink>
+}
+
+Header.Item = function HeaderItem({ children, ...restProps }) {
+  return <Item {...restProps}>{children}</Item>
+}
+
+Header.Icon = function HeaderIcon({ children, ...restProps }) {
+  return <Icon {...restProps}>{children}</Icon> 
 }
 
 Header.NavButton = function HeaderNavButton({ children, ...restProps }) {
@@ -34,7 +44,6 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
 }
 
 Header.User = function HeaderUser({ displayName, ...restProps }) {
-  
   return <User {...restProps}>
     <Avatar icon={faUserCircle}/>
     <UserName>{displayName}</UserName>

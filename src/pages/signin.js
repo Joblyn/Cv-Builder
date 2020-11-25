@@ -80,7 +80,7 @@ export default function SignUp() {
             <BrandIcon src='./icons/brands/facebook.svg' />
           </div>
         </div>
-
+        <Form.Text showOnlyOnSmallView>Don't have an account? <Form.Link to={ROUTES.SIGN_UP}>Sign up</Form.Link></Form.Text>
       </div>
 
       <Aside>

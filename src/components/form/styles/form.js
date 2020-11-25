@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { Button as BootstrapButton } from 'react-bootstrap';
 import * as ROUTES from '../../../constants/routes';
+import { Link as ReactRouterLink } from 'react-router-dom';
 
 export const Container = styled.form`
   width: 100%;
   max-width: 600px;
   margin-left: ${({ marginLeft }) => marginLeft ? marginLeft : '0'};
   position: relative;
-  margin-bottom: ${({ location }) => (location === ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '3.4rem' : '8rem'};
+  margin-bottom: ${({ location }) => (location === ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '1rem' : '8rem'};
   padding-left:1.2rem;
   ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? 'margin-top: 1.5rem' : null};
 
@@ -120,4 +121,19 @@ export const Text = styled.p`
   font-size: ${({ type }) => type === 'note' ? '15px' : '20px'};
   line-height: 22px;
   color: #474747;
+  ${({ showOnlyOnSmallView }) => showOnlyOnSmallView && `margin-left: 1.2rem; margin-top: 1.3rem; color: #000`};
+
+
+  @media (min-width: 768px) {
+    ${({ showOnlyOnSmallView }) => showOnlyOnSmallView && `display: none;`};
+  }
+`;
+
+export const Link = styled(ReactRouterLink)`
+  text-decoration: none;
+  color: #216DE0;
+
+  &:hover {
+    color: #216DE0;
+  }
 `;

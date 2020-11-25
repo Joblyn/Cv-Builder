@@ -49,9 +49,7 @@ export const Icon = styled(FontAwesomeIcon)`
   background-color: ${({ type }) => type === "times" ? 'inherit' : '#fff'};
   color: ${({ type }) => type === "times" ? '#474747' : '#216DE0'};
   transition: all 0.3s;
-  animation-name: show;
-  animation-duration: 0.2s;
-  animation-timing-function: ease-in-out; 
+  animation: show 0.2s ease-in-out;
   border-radius: 50%;
 
   &:hover {

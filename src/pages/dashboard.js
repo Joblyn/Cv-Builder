@@ -1,7 +1,8 @@
 import React from 'react';
+import { DashboardHeader } from '../containers';
 
 export default function Dashboard(){
   return <>
-    <h1>Dashboard</h1>
+    <DashboardHeader />
   </>
 }
