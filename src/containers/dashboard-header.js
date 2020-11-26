@@ -13,7 +13,6 @@ export default function DashboardHeader(){
 
   const [active, setActive] = useState(false);
 
-
   return (
     <Header bg="blue" expand="md">
       <Header.Brand to={ROUTES.HOME} type="dashboard"/>

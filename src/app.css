@@ -117,3 +117,9 @@
   flex-direction: row;
   align-items: center;
 }
+
+.resume {
+  padding: 2rem 2rem 2rem 1rem;
+  display: flex;
+  flex-direction: row;
+}
