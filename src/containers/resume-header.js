@@ -7,7 +7,7 @@ import * as ROUTES from '../constants/routes';
 import { FirebaseContext } from '../context/firebase';
 import { Spinner } from '../components/loading';
 
-export default function DashboardHeader(){
+export default function ResumeHeader(){
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {}; 
 
@@ -34,7 +34,7 @@ export default function DashboardHeader(){
           /> : <Spinner />}
           <Header.UserNav active = {active}>
             <Header.Item>
-              <Header.TextLink to={ROUTES.DASHBOARD} type="user">Dashboard</Header.TextLink>
+              <Header.TextLink to={ROUTES.RESUME} type="user">Build Resume</Header.TextLink>
             </Header.Item>
             <Header.Item>
               <Header.TextLink onClick={() => firebase.auth().signOut()} to='#' type="user">Log out</Header.TextLink>

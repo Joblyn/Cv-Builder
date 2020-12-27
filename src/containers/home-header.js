@@ -44,7 +44,7 @@ export default function HomeHeader(){
                   />  
                   <Header.UserNav active = {active} >
                     <Header.Item>
-                      <Header.TextLink to={ROUTES.DASHBOARD} type="user">Dashboard</Header.TextLink>
+                      <Header.TextLink to={ROUTES.RESUME} type="user">Build Resume</Header.TextLink>
                     </Header.Item>
                     <Header.Item>
                       <Header.TextLink onClick={() => firebase.auth().signOut()} to='#' type="user">Log out</Header.TextLink>

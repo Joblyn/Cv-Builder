@@ -1,58 +1,58 @@
 [
   {
     "id": 1,
-    "icon": "./icons/resume-nav/pers-info.svg",
-    "iconActive":"./icons/resume-nav/pers-info-active.svg",
+    "icon": "../icons/resume-nav/pers-info.svg",
+    "iconActive":"../icons/resume-nav/pers-info-active.svg",
     "title":"Personal Info",
-    "to": "/dashboard"
+    "to": "/resume/personal-info"
   },
   {
     "id": 2,
-    "icon": "./icons/resume-nav/edu.svg",
-    "iconActive":"./icons/resume-nav/edu-active.svg",
+    "icon": "../icons/resume-nav/edu.svg",
+    "iconActive":"../icons/resume-nav/edu-active.svg",
     "title":"Education",
-    "to": "/education"
+    "to": "/resume/education"
   },
   {
     "id": 3,
-    "icon": "./icons/resume-nav/exp.svg",
-    "iconActive":"./icons/resume-nav/exp-active.svg",
+    "icon": "../icons/resume-nav/exp.svg",
+    "iconActive":"../icons/resume-nav/exp-active.svg",
     "title":"Work Experience",
-    "to": "/work-experience"
+    "to": "/resume/work-experience"
   },
   {
     "id": 4,
-    "icon": "./icons/resume-nav/lang.svg",
-    "iconActive":"./icons/resume-nav/lang-active.svg",
+    "icon": "../icons/resume-nav/lang.svg",
+    "iconActive":"../icons/resume-nav/lang-active.svg",
     "title":"Languages",
-    "to": "/languages"
+    "to": "/resume/languages"
   },
   {
     "id": 5,
-    "icon": "./icons/resume-nav/cert.svg",
-    "iconActive":"./icons/resume-nav/cert-active.svg",
+    "icon": "../icons/resume-nav/cert.svg",
+    "iconActive":"../icons/resume-nav/cert-active.svg",
     "title":"Certifications",
-    "to": "/certifications"
+    "to": "/resume/certifications"
   },
   {
     "id": 6,
-    "icon": "./icons/resume-nav/achieve.svg",
-    "iconActive":"./icons/resume-nav/achieve-active.svg",
+    "icon": "../icons/resume-nav/achieve.svg",
+    "iconActive":"../icons/resume-nav/achieve-active.svg",
     "title":"Achievements",
-    "to": "/achievements"
+    "to": "/resume/achievements"
   },
   {
     "id": 7,
-    "icon": "./icons/resume-nav/skills.svg",
-    "iconActive":"./icons/resume-nav/skills-active.svg",
+    "icon": "../icons/resume-nav/skills.svg",
+    "iconActive":"../icons/resume-nav/skills-active.svg",
     "title":"Skills",
-    "to": "/skills"
+    "to": "/resume/skills"
   },
   {
     "id": 8,
-    "icon": "./icons/resume-nav/refs.svg",
-    "iconActive":"./icons/resume-nav/refs-active.svg",
+    "icon": "../icons/resume-nav/refs.svg",
+    "iconActive":"../icons/resume-nav/refs-active.svg",
     "title":"Reference",
-    "to": "/reference"
+    "to": "/resume/reference"
   }
 ]

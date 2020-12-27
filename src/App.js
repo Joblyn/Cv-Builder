@@ -12,7 +12,7 @@ const About = lazy(() => import('./pages/about'));
 const Contact = lazy(() => import('./pages/contact'));
 const SignUp = lazy(() => import('./pages/signup'));
 const SignIn = lazy(() => import('./pages/signin'));
-const Dashboard = lazy(() => import('./pages/dashboard'));
+const Resume = lazy(() => import('./pages/resume'));
 
 export default function App() {
   const { user } = useAuthListener();
@@ -32,23 +32,23 @@ export default function App() {
           </Route>
           <IsUserRedirect 
             user={user} 
-            loggedInPath={ROUTES.DASHBOARD}
+            loggedInPath={ROUTES.RESUME}
             path={ROUTES.SIGN_UP}
           >
             <SignUp />
           </IsUserRedirect>
           <IsUserRedirect 
             user={user} 
-            loggedInPath={ROUTES.DASHBOARD}
+            loggedInPath={ROUTES.RESUME}
             path={ROUTES.SIGN_IN}
           >
             <SignIn />
           </IsUserRedirect>
           <ProtectedRoute
             user={user}
-            path={ROUTES.DASHBOARD}
+            path={ROUTES.RESUME}
           >
-            <Dashboard />
+            <Resume />
           </ProtectedRoute>
         </Switch>
       </Suspense>

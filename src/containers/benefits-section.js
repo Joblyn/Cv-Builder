@@ -15,7 +15,7 @@ export default function BenefitsSection({ user }) {
         </Benefits.Item>
       ))
       }
-      <Benefits.Button href={user ? ROUTES.DASHBOARD : ROUTES.SIGN_IN}>Build your resume</Benefits.Button>
+      <Benefits.Button href={user ? ROUTES.RESUME : ROUTES.SIGN_IN}>Build your resume</Benefits.Button>
     </Benefits>
   )
 }

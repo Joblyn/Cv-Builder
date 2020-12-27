@@ -4,7 +4,7 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 
 export const NavBar = styled(Navbar)`
-  padding: .8rem 4%;
+  padding: .7rem 4%;
   ${({ bg }) => bg === 'blue' && 'background: #216DE0'};
 `;
 
@@ -137,12 +137,12 @@ export const UserNav = styled.nav`
   position: absolute;
   right: 4%;
   top: 65px;
-  height: ${({ active }) => active ? '100%' : '0'};
+  height: ${({ active }) => active ? '85px' : '0'};
   transition: height .3s ${({ active }) => !active ? '.15s' : null} ease;
   z-index: 10;
   padding-top: 0rem;
 
-  & > ${Item} {
+  > ${Item} {
     opacity: ${({ active }) => active ? '1' : '0'};
     transition: opacity .1s ${({ active }) => !active ? null : '.3s'};
   }

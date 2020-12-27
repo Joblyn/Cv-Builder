@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { FooterContainer, HomeHeader } from '../containers';
 import { Info, Form } from "../components";
 import { RequestSuccessful } from '../components/request-success';
-import { Spinner } from '../components/loading'
+import { Spinner } from '../components/loading';
 import { FirebaseContext } from '../context/firebase';
 
 export default function Contact() {
@@ -88,7 +88,7 @@ export default function Contact() {
                 placeholder = { isEmpty ? 'cannot be empty' : '' }
                 required
               />
-              {!invalidEmail && <Form.Error>Please input a valid email</Form.Error>}
+              {invalidEmail && <Form.Error>Please input a valid email</Form.Error>}
             </Form.Group>
               <Form.Group>
               <Form.Label htmlFor="phoneNo">Phone number</Form.Label>
@@ -100,7 +100,7 @@ export default function Contact() {
                 placeholder = { isEmpty ? 'cannot be empty' : '' }
                 required
               />
-              {!invalidPhoneNo && <Form.Error>Please input a valid phone number</Form.Error>}
+              {invalidPhoneNo && <Form.Error>Please input a valid phone number</Form.Error>}
             </Form.Group>
             <Form.Group>
               <Form.Label htmlFor="message">Message</Form.Label>
