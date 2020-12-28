@@ -23,7 +23,7 @@ export default function TestimonialsSection({ user }){
           ))
           }
         </Carousel>
-        <Testimonials.Button href={user ? ROUTES.RESUME : ROUTES.SIGN_IN}>Build your resume</Testimonials.Button>
+        <Testimonials.Button href={user ? ROUTES.PERS_INFO : ROUTES.SIGN_IN}>Build your resume</Testimonials.Button>
       </Testimonials>
     </>
   )

@@ -9,8 +9,7 @@ export const Container = styled.form`
   margin-left: ${({ marginLeft }) => marginLeft ? marginLeft : '0'};
   position: relative;
   margin-bottom: ${({ location }) => (location === ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '1rem' : '8rem'};
-  padding-left:1.2rem;
-  ${({ type }) => type === 'resume' && `padding-right: 1.2rem`};
+  ${({ type }) => type === 'resume' ? `padding: 0 5%` : `padding: 0 1.2rem`};
   ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? 'margin-top: 1.5rem' : null};
   @media (max-width: 768px) {
     margin-left: 0;
@@ -41,7 +40,6 @@ export const Input = styled.input`
   color: #216DE0;
   opacity: 1;
   padding: .5rem;
-
   ::placeholder,
   ::-webkit-input-placeholder{
     color: ${({ typ }) => typ === 'resume' ? '#B1B1B1' : 'red'};
@@ -52,18 +50,20 @@ export const Button = styled(BootstrapButton)`
   margin-left: ${({ position }) => position === 'right' ? 'auto' : '0'};
   border-radius: 6px;
   text-align: center;
-  width: 9rem;
-  height: 3rem; 
-  font-size:1.1rem;
-  font-weight: 600;
-  line-height: 20px;
+  width: ${({ typ }) => !(typ === 'resume') && '9rem'};
+  height: ${({ typ }) => !(typ === 'resume') && '3rem'}; 
+  ${({ typ }) => typ === 'resume' && `padding : .8rem 1.8rem`};
+  font-size:${({ typ }) => typ === 'resume' ? '1.12rem' : '1.1rem'};
+  font-weight: ${({ typ }) => typ === 'resume' ? '500' : '600'};
+  line-height: ${({ typ }) => typ === 'resume' ? '26px' : '20px'};
   background-color: #216DE0;
-  margin-top: 30px;
+  margin-top: ${({ typ }) => typ === 'resume' ? '5rem' : ' 30px'};
   border: none;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
+  ${({ typ }) => typ === 'resume' && 'box-shadow: 0px 1px 18px -10px #216DE0'};
 
   &:disabled {
     opacity: 1;
@@ -77,19 +77,18 @@ export const Group = styled.div`
 
   @media (min-width: 992px) {
     ${({row }) => row && 'flex-direction: row'};
+  ${({ width }) => width && `width: ${width}`};
+  ${({ marginRight }) => marginRight && `margin-right: ${marginRight}`};
   }
 
   &:first-of-type {
     margin-top: ${({ location }) => location === (ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : ({ type }) => type === 'resume' ? '2rem' : '0'};
-    ${'' /* @media(min-width: 992px) {
-      ${({ row }) => row && 'margin-top: 2rem'};
-    }; */}
   }
 `;
 
 export const TextArea = styled.textarea`
-  background: white;
-  border: 2px solid #216DE0;
+  background: ${({ typ }) => typ === 'resume' ? '#F8F8F8' : '#fff'};
+  border: ${({ typ }) => typ === 'resume' ? '1px solid #CDCDCD': '2px solid #216DE0'};
   box-sizing: border-box;
   border-radius: 6px;
   height: ${({height}) => height ? height : '50px'}; 
@@ -100,10 +99,11 @@ export const TextArea = styled.textarea`
   color: #216DE0;
   opacity: 1;
   padding: .5rem;
+  resize: none;
 
   ::placeholder,
   ::-webkit-input-placeholder{
-    color: red;
+    color: ${({ typ }) => typ === 'resume' ? '#B1B1B1' : 'red'};
     font-weight: 300;
   }
 `;

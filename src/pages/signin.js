@@ -23,7 +23,7 @@ export default function SignUp() {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        history.push(ROUTES.RESUME);
+        history.push(ROUTES.PERS_INFO);
       }
       )
       .catch(error => {

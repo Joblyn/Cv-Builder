@@ -50,7 +50,7 @@ export default function SignUp() {
     if(success) {
       setTimeout(() =>{
         setSuccess(false);
-        history.push(ROUTES.RESUME);
+        history.push(ROUTES.PERS_INFO);
       }, 1500);
     }
   }, [success]);

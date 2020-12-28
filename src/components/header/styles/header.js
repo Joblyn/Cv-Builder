@@ -4,7 +4,7 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 
 export const NavBar = styled(Navbar)`
-  padding: .7rem 4%;
+  padding: .8rem 4%;
   ${({ bg }) => bg === 'blue' && 'background: #216DE0'};
 `;
 

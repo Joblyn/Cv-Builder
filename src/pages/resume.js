@@ -4,9 +4,8 @@ import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { ResumeHeader } from '../containers';
 import { ResumeNav } from '../components';
 import items from '../fixtures/resume.json';
-import PersonalInfo from '../containers/Personal-Info';
 
-export default function Resume(){
+export default function Resume({ children }) {
   const location = window.location.pathname;
   const [showNav, setShowNav] = useState(false);
 
@@ -34,7 +33,7 @@ export default function Resume(){
         </ResumeNav>
       </ResumeNav.Base>
       <div className="resume-form-cont">
-        <PersonalInfo />
+        {children}
       </div>
     </div>
   </>
