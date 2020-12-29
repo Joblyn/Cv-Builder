@@ -53,14 +53,14 @@ export default function App() {
           />
 
           <Resume>
-          <ProtectedRoute user={user} path={ROUTES.PERS_INFO} component={PersonalInfo} />
-          <ProtectedRoute user={user} path={ROUTES.EDU} component={Education} />
-          <ProtectedRoute user={user} path={ROUTES.WORK_EXP} component={WorkExperience} />
-          <ProtectedRoute user={user} path={ROUTES.LANG} component={Languages} />
-          <ProtectedRoute user={user} path={ROUTES.CERT} component={Certifications} />
-          <ProtectedRoute user={user} path={ROUTES.ACHIEVE} component={Achievements} />
-          <ProtectedRoute user={user} path={ROUTES.SKILLS} component={Skills} />
-          <ProtectedRoute user={user} path={ROUTES.REF} component={Reference} />
+            <ProtectedRoute user={user} path={ROUTES.PERS_INFO} component={PersonalInfo} />
+            <ProtectedRoute user={user} path={ROUTES.EDU} component={Education} />
+            <ProtectedRoute user={user} path={ROUTES.WORK_EXP} component={WorkExperience} />
+            <ProtectedRoute user={user} path={ROUTES.LANG} component={Languages} />
+            <ProtectedRoute user={user} path={ROUTES.CERT} component={Certifications} />
+            <ProtectedRoute user={user} path={ROUTES.ACHIEVE} component={Achievements} />
+            <ProtectedRoute user={user} path={ROUTES.SKILLS} component={Skills} />
+            <ProtectedRoute user={user} path={ROUTES.REF} component={Reference} />
           </Resume>
         </Switch>
       </Suspense>

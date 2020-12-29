@@ -50,8 +50,8 @@ export const Button = styled(BootstrapButton)`
   margin-left: ${({ position }) => position === 'right' ? 'auto' : '0'};
   border-radius: 6px;
   text-align: center;
-  width: ${({ typ }) => !(typ === 'resume') && '9rem'};
-  height: ${({ typ }) => !(typ === 'resume') && '3rem'}; 
+  width: ${({ typ }) => (typ === 'resume') ? 'fit-content' : '9rem'};
+  height: ${({ typ }) => !(typ === 'resume') ? 'fit-content' : '3rem'}; 
   ${({ typ }) => typ === 'resume' && `padding : .8rem 1.8rem`};
   font-size:${({ typ }) => typ === 'resume' ? '1.12rem' : '1.1rem'};
   font-weight: ${({ typ }) => typ === 'resume' ? '500' : '600'};
@@ -73,7 +73,7 @@ export const Button = styled(BootstrapButton)`
 export const Group = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: ${({ marginTop }) => marginTop ? marginTop : '2rem'};
 
   @media (min-width: 992px) {
     ${({row }) => row && 'flex-direction: row'};

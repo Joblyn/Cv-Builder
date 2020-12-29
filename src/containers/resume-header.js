@@ -19,11 +19,11 @@ export default function ResumeHeader(){
       <Header.Toggle aria-controls="basic-navbar-nav"/>   
       <Header.Collapse id="basic-navbar-nav">
         <Header.Group>
-          <Header.TextLink type="header">
+          <Header.TextLink type="header" to="#">
             <Header.Icon><IoMdEye /></Header.Icon>
             Preview Resume
           </Header.TextLink>
-          <Header.TextLink type="header">
+          <Header.TextLink type="header" to="#">
             <Header.Icon><AiOutlineDownload /></Header.Icon>
             Download
           </Header.TextLink>
