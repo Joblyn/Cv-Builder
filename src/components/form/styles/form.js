@@ -46,6 +46,28 @@ export const Input = styled.input`
     font-weight: 300;
   }
 `;
+
+export const InputDropdown = styled.select`
+  background: ${({ typ }) => typ === 'resume' ? '#F8F8F8' : '#fff'};
+  border: ${({ typ }) => typ === 'resume' ? '1px solid #CDCDCD': '2px solid #216DE0'};
+  box-sizing: border-box;
+  border-radius: 6px;
+  height: ${({height}) => height ? height : '50px'}; 
+  font-style: normal;
+  font-weight: ${({ value }) => value ? '500' : '300'};
+  font-size: 18px;
+  line-height: 22px;
+  color: ${({ value }) => value ? '#216DE0' : '#B1B1B1'};
+  opacity: 1;
+  padding: .5rem;
+  width: ${({ width }) => width ? width : '100%'};
+  margin-right: ${({ marginRight }) => marginRight ? marginRight : '0'};
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
+  appearance:none;
+
+`;
+
 export const Button = styled(BootstrapButton)`
   margin-left: ${({ position }) => position === 'right' ? 'auto' : '0'};
   border-radius: 6px;
@@ -56,14 +78,18 @@ export const Button = styled(BootstrapButton)`
   font-size:${({ typ }) => typ === 'resume' ? '1.12rem' : '1.1rem'};
   font-weight: ${({ typ }) => typ === 'resume' ? '500' : '600'};
   line-height: ${({ typ }) => typ === 'resume' ? '26px' : '20px'};
-  background-color: #216DE0;
+  background-color: ${({ outline }) => outline ? '#fff' : '#216DE0'};
   margin-top: ${({ typ }) => typ === 'resume' ? '5rem' : ' 30px'};
   border: none;
-  color: #fff;
+  color: ${({ outline }) => outline ? '#216DE0' : '#fff'};
   display: flex;
   justify-content: center;
   align-items: center;
   ${({ typ }) => typ === 'resume' && 'box-shadow: 0px 1px 18px -10px #216DE0'};
+
+  &:hover {
+    ${({ outline }) => outline && 'color: #216DE0; background-color: inherit'};
+  }
 
   &:disabled {
     opacity: 1;
@@ -77,12 +103,12 @@ export const Group = styled.div`
 
   @media (min-width: 992px) {
     ${({row }) => row && 'flex-direction: row'};
-  ${({ width }) => width && `width: ${width}`};
-  ${({ marginRight }) => marginRight && `margin-right: ${marginRight}`};
+    ${({ width }) => width && `width: ${width}`};
+    ${({ marginRight }) => marginRight && `margin-right: ${marginRight}`};
   }
 
   &:first-of-type {
-    margin-top: ${({ location }) => location === (ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : ({ type }) => type === 'resume' ? '2rem' : '0'};
+    margin-top: ${({ location, marginTop }) => location === (ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : ({ type }) => type === 'resume' ? '2rem' : '0' };
   }
 `;
 

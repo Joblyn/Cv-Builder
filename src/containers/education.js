@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "../components";
+import { MdRemove, MdArrowDropDown } from 'react-icons/md'; 
+import * as ROUTES from '../constants/routes';
+
+const months = [
+  "Month",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const monthsDropdown = months.map((month, id) => (
+  <option value={id !== 0 ? month : ''} key={id+1} style={{ color: '#B1B1B1' }}>
+    {month}
+  </option>
+));
 
 export default function Education() {
+  const [month, setMonth] = useState('');
+
   return (
     <Form type="resume" id="education">
       <Form.Group row>
@@ -55,10 +81,82 @@ export default function Education() {
           }}
         >
           <Form.Label style={{ marginRight: "auto" }}>Time Period</Form.Label>
-          <input type="checkbox" />
+          <input type="checkbox" style={{ margin: ".4rem" }} />
           Currently study here
         </span>
+        <Form.Group row>
+          <Form.Group row width="45%">
+            <div style={{width:"45%", marginRight:'10%', position:'relative'}}>
+              <Form.InputDropdown
+                dropdownElements={monthsDropdown}
+                typ="resume"
+                value={month}
+                onChange={({ target }) => setMonth(target.value)}
+              />
+              <MdArrowDropDown size={35} style={{position: 'absolute', top:'50%', right:'0', color:'#474747', transform:'translate(0, -50%)'}} />
+            </div>
+            <div style={{width:"45%", position:'relative'}}>
+              <Form.InputDropdown
+                dropdownElements={monthsDropdown}
+                typ="resume"
+                value={month}
+                onChange={({ target }) => setMonth(target.value)}
+              />
+              <MdArrowDropDown size={35} style={{position: 'absolute', top:'50%', right:'0', color:'#474747', transform:'translate(0, -50%)'}} />
+            </div>
+          </Form.Group>
+          <div style={{ width: '10%'}} className="d-flex align-items-center justify-content-center"><MdRemove size={29}/></div>
+          <Form.Group row width="45%" marginTop="0">
+          <div style={{width:"45%", marginRight:'10%', position:'relative'}}>
+              <Form.InputDropdown
+                dropdownElements={monthsDropdown}
+                typ="resume"
+                value={month}
+                onChange={({ target }) => setMonth(target.value)}
+              />
+              <MdArrowDropDown size={35} style={{position: 'absolute', top:'50%', right:'0', color:'#474747', transform:'translate(0, -50%)'}} />
+            </div>
+            <div style={{width:"45%", position:'relative'}}>
+              <Form.InputDropdown
+                dropdownElements={monthsDropdown}
+                typ="resume"
+                value={month}
+                onChange={({ target }) => setMonth(target.value)}
+              />
+              <MdArrowDropDown size={35} style={{position: 'absolute', top:'50%', right:'0', color:'#474747', transform:'translate(0, -50%)'}} />
+            </div>
+          </Form.Group>
+        </Form.Group>
       </Form.Group>
+      <Form.Group type="resume">
+        <Form.Label htmlFor="info">Other Information</Form.Label>
+        <Form.TextArea 
+          id="info" 
+          placeholde=""
+          height="12rem"
+          typ="resume"
+        />
+      </Form.Group>
+      <div className="d-flex">
+        <Form.Button
+          type="submit"
+          form="personal-info"
+          typ="resume"
+          href={ROUTES.PERS_INFO}
+          outline
+        >
+          Previous Section
+        </Form.Button>
+        <Form.Button
+          type="submit"
+          form="personal-info"
+          position="right"
+          typ="resume"
+          href={ROUTES.EDU}
+        >
+          Next Section
+        </Form.Button>
+      </div>
     </Form>
   );
 }
