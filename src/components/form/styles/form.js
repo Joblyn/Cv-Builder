@@ -88,7 +88,7 @@ export const Button = styled(BootstrapButton)`
   ${({ typ }) => typ === 'resume' && 'box-shadow: 0px 1px 18px -10px #216DE0'};
 
   &:hover {
-    ${({ outline }) => outline && 'color: #216DE0; background-color: inherit'};
+    ${({ outline }) => outline === 'true' && 'color: #216DE0; background-color: inherit'};
   }
 
   &:disabled {
@@ -102,13 +102,18 @@ export const Group = styled.div`
   margin-top: ${({ marginTop }) => marginTop ? marginTop : '2rem'};
 
   @media (min-width: 992px) {
-    ${({row }) => row && 'flex-direction: row'};
+    ${({ row }) => row && 'flex-direction: row'};
     ${({ width }) => width && `width: ${width}`};
     ${({ marginRight }) => marginRight && `margin-right: ${marginRight}`};
+    ${({ showOnlyOnSmallViewPort }) => showOnlyOnSmallViewPort && 'display: none'};
+  }
+
+  @media(max-width: 992px) {
+    ${({ showOnlyOnLargeViewPort }) => showOnlyOnLargeViewPort && 'display: none'};
   }
 
   &:first-of-type {
-    margin-top: ${({ location, marginTop }) => location === (ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : ({ type }) => type === 'resume' ? '2rem' : '0' };
+    margin-top: ${({ location }) => location === (ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : ({ type }) => type === 'resume' ? '2rem' : '0' };
   }
 `;
 

@@ -6,11 +6,11 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     height: 100%;
     width: 100%;
-    font-smoothing: grayscale;
+    ${'' /* font-smoothing: antialised; */}
     -webkit-font-smoothing: antialised;
+    -moz-osx-font-smoothing: grayscale;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden!important;
-    -moz-osx-font-smoothing: grayscale;
     font-smooth: auto;
 
     &::-webkit-scrollbar {
