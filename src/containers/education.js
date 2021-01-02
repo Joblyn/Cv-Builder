@@ -52,7 +52,7 @@ export default function Education() {
     </option>
   ));
 
-  const handleChange = (target, id) => {
+  const  handleChange = (target, id) => {
     setControl((prevState) => [
       ...prevState.slice(0, id),
       {
@@ -87,7 +87,7 @@ export default function Education() {
         <>
         {control.map((cont, id) => (
           <div key={`edu-${id + 1}`}>
-            {control.length > 1 && <Form.SubHeading marginTop={id == 0 && '1.4rem'}>{id+1}.</Form.SubHeading>}
+            {control.length > 1 && <Form.SubHeading marginTop={id === 0 && '1.4rem'}>{id+1}.</Form.SubHeading>}
             <Form.Group row>
               <Form.Group type="resume" width="45%" marginRight="10%">
                 <Form.Label htmlFor="institutionName">
@@ -369,7 +369,7 @@ export default function Education() {
               <Form.Label htmlFor="info">Other Information</Form.Label>
               <Form.TextArea
                 id="info"
-                placeholde=""
+                placeholder=""
                 height="12rem"
                 typ="resume"
               />

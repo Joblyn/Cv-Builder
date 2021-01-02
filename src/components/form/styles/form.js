@@ -26,6 +26,8 @@ export const Label = styled.label`
   font-size: 20px;
   line-height: 24px;
   color: #2E2E2E;
+  ${({ width }) => width && `width: ${width}`};
+  ${({ marginRight }) => marginRight && `margin-right: ${marginRight}`};
 `;
 export const Input = styled.input`
   background: ${({ typ }) => typ === 'resume' ? '#F8F8F8' : '#fff'};
