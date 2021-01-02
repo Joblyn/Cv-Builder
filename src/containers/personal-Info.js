@@ -5,6 +5,7 @@ import * as ROUTES from '../constants/routes';
 export default function PersonalInfo() {
   return (
     <Form type="resume" id="personal-info">
+      <Form.Title type="resume" showOnlyOnSmallViewPort>Personal Information</Form.Title>
       <Form.Group row>
         <Form.Group type="resume" width="45%" marginRight="10%">
           <Form.Label htmlFor="firstname">First name</Form.Label>

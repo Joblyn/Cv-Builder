@@ -74,7 +74,6 @@ export const Button = styled(BootstrapButton)`
   text-align: center;
   width: ${({ typ }) => (typ === 'resume') ? 'fit-content' : '9rem'};
   height: ${({ typ }) => !(typ === 'resume') ? 'fit-content' : '3rem'}; 
-  ${({ typ }) => typ === 'resume' && `padding : .8rem 1.8rem`};
   font-size:${({ typ }) => typ === 'resume' ? '1.12rem' : '1.1rem'};
   font-weight: ${({ typ }) => typ === 'resume' ? '500' : '600'};
   line-height: ${({ typ }) => typ === 'resume' ? '26px' : '20px'};
@@ -100,6 +99,7 @@ export const Group = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: ${({ marginTop }) => marginTop ? marginTop : '2rem'};
+  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}`};
 
   @media (min-width: 992px) {
     ${({ row }) => row && 'flex-direction: row'};
@@ -149,10 +149,15 @@ export const Error = styled.p`
 
 export const Title = styled.p`
   font-style: normal;
-  font-weight: 600;
-  font-size: 40px;
-  line-height: 48px;
-  color: #2E2E2E;
+  font-weight: ${({ type }) => type === 'resume' ? '500' : '600'};
+  font-size: ${({ type }) => type === 'resume' ? '24px' : '40px'};
+  line-height: ${({ type }) => type === 'resume' ? '24px' : '48px'};
+  color: ${({ type }) => type === 'resume' ? '#0056b3' : '#2E2E2E'};
+  ${({ type }) => type === 'resume' && 'margin-bottom: -.8rem'};
+
+  @media (min-width: 992px) {
+    ${({ showOnlyOnSmallViewPort }) => showOnlyOnSmallViewPort && 'display: none'};
+  }
 `;
 
 export const Text = styled.p`
@@ -176,4 +181,12 @@ export const Link = styled(ReactRouterLink)`
   &:hover {
     color: #216DE0;
   }
+`;
+
+export const SubHeading = styled.p`
+  ${({ marginTop }) => marginTop && `margin-top: ${marginTop}`};
+  margin-bottom: -1.6rem;
+  font-size: 18px;
+  font-weight: 500;
+  color: #0056b3;
 `;

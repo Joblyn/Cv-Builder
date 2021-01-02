@@ -29,7 +29,7 @@ export const Container = styled.nav`
 
   @media (max-width: 992px) {
     grid-gap: 20px;
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
   }
 `;
 export const Overlay = styled.div`
@@ -43,6 +43,9 @@ export const Overlay = styled.div`
   z-index: 1;
   @media (max-width: 992px) {
     display: block;
+    visibility: ${({ showNav }) => showNav ? 'visible' : 'hidden'};
+    transition: all;
+    transition-delay: ${({ showNav }) => showNav === false && '0.4s'};
   }
 `;
 export const Text = styled.p`

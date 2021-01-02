@@ -67,7 +67,7 @@ export default function Education() {
   };
 
   const addForm = () => {
-    setControl((prevState) => [
+    setControl(prevState => [
       ...prevState,
       {
         month: { start: "", end: "" },
@@ -82,11 +82,12 @@ export default function Education() {
 
   return (
     <Form type="resume" id="education">
+      <Form.Title type='resume' showOnlyOnSmallViewPort>Education</Form.Title>
       {control.length &&
         <>
-        {control.map((control, id) => (
+        {control.map((cont, id) => (
           <div key={`edu-${id + 1}`}>
-            <Form.Title>{`Education`}</Form.Title>
+            {control.length > 1 && <Form.SubHeading marginTop={id == 0 && '1.4rem'}>{id+1}.</Form.SubHeading>}
             <Form.Group row>
               <Form.Group type="resume" width="45%" marginRight="10%">
                 <Form.Label htmlFor="institutionName">
@@ -159,7 +160,7 @@ export default function Education() {
                       typ="resume"
                       name="start"
                       data-category="month"
-                      value={control.month.start}
+                      value={cont.month.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -179,7 +180,7 @@ export default function Education() {
                       typ="resume"
                       name="start"
                       data-category="year"
-                      value={control.year.start}
+                      value={cont.year.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -213,7 +214,7 @@ export default function Education() {
                       typ="resume"
                       name="end"
                       data-category="month"
-                      value={control.month.end}
+                      value={cont.month.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -233,7 +234,7 @@ export default function Education() {
                       typ="resume"
                       name="end"
                       data-category="year"
-                      value={control.year.end}
+                      value={cont.year.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -273,7 +274,7 @@ export default function Education() {
                     dropdownElements={monthsDropdown}
                     typ="resume"
                     name="start"
-                    value={control.month.start}
+                    value={cont.month.start}
                     onChange={({ target }) => handleChange(target, id)}
                   />
                   <MdArrowDropDown
@@ -292,7 +293,7 @@ export default function Education() {
                     dropdownElements={yearsDropdown}
                     typ="resume"
                     name="start"
-                    value={control.year.start}
+                    value={cont.year.start}
                     onChange={({ target }) => handleChange(target, id)}
                   />
                   <MdArrowDropDown
@@ -329,7 +330,7 @@ export default function Education() {
                     dropdownElements={monthsDropdown}
                     typ="resume"
                     name="end"
-                    value={control.month.end}
+                    value={cont.month.end}
                     onChange={({ target }) => handleChange(target, id)}
                   />
                   <MdArrowDropDown
@@ -348,7 +349,7 @@ export default function Education() {
                     dropdownElements={yearsDropdown}
                     typ="resume"
                     name="end"
-                    value={control.year.end}
+                    value={cont.year.end}
                     onChange={({ target }) => handleChange(target, id)}
                   />
                   <MdArrowDropDown
@@ -364,7 +365,7 @@ export default function Education() {
                 </div>
               </Form.Group>
             </Form.Group>
-            <Form.Group type="resume">
+            <Form.Group type="resume" marginBottom="2rem">
               <Form.Label htmlFor="info">Other Information</Form.Label>
               <Form.TextArea
                 id="info"
@@ -373,10 +374,9 @@ export default function Education() {
                 typ="resume"
               />
             </Form.Group>
-
           </div>
         ))}
-          <div className={`mt-4 d-flex ${control.length === 1 ? 'justify-content-end' : 'justify-content-between'}`}>
+          <div className={`d-flex ${control.length === 1 ? 'justify-content-end' : 'justify-content-between'}`}>
             {control.length > 1 && (
               <span>
                 <span

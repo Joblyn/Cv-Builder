@@ -10,7 +10,8 @@ import {
   Title,
   Text,
   Link,
-  InputDropdown
+  InputDropdown,
+  SubHeading
 } from "./styles/form";
 
 const location = window.location.pathname;
@@ -66,3 +67,7 @@ Form.Error = function FormError({ children, ...restProps }) {
 Form.InputDropdown = function FormInputDropdown({ dropdownElements, ...restProps }) {
   return <InputDropdown {...restProps}>{dropdownElements}</InputDropdown>;
 };
+
+Form.SubHeading = function FormSubHeading({ children, ...restProps }) {
+  return <SubHeading {...restProps}>{children}</SubHeading>
+}

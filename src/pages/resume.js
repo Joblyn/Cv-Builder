@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
-
+import $ from "jquery";
 import { ResumeHeader } from '../containers';
 import { ResumeNav } from '../components';
 import items from '../fixtures/resume.json';
@@ -8,6 +8,16 @@ import items from '../fixtures/resume.json';
 export default function Resume({ children }) {
   const location = window.location.pathname;
   const [showNav, setShowNav] = useState(false);
+
+  let resumeNav = $('#resume-nav');
+  $('body').click(event => {
+    let target = event.target;
+    if (target !== resumeNav) {
+      if(showNav) {
+        setShowNav(false);
+      }
+    }
+  })
 
   const activeStyle = {
     background: '#216DE0',
@@ -19,11 +29,10 @@ export default function Resume({ children }) {
     <ResumeHeader />
     <div className="resume">
       <ResumeNav.Icon type='left' onClick={() => setShowNav(true)}><BsArrowRight /></ResumeNav.Icon>
-      { showNav && <ResumeNav.Overlay />}
+      {<ResumeNav.Overlay showNav={showNav}/>}
       {showNav && <ResumeNav.LockBody />}
-      <ResumeNav.Base showNav={showNav}>
+      <ResumeNav.Base id="resume-nav" showNav={showNav}>
         <ResumeNav>
-          <ResumeNav.Icon type='right' onClick={() => setShowNav(false)}><BsArrowLeft /></ResumeNav.Icon>
           {items.map(item => (
             <ResumeNav.Item to={item.to} activeStyle={activeStyle} key={item.id}>
               <ResumeNav.Image src={location===item.to ? item.iconActive : item.icon}/>
