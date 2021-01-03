@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import { BsArrowRight } from 'react-icons/bs';
 import $ from "jquery";
 import { ResumeHeader } from '../containers';
 import { ResumeNav } from '../components';

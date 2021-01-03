@@ -11,6 +11,7 @@ export const Container = styled.form`
   margin-bottom: ${({ location }) => (location === ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '1rem' : '8rem'};
   ${({ type }) => type === 'resume' ? `padding: 0 5%` : `padding: 0 1.2rem`};
   ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? 'margin-top: 1.5rem' : null};
+  ${({ type }) => type === 'resume' && 'min-height: 90vh'};
   @media (max-width: 768px) {
     margin-left: 0;
     margin-top: ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '1rem' : '3rem' };
@@ -115,7 +116,7 @@ export const Group = styled.div`
   }
 
   &:first-of-type {
-    margin-top: ${({ location }) => location === (ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : ({ type }) => type === 'resume' ? '2rem' : '0' };
+    margin-top: ${({ location, type }) => location === (ROUTES.SIGN_UP ||  ROUTES.SIGN_IN) ? '2rem' : type === 'resume' ? '2rem' : '0' };
   }
 `;
 

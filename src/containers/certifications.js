@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Form } from "../components";
-import { MdArrowDropDown } from 'react-icons/md';
+import { MdArrowDropDown } from "react-icons/md";
+import { GoTrashcan } from "react-icons/go";
 
 export default function Certifications() {
   const [control, setControl] = useState(
-    Array.from(new Array(3), (cert, id) => ({
-      name: "",
-      year: "",
-    }))
+    [
+      {name: '', year: ''},{name: '', year: ''},{name: '', year: ''},
+    ]
   );
   const start = new Date().getFullYear();
   const end = 1949;
@@ -25,65 +25,118 @@ export default function Certifications() {
   ));
 
   const handleChange = (target, id) => {
-    setControl(prevState => [
+    setControl((prevState) => [
       ...prevState.slice(0, id),
       {
         ...prevState[id],
-        [target.name]: target.value
+        [target.name]: target.value,
       },
-      ...prevState.slice(id+1),
-    ])
-  }  
+      ...prevState.slice(id + 1),
+    ]);
+  };
+
+  const addItem = () => {
+    setControl((prevState) => [
+      ...prevState,
+      {
+        name: "",
+        year: "",
+      },
+    ]);
+  };
+
+  const removeItem = (id) => {
+    setControl((prevState) => {
+      let arr = prevState;
+      arr.splice(id, 1);
+      console.log(arr);
+      return arr;
+    });
+  };
 
   return (
     <Form type="resume" id="certifications">
+      <Form.Title type="resume" showOnlyOnSmallViewPort>
+        Certifications
+      </Form.Title>
       <div className="d-flex align-items-center mt-4">
         <Form.Label width="70%" marginRight="10%">
           Certificate Name
         </Form.Label>
         <Form.Label width="20%">Year</Form.Label>
       </div>
-      <Form.Title type="resume" showOnlyOnSmallViewPort>
-        Certifications
-      </Form.Title>
 
-      {control.map((cert, id) => (
-        <Form.Group row marginTop="0">
-          <Form.Group type="resume" width="70%" marginRight="10%">
-            <Form.Input
-              type="text"
-              name="name"
-              placeholder="e.g Figma Ambassador"
-              typ="resume"
-              onChange={({ target }) => handleChange(target, id)}
-            />
-          </Form.Group>
-          <Form.Group type="resume" width="20%">
+      {control.length &&
+        control.map((cert, id) => (
+          <Form.Group row marginTop="0" className="flex-row position-relative" key={`cert-${id+1}`}>
             <div
-              style={{
-                width: "100%",
-                marginRight: "10%",
-                position: "relative",
-              }}
+              className="d-flex justify-content-end position-absolute mt-3"
+              style={{ right: 0, color: "rgba(0,0,0,.4)", cursor: "pointer" }}
+              onClick={() => removeItem(id)}
             >
-              <Form.InputDropdown typ="resume" name="year" value={cert.year} 
-                dropdownElements={yearsDropdown}
+              <GoTrashcan size={20} />
+            </div>
+            <Form.Group
+              type="resume"
+              width="70%"
+              marginRight="10%"
+              style={{ marginTop: "3rem", width: "70%", marginRight: "10%" }}
+            >
+              <Form.Input
+                type="text"
+                name="name"
+                placeholder="e.g Figma Ambassador"
+                typ="resume"
                 onChange={({ target }) => handleChange(target, id)}
               />
-              <MdArrowDropDown
-                size={35}
+            </Form.Group>
+            <Form.Group
+              type="resume"
+              width="20%"
+              style={{ marginTop: "3rem", width: "20%" }}
+            >
+              <div
                 style={{
-                  position: "absolute",
-                  top: "50%",
-                  right: "0",
-                  color: "#474747",
-                  transform: "translate(0, -50%)",
+                  width: "100%",
+                  marginRight: "10%",
+                  position: "relative",
                 }}
-              />
-            </div>
+              >
+                <Form.InputDropdown
+                  typ="resume"
+                  name="year"
+                  value={cert.year}
+                  dropdownElements={yearsDropdown}
+                  onChange={({ target }) => handleChange(target, id)}
+                />
+                <MdArrowDropDown
+                  size={35}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "0",
+                    color: "#474747",
+                    transform: "translate(0, -50%)",
+                  }}
+                />
+              </div>
+            </Form.Group>
           </Form.Group>
-        </Form.Group>
-      ))}
+        ))}
+      <div className="d-flex justify-content-end mt-4">
+        <span
+          className="btn-link text-decoration-none"
+          style={{
+            color: "#216DE0",
+            fontSize: "1.15rem",
+            cursor: "pointer",
+            fontWeight: "500",
+          }}
+          onClick={addItem}
+        >
+          + Add Another
+        </span>
+      </div>
     </Form>
   );
 }
