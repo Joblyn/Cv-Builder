@@ -73,4 +73,4 @@ export default function PersonalInfo() {
       </Form.Button>
     </Form>
   );
-}
+};

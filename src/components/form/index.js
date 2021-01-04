@@ -11,7 +11,8 @@ import {
   Text,
   Link,
   InputDropdown,
-  SubHeading
+  SubHeading,
+  Icon
 } from "./styles/form";
 
 const location = window.location.pathname;
@@ -70,4 +71,8 @@ Form.InputDropdown = function FormInputDropdown({ dropdownElements, ...restProps
 
 Form.SubHeading = function FormSubHeading({ children, ...restProps }) {
   return <SubHeading {...restProps}>{children}</SubHeading>
-}
+};
+
+Form.Icon = function FormIcon({ children, ...restProps }) {
+  return <Icon {...restProps}>{children}</Icon>
+};

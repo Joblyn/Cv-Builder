@@ -18,8 +18,8 @@ export const Collapse = styled(Navbar.Collapse)`
 
 export const Brand = styled(ReactRouterLink)`
   font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
+  font-weight: 600;
+  font-size: 28px;
   line-height: 36px;
   color: ${({ type }) => type === 'dashboard' ? '#fff' : '#216DE0'};
   cursor: pointer;

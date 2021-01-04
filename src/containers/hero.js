@@ -10,7 +10,7 @@ export default function HeroContainer({ user }){
           Create a mind blowing resume
         </Hero.Caption>
         <Hero.Text>
-        Design and build a unique CV that your dream job will notice.
+        Build a stunning resume in minutes that will get you that dream job.
         </Hero.Text>
         <Hero.Button href={user ? ROUTES.PERS_INFO : ROUTES.SIGN_IN}>Build your resume</Hero.Button>
       </Hero.Left>

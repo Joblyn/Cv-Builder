@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form } from "../components";
 import { MdRemove, MdArrowDropDown } from "react-icons/md";
 import * as ROUTES from "../constants/routes";
+import { GoTrashcan } from "react-icons/go";
 
 const months = [
   "Month",
@@ -67,7 +68,7 @@ export default function WorkExperience() {
   };
 
   const addForm = () => {
-    setControl(prevState => [
+    setControl((prevState) => [
       ...prevState,
       {
         month: { start: "", end: "" },
@@ -76,78 +77,214 @@ export default function WorkExperience() {
     ]);
   };
 
-  const removeForm = () => {
-    setControl((prevState) => prevState.slice(0, -1));
+  const removeItem = (id) => {
+    setControl((prevState) => {
+      let arr = [...prevState];
+      arr.splice(id, 1);
+      return arr;
+    });
   };
 
   return (
     <Form type="resume" id="work-exp">
-      <Form.Title type='resume' showOnlyOnSmallViewPort>Work Experience</Form.Title>
-      {control.length &&
+      <Form.Title type="resume" showOnlyOnSmallViewPort>
+        Work Experience
+      </Form.Title>
+      {control.length && (
         <>
-        {control.map((cont, id) => (
-          <div key={`edu-${id + 1}`}>
-            {control.length > 1 && <Form.SubHeading marginTop={id === 0 && '1.4rem'}>{id+1}.</Form.SubHeading>}
-            <Form.Group row>
-              <Form.Group type="resume" width="45%" marginRight="10%">
-                <Form.Label htmlFor="institutionName">
-                  Job Title
-                </Form.Label>
-                <Form.Input
-                  id="institutionName"
-                  type="text"
-                  placeholder="e.g Fupre"
-                  typ="resume"
-                />
-              </Form.Group>
-              <Form.Group width="45%">
-                <Form.Label htmlFor="fieldOfStudy">Company Name</Form.Label>
-                <Form.Input
-                  id="fieldOfStudy"
-                  type="text"
-                  placeholder="e.g Engineering"
-                  typ="resume"
-                />
-              </Form.Group>
-            </Form.Group>
-            <Form.Group row marginTop="0">
-              <Form.Group type="resume" width="45%" marginRight="10%">
-                <Form.Label htmlFor="country">Country</Form.Label>
-                <Form.Input
-                  id="country"
-                  type="text"
-                  placeholder="e.g Nigeria"
-                  typ="resume"
-                />
-              </Form.Group>
-              <Form.Group width="45%">
-                <Form.Label htmlFor="fieldOfStudy">City</Form.Label>
-                <Form.Input
-                  id="city"
-                  type="text"
-                  placeholder="e.g Effurun"
-                  typ="resume"
-                />
-              </Form.Group>
-            </Form.Group>
-            <Form.Group showOnlyOnLargeViewPort>
-              <span
-                style={{
-                  fontSize: "16px",
-                  lineHeight: "19px",
-                  color: "#216DE0",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Form.Label style={{ marginRight: "auto" }}>
-                  Time Period
-                </Form.Label>
-                <input type="checkbox" style={{ margin: ".4rem" }} />
-                Currently study here
-              </span>
+          {control.map((cont, id) => (
+            <div key={`work-exp-${id + 1}`}>
+              {control.length > 1 && (
+                <div
+                  className="position-relative d-flex"
+                  style={{ marginBottom: "-3rem" }}
+                >
+                  <Form.SubHeading
+                    marginTop={id === 0 && "1.4rem"}
+                    marginBottom="0"
+                  >
+                    {id + 1}.
+                  </Form.SubHeading>
+                  {id > 0 && (
+                    <Form.Icon onClick={() => removeItem(id)}>
+                      <GoTrashcan size={20} />
+                    </Form.Icon>
+                  )}
+                </div>
+              )}
               <Form.Group row>
-                <Form.Group row width="45%">
+                <Form.Group type="resume" width="45%" marginRight="10%">
+                  <Form.Label htmlFor="job">Job Title</Form.Label>
+                  <Form.Input
+                    id="job"
+                    type="text"
+                    placeholder="e.g Fupre"
+                    typ="resume"
+                  />
+                </Form.Group>
+                <Form.Group width="45%" type="resume">
+                  <Form.Label htmlFor="company">Company Name</Form.Label>
+                  <Form.Input
+                    id="company"
+                    type="text"
+                    placeholder="e.g Engineering"
+                    typ="resume"
+                  />
+                </Form.Group>
+              </Form.Group>
+              <Form.Group row marginTop="0">
+                <Form.Group type="resume" width="45%" marginRight="10%">
+                  <Form.Label htmlFor="country">Country</Form.Label>
+                  <Form.Input
+                    id="country"
+                    type="text"
+                    placeholder="e.g Nigeria"
+                    typ="resume"
+                  />
+                </Form.Group>
+                <Form.Group width="45%">
+                  <Form.Label htmlFor="fieldOfStudy">City</Form.Label>
+                  <Form.Input
+                    id="city"
+                    type="text"
+                    placeholder="e.g Effurun"
+                    typ="resume"
+                  />
+                </Form.Group>
+              </Form.Group>
+              <Form.Group showOnlyOnLargeViewPort>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    lineHeight: "19px",
+                    color: "#216DE0",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Form.Label style={{ marginRight: "auto" }}>
+                    Time Period
+                  </Form.Label>
+                  <input type="checkbox" style={{ margin: ".4rem" }} />
+                  Currently study here
+                </span>
+                <Form.Group row>
+                  <Form.Group row width="45%">
+                    <div
+                      style={{
+                        width: "45%",
+                        marginRight: "10%",
+                        position: "relative",
+                      }}
+                    >
+                      <Form.InputDropdown
+                        dropdownElements={monthsDropdown}
+                        typ="resume"
+                        name="start"
+                        data-category="month"
+                        value={cont.month.start}
+                        onChange={({ target }) => handleChange(target, id)}
+                      />
+                      <MdArrowDropDown
+                        size={35}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "0",
+                          color: "#474747",
+                          transform: "translate(0, -50%)",
+                        }}
+                      />
+                    </div>
+                    <div style={{ width: "45%", position: "relative" }}>
+                      <Form.InputDropdown
+                        dropdownElements={yearsDropdown}
+                        typ="resume"
+                        name="start"
+                        data-category="year"
+                        value={cont.year.start}
+                        onChange={({ target }) => handleChange(target, id)}
+                      />
+                      <MdArrowDropDown
+                        size={35}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "0",
+                          color: "#474747",
+                          transform: "translate(0, -50%)",
+                        }}
+                      />
+                    </div>
+                  </Form.Group>
+                  <div
+                    style={{ width: "10%" }}
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    <MdRemove size={29} />
+                  </div>
+                  <Form.Group row width="45%" marginTop="0">
+                    <div
+                      style={{
+                        width: "45%",
+                        marginRight: "10%",
+                        position: "relative",
+                      }}
+                    >
+                      <Form.InputDropdown
+                        dropdownElements={monthsDropdown}
+                        typ="resume"
+                        name="end"
+                        data-category="month"
+                        value={cont.month.end}
+                        onChange={({ target }) => handleChange(target, id)}
+                      />
+                      <MdArrowDropDown
+                        size={35}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "0",
+                          color: "#474747",
+                          transform: "translate(0, -50%)",
+                        }}
+                      />
+                    </div>
+                    <div style={{ width: "45%", position: "relative" }}>
+                      <Form.InputDropdown
+                        dropdownElements={yearsDropdown}
+                        typ="resume"
+                        name="end"
+                        data-category="year"
+                        value={cont.year.end}
+                        onChange={({ target }) => handleChange(target, id)}
+                      />
+                      <MdArrowDropDown
+                        size={35}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "0",
+                          color: "#474747",
+                          transform: "translate(0, -50%)",
+                        }}
+                      />
+                    </div>
+                  </Form.Group>
+                </Form.Group>
+              </Form.Group>
+              <Form.Group showOnlyOnSmallViewPort>
+                <Form.Label>Time Period</Form.Label>
+                <span
+                  style={{
+                    color: "#216DE0",
+                    marginBottom: ".4rem",
+                    fontSize: "1.12rem",
+                  }}
+                >
+                  From
+                </span>
+                <Form.Group style={{ flexDirection: "row" }}>
                   <div
                     style={{
                       width: "45%",
@@ -159,7 +296,6 @@ export default function WorkExperience() {
                       dropdownElements={monthsDropdown}
                       typ="resume"
                       name="start"
-                      data-category="month"
                       value={cont.month.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
@@ -179,7 +315,6 @@ export default function WorkExperience() {
                       dropdownElements={yearsDropdown}
                       typ="resume"
                       name="start"
-                      data-category="year"
                       value={cont.year.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
@@ -195,13 +330,17 @@ export default function WorkExperience() {
                     />
                   </div>
                 </Form.Group>
-                <div
-                  style={{ width: "10%" }}
-                  className="d-flex align-items-center justify-content-center"
+                <span
+                  style={{
+                    color: "#216DE0",
+                    marginBottom: ".4rem",
+                    marginTop: ".5rem",
+                    fontSize: "1.12rem",
+                  }}
                 >
-                  <MdRemove size={29} />
-                </div>
-                <Form.Group row width="45%" marginTop="0">
+                  To
+                </span>
+                <Form.Group style={{ flexDirection: "row" }} marginTop="0">
                   <div
                     style={{
                       width: "45%",
@@ -213,7 +352,6 @@ export default function WorkExperience() {
                       dropdownElements={monthsDropdown}
                       typ="resume"
                       name="end"
-                      data-category="month"
                       value={cont.month.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
@@ -233,7 +371,6 @@ export default function WorkExperience() {
                       dropdownElements={yearsDropdown}
                       typ="resume"
                       name="end"
-                      data-category="year"
                       value={cont.year.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
@@ -250,149 +387,18 @@ export default function WorkExperience() {
                   </div>
                 </Form.Group>
               </Form.Group>
-            </Form.Group>
-            <Form.Group showOnlyOnSmallViewPort>
-              <Form.Label>Time Period</Form.Label>
-              <span
-                style={{
-                  color: "#216DE0",
-                  marginBottom: ".4rem",
-                  fontSize: "1.12rem",
-                }}
-              >
-                From
-              </span>
-              <Form.Group style={{ flexDirection: "row" }}>
-                <div
-                  style={{
-                    width: "45%",
-                    marginRight: "10%",
-                    position: "relative",
-                  }}
-                >
-                  <Form.InputDropdown
-                    dropdownElements={monthsDropdown}
-                    typ="resume"
-                    name="start"
-                    value={cont.month.start}
-                    onChange={({ target }) => handleChange(target, id)}
-                  />
-                  <MdArrowDropDown
-                    size={35}
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "0",
-                      color: "#474747",
-                      transform: "translate(0, -50%)",
-                    }}
-                  />
-                </div>
-                <div style={{ width: "45%", position: "relative" }}>
-                  <Form.InputDropdown
-                    dropdownElements={yearsDropdown}
-                    typ="resume"
-                    name="start"
-                    value={cont.year.start}
-                    onChange={({ target }) => handleChange(target, id)}
-                  />
-                  <MdArrowDropDown
-                    size={35}
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "0",
-                      color: "#474747",
-                      transform: "translate(0, -50%)",
-                    }}
-                  />
-                </div>
+              <Form.Group type="resume" marginBottom="2rem">
+                <Form.Label htmlFor="info">Description</Form.Label>
+                <Form.TextArea
+                  id="info"
+                  placeholde=""
+                  height="12rem"
+                  typ="resume"
+                />
               </Form.Group>
-              <span
-                style={{
-                  color: "#216DE0",
-                  marginBottom: ".4rem",
-                  marginTop: ".5rem",
-                  fontSize: "1.12rem",
-                }}
-              >
-                To
-              </span>
-              <Form.Group style={{ flexDirection: "row" }} marginTop="0">
-                <div
-                  style={{
-                    width: "45%",
-                    marginRight: "10%",
-                    position: "relative",
-                  }}
-                >
-                  <Form.InputDropdown
-                    dropdownElements={monthsDropdown}
-                    typ="resume"
-                    name="end"
-                    value={cont.month.end}
-                    onChange={({ target }) => handleChange(target, id)}
-                  />
-                  <MdArrowDropDown
-                    size={35}
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "0",
-                      color: "#474747",
-                      transform: "translate(0, -50%)",
-                    }}
-                  />
-                </div>
-                <div style={{ width: "45%", position: "relative" }}>
-                  <Form.InputDropdown
-                    dropdownElements={yearsDropdown}
-                    typ="resume"
-                    name="end"
-                    value={cont.year.end}
-                    onChange={({ target }) => handleChange(target, id)}
-                  />
-                  <MdArrowDropDown
-                    size={35}
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "0",
-                      color: "#474747",
-                      transform: "translate(0, -50%)",
-                    }}
-                  />
-                </div>
-              </Form.Group>
-            </Form.Group>
-            <Form.Group type="resume" marginBottom="2rem">
-              <Form.Label htmlFor="info">Description</Form.Label>
-              <Form.TextArea
-                id="info"
-                placeholde=""
-                height="12rem"
-                typ="resume"
-              />
-            </Form.Group>
-          </div>
-        ))}
-          <div className={`d-flex ${control.length === 1 ? 'justify-content-end' : 'justify-content-between'}`}>
-            {control.length > 1 && (
-              <span>
-                <span
-                  className="btn-link text-decoration-none "
-                  style={{
-                    color: "#216DE0",
-                    fontSize: "1.15rem",
-                    cursor: "pointer",
-                    fontWeight: "500",
-                  }}
-                  onClick={removeForm}
-                >
-                  - Remove
-                </span>
-              </span>
-            )}
+            </div>
+          ))}
+          <div className="d-flex justify-content-end">
             <span
               className="btn-link text-decoration-none"
               style={{
@@ -407,13 +413,13 @@ export default function WorkExperience() {
             </span>
           </div>
         </>
-        }
+      )}
       <div className="d-flex">
         <Form.Button
           type="submit"
           form="work-exp"
           typ="resume"
-          href={ROUTES.PERS_INFO}
+          href={ROUTES.EDU}
           outline="true"
         >
           Previous Section
@@ -423,7 +429,7 @@ export default function WorkExperience() {
           form="work-exp"
           position="right"
           typ="resume"
-          href={ROUTES.EDU}
+          href={ROUTES.LANG}
         >
           Next Section
         </Form.Button>

@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Form } from "../components";
 import { MdArrowDropDown } from "react-icons/md";
 import { GoTrashcan } from "react-icons/go";
+import * as ROUTES from "../constants/routes";
 
 export default function Certifications() {
-  const [control, setControl] = useState(
-    [
-      {name: '', year: ''},{name: '', year: ''},{name: '', year: ''},
-    ]
-  );
+  const [control, setControl] = useState([
+    { name: "", year: "" },
+    { name: "", year: "" },
+    { name: "", year: "" },
+  ]);
   const start = new Date().getFullYear();
   const end = 1949;
   let len = start - end;
@@ -47,9 +48,8 @@ export default function Certifications() {
 
   const removeItem = (id) => {
     setControl((prevState) => {
-      let arr = prevState;
+      let arr = [...prevState];
       arr.splice(id, 1);
-      console.log(arr);
       return arr;
     });
   };
@@ -65,63 +65,67 @@ export default function Certifications() {
         </Form.Label>
         <Form.Label width="20%">Year</Form.Label>
       </div>
-
       {control.length &&
         control.map((cert, id) => (
-          <Form.Group row marginTop="0" className="flex-row position-relative" key={`cert-${id+1}`}>
-            <div
-              className="d-flex justify-content-end position-absolute mt-3"
-              style={{ right: 0, color: "rgba(0,0,0,.4)", cursor: "pointer" }}
-              onClick={() => removeItem(id)}
-            >
-              <GoTrashcan size={20} />
+          <div key={`cert-${id+1}`}>
+            <div className="position-relative">
+              <Form.Icon onClick={() => removeItem(id)} marginTop='1rem'>
+                <GoTrashcan size={20} />
+              </Form.Icon>
             </div>
             <Form.Group
-              type="resume"
-              width="70%"
-              marginRight="10%"
-              style={{ marginTop: "3rem", width: "70%", marginRight: "10%" }}
+              row
+              marginTop="0"
+              className="flex-row"
+              key={`cert-${id + 1}`}
             >
-              <Form.Input
-                type="text"
-                name="name"
-                placeholder="e.g Figma Ambassador"
-                typ="resume"
-                onChange={({ target }) => handleChange(target, id)}
-              />
-            </Form.Group>
-            <Form.Group
-              type="resume"
-              width="20%"
-              style={{ marginTop: "3rem", width: "20%" }}
-            >
-              <div
-                style={{
-                  width: "100%",
-                  marginRight: "10%",
-                  position: "relative",
-                }}
+              <Form.Group
+                type="resume"
+                width="70%"
+                marginRight="10%"
+                style={{ marginTop: "3rem", width: "70%", marginRight: "10%" }}
               >
-                <Form.InputDropdown
+                <Form.Input
+                  type="text"
+                  name="name"
+                  placeholder="e.g Figma Ambassador"
                   typ="resume"
-                  name="year"
-                  value={cert.year}
-                  dropdownElements={yearsDropdown}
                   onChange={({ target }) => handleChange(target, id)}
                 />
-                <MdArrowDropDown
-                  size={35}
+              </Form.Group>
+              <Form.Group
+                type="resume"
+                width="20%"
+                style={{ marginTop: "3rem", width: "20%" }}
+              >
+                <div
                   style={{
-                    position: "absolute",
-                    top: "50%",
-                    right: "0",
-                    color: "#474747",
-                    transform: "translate(0, -50%)",
+                    width: "100%",
+                    marginRight: "10%",
+                    position: "relative",
                   }}
-                />
-              </div>
+                >
+                  <Form.InputDropdown
+                    typ="resume"
+                    name="year"
+                    value={cert.year}
+                    dropdownElements={yearsDropdown}
+                    onChange={({ target }) => handleChange(target, id)}
+                  />
+                  <MdArrowDropDown
+                    size={35}
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "0",
+                      color: "#474747",
+                      transform: "translate(0, -50%)",
+                    }}
+                  />
+                </div>
+              </Form.Group>
             </Form.Group>
-          </Form.Group>
+          </div>
         ))}
       <div className="d-flex justify-content-end mt-4">
         <span
@@ -136,6 +140,27 @@ export default function Certifications() {
         >
           + Add Another
         </span>
+      </div>
+
+      <div className="d-flex">
+        <Form.Button
+          type="submit"
+          form="personal-info"
+          typ="resume"
+          href={ROUTES.LANG}
+          outline="true"
+        >
+          Previous Section
+        </Form.Button>
+        <Form.Button
+          type="submit"
+          form="personal-info"
+          position="right"
+          typ="resume"
+          href={ROUTES.ACHIEVE}
+        >
+          Next Section
+        </Form.Button>
       </div>
     </Form>
   );

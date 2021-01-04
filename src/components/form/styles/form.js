@@ -10,8 +10,8 @@ export const Container = styled.form`
   position: relative;
   margin-bottom: ${({ location }) => (location === ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '1rem' : '8rem'};
   ${({ type }) => type === 'resume' ? `padding: 0 5%` : `padding: 0 1.2rem`};
-  ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? 'margin-top: 1.5rem' : null};
-  ${({ type }) => type === 'resume' && 'min-height: 90vh'};
+  ${({ location }) => (location === ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? 'margin-top: 1.5rem' : null};
+
   @media (max-width: 768px) {
     margin-left: 0;
     margin-top: ${({ location }) => location === (ROUTES.SIGN_UP || ROUTES.SIGN_IN) ? '1rem' : '3rem' };
@@ -43,6 +43,8 @@ export const Input = styled.input`
   color: #216DE0;
   opacity: 1;
   padding: .5rem;
+  width: 100%;
+
   ::placeholder,
   ::-webkit-input-placeholder{
     color: ${({ typ }) => typ === 'resume' ? '#B1B1B1' : 'red'};
@@ -75,14 +77,14 @@ export const Button = styled(BootstrapButton)`
   margin-left: ${({ position }) => position === 'right' ? 'auto' : '0'};
   border-radius: 6px;
   text-align: center;
-  width: ${({ typ }) => (typ === 'resume') ? 'fit-content' : '9rem'};
-  height: ${({ typ }) => !(typ === 'resume') ? 'fit-content' : '3rem'}; 
-  font-size:${({ typ }) => typ === 'resume' ? '1.12rem' : '1.1rem'};
-  font-weight: ${({ typ }) => typ === 'resume' ? '500' : '600'};
-  line-height: ${({ typ }) => typ === 'resume' ? '26px' : '20px'};
+  width: ${({ typ }) => (typ === 'resume') ? '10rem' : '9rem'};
+  height: ${({ typ }) => !(typ === 'resume') ? '3rem' : '3rem'}; 
+  font-size:${({ typ }) => typ === 'resume' ? '.95rem' : '1.1rem'};
+  font-weight: ${({ typ }) => typ === 'resume' ? '600' : '600'};
+  line-height: ${({ typ }) => typ === 'resume' ? '1rem' : '20px'};
   background-color: ${({ outline }) => outline ? '#fff' : '#216DE0'};
   margin-top: ${({ typ }) => typ === 'resume' ? '5rem' : ' 30px'};
-  border: none;
+  border: 1px solid #216DE0;
   color: ${({ outline }) => outline ? '#216DE0' : '#fff'};
   display: flex;
   justify-content: center;
@@ -188,8 +190,24 @@ export const Link = styled(ReactRouterLink)`
 
 export const SubHeading = styled.p`
   ${({ marginTop }) => marginTop && `margin-top: ${marginTop}`};
-  margin-bottom: -1.6rem;
+  margin-bottom: ${({ marginBottom }) => marginBottom ? marginBottom : '-1.6rem'};
   font-size: 18px;
   font-weight: 500;
   color: #0056b3;
+`;
+
+export const Icon = styled.div`
+  ${({ noPosition }) => noPosition ? '' : 'position: absolute'};
+  right: 0;
+  opacity: ${({ password }) => password ? '1' : '.5'};
+  cursor: pointer;
+  ${({ marginTop }) => marginTop && `margin-top: ${marginTop}`};
+  ${({ marginBottom }) => marginBottom && `margin-bottom: ${marginBottom}`};
+  ${({ password }) => password && 'top: 50%'};
+  ${({ password }) => password && 'transform: translate(-50%, -50%)'};
+  ${({ password }) => password && 'color: #216DE0'};
+
+  &:hover {
+    opacity: 1;
+  } 
 `;

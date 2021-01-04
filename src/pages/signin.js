@@ -40,7 +40,6 @@ export default function SignUp() {
       <HomeHeader />
       <div className="sign-up">
         <img src="./images/sign-up-bg.svg" className="bg-img" alt='' />
-
         <Form id="sign-in" onSubmit={handleSignup} marginLeft="5%">
           <Form.Title>Welcome back!</Form.Title>
           <Form.Text>Login to continue!</Form.Text>

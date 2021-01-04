@@ -41,7 +41,7 @@ export const Text = styled.p`
   line-height: 24px;
   letter-spacing: 0em;
   text-align: left;
-  margin-top: 10px;
+  margin-top: 1.5rem;
 `;
 
 export const Button = styled(BootstrapButton)`
