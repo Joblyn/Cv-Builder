@@ -25,6 +25,7 @@ const Reference = lazy(() => import("./containers/reference"));
 
 export default function App() {
   const { user } = useAuthListener();
+  console.log(user);
 
   return (
     <Router>
@@ -43,14 +44,16 @@ export default function App() {
             user={user}
             loggedInPath={ROUTES.PERS_INFO}
             path={ROUTES.SIGN_UP}
-            component={SignUp} 
-          />
+          >
+            <SignUp />
+          </IsUserRedirect>
           <IsUserRedirect
             user={user}
             loggedInPath={ROUTES.PERS_INFO}
             path={ROUTES.SIGN_IN}
-            component={SignIn} 
-          />
+          >
+            <SignIn />
+          </IsUserRedirect>
 
           <Resume>
             <ProtectedRoute user={user} path={ROUTES.PERS_INFO} component={PersonalInfo} />

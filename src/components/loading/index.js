@@ -14,9 +14,9 @@ export function Loading() {
   )
 };
 
-export function Spinner(){
+export function Spinner({ ...restProps }){
   return (
-    <div className="lds-ring">
+    <div className="lds-ring" {...restProps}>
       <div></div>
       <div></div>
       <div></div>

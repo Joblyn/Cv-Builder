@@ -2,6 +2,7 @@ import React from 'react';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { NavBar, Brand, Collapse, Link, Toggle, NavButton, Group, Avatar, User, UserName, TextLink, UserNav, Icon, Item } from './styles/header';
 import { AiOutlineMenu } from 'react-icons/ai';
+import { Spinner } from '../loading';
 
 export default function Header({ expand, bg, children, restProps }) {
   return <NavBar expand={expand} bg={bg} {...restProps}>{children}</NavBar>
@@ -45,8 +46,13 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
 
 Header.User = function HeaderUser({ displayName, ...restProps }) {
   return <User {...restProps}>
+    {displayName ? 
+    <>
     <Avatar icon={faUserCircle}/>
     <UserName>{displayName}</UserName>
+    </>  :
+    <Spinner style={{ position: 'absolute'}}/>
+    }
   </User>
 }
 

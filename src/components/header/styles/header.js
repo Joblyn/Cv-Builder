@@ -127,7 +127,7 @@ export const NavButton = styled(Button)`
 `;
 
 export const UserNav = styled.nav`
-  width: 246.5px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,13 +159,16 @@ export const UserNav = styled.nav`
 `;
 
 export const User = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   background: #216DE0;
-  padding: .8rem 1rem;
+  padding: .8rem .5rem;
   border-radius: 6px;
   cursor: pointer;
+  width: 250px;
+  font-size: 16.5px;
 
   @media (min-width: 768px) {
     margin-left: 5rem;
@@ -182,8 +185,9 @@ export const UserName = styled.p`
   margin-left: .4rem;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 1.07rem;
   line-height: normal;
   color: #FFFFFF;
   margin-bottom: 0;
+  text-overflow: ellipsis;
 `;

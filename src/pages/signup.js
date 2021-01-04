@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router";
+import React, { useState, useContext } from "react";
 import { FirebaseContext } from "../context/firebase";
 import { HomeHeader } from "../containers";
 import { Form, Aside } from "../components";
@@ -8,9 +7,9 @@ import * as ROUTES from "../constants/routes";
 import { Spinner } from "../components/loading";
 import { SignUpSuccessful } from "../components/request-success";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
+import { useHistory } from "react-router";
 
 export default function SignUp() {
-  const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
   const [passwordView, setPasswordView] = useState(false);
   const [fullName, setFullName] = useState();
@@ -19,6 +18,7 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const [success, setSuccess] = useState(false);
+  const history = useHistory();
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -29,9 +29,7 @@ export default function SignUp() {
       .createUserWithEmailAndPassword(email, password)
       .then((result) =>
         result.user.updateProfile({ displayName: fullName }).then(() => {
-          setSuccess(true);
-          setError(false);
-          setIsLoading(false);
+          history.push(ROUTES.PERS_INFO)
         })
       )
       .catch((error) => {
@@ -45,27 +43,27 @@ export default function SignUp() {
       });
   };
 
-  useEffect(() => {
-    if (success) {
-      setTimeout(() => {
-        setSuccess(false);
-        history.push(ROUTES.PERS_INFO);
-      }, 1500);
-    }
-  }, [success]);
+  // useEffect(() => {
+  //   if (success) {
+  //     setTimeout(() => {
+  //       setSuccess(false);
+  //     }, 3000);
+  //   };
+  // }, [success]);
 
   const togglePasswordView = () => {
-    let target = document.querySelector('#password');
-    setPasswordView(prevState => !prevState);
-    if(target.type === "password") {
+    let target = document.querySelector("#password");
+    setPasswordView((prevState) => !prevState);
+    if (target.type === "password") {
       target.type = "text";
     } else {
       target.type = "password";
     }
-  }
+  };
 
   return (
     <>
+      {success ? <SignUpSuccessful /> : null}
       <HomeHeader />
       <div className="sign-up">
         <img src="./images/sign-up-bg.svg" className="bg-img" alt="" />
@@ -80,6 +78,7 @@ export default function SignUp() {
               value={fullName}
               id="full-name"
               onChange={({ target }) => setFullName(target.value)}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -95,7 +94,7 @@ export default function SignUp() {
             <Form.Label htmlFor="password">Password</Form.Label>
             <div className="position-relative">
               <Form.Icon password onClick={togglePasswordView}>
-                {passwordView ? <BsEye size={20}/> : <BsEyeSlash size={20} />}
+                {passwordView ? <BsEye size={20} /> : <BsEyeSlash size={20} />}
               </Form.Icon>
               <Form.Input
                 type="password"
@@ -132,7 +131,6 @@ export default function SignUp() {
         </Aside.Group>
         <Aside.Image src="./images/sign-up-aside.svg" />
       </Aside>
-      {success && <SignUpSuccessful />}
     </>
   );
 }

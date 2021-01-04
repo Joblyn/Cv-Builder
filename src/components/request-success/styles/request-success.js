@@ -31,7 +31,8 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: #fff;
-
+  z-index: 20;
+  
   @media (max-width: 768px) {
     padding: 2rem 1rem;
   }

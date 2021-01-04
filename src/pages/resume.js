@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import $ from "jquery";
 import { ResumeHeader } from '../containers';
 import { ResumeNav } from '../components';
 import items from '../fixtures/resume.json';
+import { FirebaseContext } from '../context/firebase';
 
 export default function Resume({ children }) {
   const location = window.location.pathname;
   const [showNav, setShowNav] = useState(false);
+  const { firebase } = useContext(FirebaseContext);
+  const user = firebase.auth().currentUser || {}; 
 
   const resumeNav = $('#resume-nav');
   // const arrRight = $('#arr-right');
@@ -93,7 +96,7 @@ export default function Resume({ children }) {
   };
 
   return <>
-    <ResumeHeader />
+    <ResumeHeader user={user}/>
     <div className="resume" id="resume">
       <ResumeNav.Icon type='left' id="arr-right" onClick={() => setShowNav(true)}><BsArrowRight /></ResumeNav.Icon>
       {<ResumeNav.Overlay showNav={showNav}/>}
@@ -112,5 +115,5 @@ export default function Resume({ children }) {
         {children}
       </div>
     </div>
-  </>
+  </>  
 }

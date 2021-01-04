@@ -10,7 +10,7 @@ export const Container = styled.div`
   max-width: 500px;
   padding: 0.5rem 0.5rem;
   background: #F2F6FB;
-  z-index: 10;
+  ${'' /* z-index: 10; */}
 
   @media (max-width: 768px) {
     display: none;

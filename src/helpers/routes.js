@@ -3,12 +3,12 @@ import { Route, Redirect } from 'react-router-dom';
 
 import * as ROUTES from '../constants/routes';
 
-export function IsUserRedirect({ component: Component, user, loggedInPath, children, ...restProps }) {
+export function IsUserRedirect({ user, loggedInPath, children, ...restProps }) {
   return (
     <Route { ...restProps } 
       render = {() => {
         if(!user) {
-          return <Component />
+          return children
         } 
         if(user) {
           return (<Redirect 
