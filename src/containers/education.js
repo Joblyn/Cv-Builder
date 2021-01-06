@@ -23,6 +23,8 @@ const months = [
 export default function Education() {
   const [control, setControl] = useState([
     {
+      institutionName: "",
+      fieldOfStudy: "",
       month: { start: "", end: "" },
       year: { start: "", end: "" },
     },
@@ -81,7 +83,6 @@ export default function Education() {
     setControl((prevState) => {
       let arr = [...prevState];
       arr.splice(id, 1);
-      console.log(arr);
       return arr;
     });
   };
@@ -123,6 +124,9 @@ export default function Education() {
                     type="text"
                     placeholder="e.g Fupre"
                     typ="resume"
+                    name="institutionName"
+                    defaultValue={control[id].institutionName}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
                 <Form.Group width="45%">
@@ -132,6 +136,9 @@ export default function Education() {
                     type="text"
                     placeholder="e.g Engineering"
                     typ="resume"
+                    name="fieldOfStudy"
+                    defaultValue={control[id].fieldOfStudy}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
               </Form.Group>

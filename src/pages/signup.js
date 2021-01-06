@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FirebaseContext } from "../context/firebase";
 import { HomeHeader } from "../containers";
 import { Form, Aside } from "../components";
@@ -28,8 +28,10 @@ export default function SignUp() {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((result) =>
-        result.user.updateProfile({ displayName: fullName }).then(() => {
-          history.push(ROUTES.PERS_INFO)
+        result.user.updateProfile({ displayName: fullName })
+        .then(() => {
+          setSuccess(true);
+          setIsLoading(false);
         })
       )
       .catch((error) => {
@@ -43,13 +45,14 @@ export default function SignUp() {
       });
   };
 
-  // useEffect(() => {
-  //   if (success) {
-  //     setTimeout(() => {
-  //       setSuccess(false);
-  //     }, 3000);
-  //   };
-  // }, [success]);
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+        setSuccess(false);
+        history.push(ROUTES.PERS_INFO);
+      }, 3000);
+    };
+  }, [success, history]);
 
   const togglePasswordView = () => {
     let target = document.querySelector("#password");
@@ -63,7 +66,7 @@ export default function SignUp() {
 
   return (
     <>
-      {success ? <SignUpSuccessful /> : null}
+      {success && <SignUpSuccessful />}
       <HomeHeader />
       <div className="sign-up">
         <img src="./images/sign-up-bg.svg" className="bg-img" alt="" />

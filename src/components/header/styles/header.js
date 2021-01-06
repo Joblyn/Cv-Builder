@@ -4,7 +4,7 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import { FontAwesomeIcon  } from '@fortawesome/react-fontawesome';
 
 export const NavBar = styled(Navbar)`
-  padding: .8rem 4%;
+  padding: .6rem 4%;
   ${({ bg }) => bg === 'blue' && 'background: #216DE0'};
 `;
 
@@ -97,13 +97,17 @@ export const Item = styled.div`
   width: 100%;
   padding: .5rem;
   margin: 0;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
-  &:hover {
-    background-color: rgba(33, 109, 224, 0.4);
+  cursor: pointer;
+
+  ${TextLink} {
+    opacity: .8;
   }
 
-  &:last-of-type {
-    border: none;
+  &:hover {
+    background-color: rgba(33, 109, 224, 0.4);
+    ${TextLink} {
+      color: #0056b3;
+    }
   }
 `;
 
@@ -128,7 +132,7 @@ export const NavButton = styled(Button)`
 
 export const UserNav = styled.nav`
   width: 250px;
-  display: flex;
+  display: ${({ active }) => active ? 'flex' : 'none'};
   flex-direction: column;
   align-items: center;
   border-bottom-left-radius: 6px;
@@ -137,14 +141,14 @@ export const UserNav = styled.nav`
   position: absolute;
   right: 4%;
   top: 65px;
-  height: ${({ active }) => active ? '85px' : '0'};
-  transition: height .3s ${({ active }) => !active ? '.15s' : null} ease;
+  height: ${({ active }) => active ? '125px' : '0'};
+  transition: all .3s ${({ active }) => !active ? '.15s' : null} ease;
   z-index: 10;
   padding-top: 0rem;
 
   > ${Item} {
     opacity: ${({ active }) => active ? '1' : '0'};
-    transition: opacity .1s ${({ active }) => !active ? null : '.3s'};
+    transition: opacity .07s ${({ active }) => !active ? null : '.3s'};
   }
 
   @media(max-width: 992px) {
@@ -167,7 +171,7 @@ export const User = styled.div`
   padding: .8rem .5rem;
   border-radius: 6px;
   cursor: pointer;
-  width: 250px;
+  min-width: 250px;
   font-size: 16.5px;
 
   @media (min-width: 768px) {

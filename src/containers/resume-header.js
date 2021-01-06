@@ -1,48 +1,103 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { IoMdEye } from 'react-icons/io';
-import { AiOutlineDownload } from 'react-icons/ai';
+import React, { useState, useContext, useEffect } from "react";
+import { IoMdEye } from "react-icons/io";
+import { AiOutlineDownload } from "react-icons/ai";
 
-import { Header } from '../components';
-import * as ROUTES from '../constants/routes';
-import { FirebaseContext } from '../context/firebase';
+import { Header } from "../components";
+import * as ROUTES from "../constants/routes";
+import { FirebaseContext } from "../context/firebase";
+import { useAuthListener } from '../hooks';
 
-export default function ResumeHeader({ user }){
+export default function ResumeHeader() {
   const { firebase } = useContext(FirebaseContext);
+  const { user } = useAuthListener();
   const [active, setActive] = useState(false);
-  const [displayName, setDisplayName] = useState('');
+  const [photoUrl, setPhotoUrl] = useState();
 
   useEffect(() => {
-    setDisplayName(user.displayName);
-  }, [user]);
+    if (user) {
+    firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL()
+      .then(imgUrl => {
+        setPhotoUrl(imgUrl);
+      })
+    }
+  }, [firebase, user]);
+
+  const photoUpdate = (target) => {
+    const file = target.files[0];
+    firebase.storage().ref('users/' + user.uid + '/profile.jpg').put(file)
+    .then(() => {
+      firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL()
+      .then(imgUrl => {
+        setPhotoUrl(imgUrl);
+      })
+    }).catch(error => {
+      console.log(error.message);
+    })
+  };
 
   return (
-      <Header bg="blue" expand="md">
-      <Header.Brand to={ROUTES.HOME} type="dashboard"/>
-      <Header.Toggle aria-controls="basic-navbar-nav"/>   
+    <Header bg="blue" expand="md">
+      <Header.Brand to={ROUTES.HOME} type="dashboard" />
+      <Header.Toggle aria-controls="basic-navbar-nav" />
       <Header.Collapse id="basic-navbar-nav">
         <Header.Group>
           <Header.TextLink type="header" to="#">
-            <Header.Icon><IoMdEye /></Header.Icon>
+            <Header.Icon>
+              <IoMdEye />
+            </Header.Icon>
             Preview Resume
           </Header.TextLink>
           <Header.TextLink type="header" to="#">
-            <Header.Icon><AiOutlineDownload /></Header.Icon>
+            <Header.Icon>
+              <AiOutlineDownload />
+            </Header.Icon>
             Download
           </Header.TextLink>
-          
-          <Header.User displayName={displayName} 
-            onClick={() => setActive(active => !active)}
-          /> 
-          <Header.UserNav active = {active}>
+
+          <Header.User
+            displayName={user.displayName}
+            photoURL={photoUrl}
+            onClick={() => setActive((active) => !active)}
+          />
+          <Header.UserNav active={active}>
             <Header.Item>
-              <Header.TextLink to={ROUTES.PERS_INFO} type="user">Build Resume</Header.TextLink>
+              <Header.TextLink to={ROUTES.PERS_INFO} type="user">
+                Build Resume
+              </Header.TextLink>
+            </Header.Item>
+            <Header.Item className="position-relative">
+              <Header.TextLink to="#" type="user">
+                Update photo
+              </Header.TextLink>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={({ target }) => photoUpdate(target)}
+                style={{
+                  opacity: 0,
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  height: "100%",
+                  width: "100%",
+                  cursor: "pointer",
+                  zIndex: "10",
+                  fontSIze: 0,
+                }}
+              />
             </Header.Item>
             <Header.Item>
-              <Header.TextLink onClick={() => firebase.auth().signOut()} to='#' type="user">Log out</Header.TextLink>
+              <Header.TextLink
+                onClick={() => firebase.auth().signOut()}
+                to="#"
+                type="user"
+              >
+                Log out
+              </Header.TextLink>
             </Header.Item>
           </Header.UserNav>
         </Header.Group>
-      </Header.Collapse> 
+      </Header.Collapse>
     </Header>
-  ); 
+  );
 }

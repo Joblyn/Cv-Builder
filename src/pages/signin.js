@@ -33,7 +33,7 @@ export default function SignUp() {
         setError(error.message);
         setIsLoading(false);
       })
-  }
+  };
 
   return (
     <>

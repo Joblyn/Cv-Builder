@@ -1,14 +1,38 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { FirebaseContext } from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 import { Header } from '../components';
+import { useAuthListener } from '../hooks';
 
 export default function HomeHeader(){
   const location = window.location.pathname;
   const { firebase } = useContext(FirebaseContext);
   const [active, setActive] = useState(false);
-  const user = firebase.auth().currentUser; 
+  const { user } = useAuthListener();
+  const [photoUrl, setPhotoUrl] = useState();
+
+  useEffect(() => {
+    if (user) {
+    firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL()
+      .then(imgUrl => {
+        setPhotoUrl(imgUrl);
+      })
+    }
+  }, [firebase, user]);
+
+  const photoUpdate = (target) => {
+    const file = target.files[0];
+    firebase.storage().ref('users/' + user.uid + '/profile.jpg').put(file)
+    .then(() => {
+      firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL()
+      .then(imgUrl => {
+        setPhotoUrl(imgUrl);
+      })
+    }).catch(error => {
+      console.log(error.message);
+    })
+  };
 
   return (
     <>
@@ -39,19 +63,42 @@ export default function HomeHeader(){
               </Header.Link>
               {user ?  
                 <>
-                  <Header.User displayName={user.displayName} 
+                  <Header.User 
+                    displayName={user.displayName} 
+                    photoURL={photoUrl}
                     onClick={() => setActive(active => !active)}
                   />  
                   <Header.UserNav active = {active} >
                     <Header.Item>
                       <Header.TextLink to={ROUTES.PERS_INFO} type="user">Build Resume</Header.TextLink>
                     </Header.Item>
+                    <Header.Item className="position-relative">
+                      <Header.TextLink to="#" type="user">
+                        Update photo
+                      </Header.TextLink>
+                      <input 
+                        onChange={({ target })=> photoUpdate(target)}
+                        type="file" 
+                        id="file"
+                        style={{
+                          opacity: 0,
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          height: '100%',
+                          width: '100%',
+                          cursor: 'pointer',
+                          zIndex: '10',
+                          fontSize: 0
+                        }}
+                      />
+                    </Header.Item>
                     <Header.Item>
                       <Header.TextLink onClick={() => firebase.auth().signOut()} to='#' type="user">Log out</Header.TextLink>
                     </Header.Item>
                   </Header.UserNav>
                 </> 
-                : <Header.NavButton href={ROUTES.SIGN_UP}>Get Started</Header.NavButton>
+                : <Header.NavButton href={ROUTES.SIGN_IN}>Get Started</Header.NavButton>
               } 
             </Header.Group>
           </Header.Collapse>

@@ -1,41 +1,49 @@
-import React, { useState, useContext } from 'react';
-import { BsArrowRight } from 'react-icons/bs';
+import React, { useState } from "react";
+import { BsArrowRight } from "react-icons/bs";
 import $ from "jquery";
-import { ResumeHeader } from '../containers';
-import { ResumeNav } from '../components';
-import items from '../fixtures/resume.json';
-import { FirebaseContext } from '../context/firebase';
+import { ResumeHeader } from "../containers";
+import { ResumeNav } from "../components";
+import items from "../fixtures/resume.json";
+import { ResumeData } from "../context/resumeData";
 
 export default function Resume({ children }) {
   const location = window.location.pathname;
   const [showNav, setShowNav] = useState(false);
-  const { firebase } = useContext(FirebaseContext);
-  const user = firebase.auth().currentUser || {}; 
+  const [data, setData] = useState({
+    personalInfo: {},
+    education: [{}],
+    workExperience: [{}],
+    languages: [{}],
+    certifications: [{}],
+    achievements: [{}],
+    skills: [],
+    references: [{}],
+  });
 
-  const resumeNav = $('#resume-nav');
+  const resumeNav = $("#resume-nav");
   // const arrRight = $('#arr-right');
-  $('body').click(event => {
+  $("body").click((event) => {
     let target = event.target;
     if (target !== resumeNav) {
-      if(showNav) {
+      if (showNav) {
         setShowNav(false);
       }
     }
   });
 
   // const swipeController = (body, callback) => {
-  //   let dir, 
-  //   swipeType, 
-  //   startX,  
-  //   startY,  
-  //   distX,  
-  //   distY,  
+  //   let dir,
+  //   swipeType,
+  //   startX,
+  //   startY,
+  //   distX,
+  //   distY,
   //   threshold = 50,
   //   maxDist = 200,
   //   restraint = 100, // maximum distance allowed at the same time in perpendicular direction
-  //   startTime,  
-  //   allowedTime = 800,  
-  //   elapsedTime  
+  //   startTime,
+  //   allowedTime = 800,
+  //   elapsedTime
 
   //   document.addEventListener('touchstart', function(e){
   //     let touchObj = e.touches[0];
@@ -51,7 +59,7 @@ export default function Resume({ children }) {
   //     // if(showNav) {
   //     //   if (target !== resumeNav) {
   //     //     setShowNav(false);
-  //     //   } 
+  //     //   }
   //     // } else {
   //     //   if (target === arrRight) {
   //     //     setShowNav(true);
@@ -90,30 +98,44 @@ export default function Resume({ children }) {
   // swipeController(body, showSideNav);
 
   const activeStyle = {
-    background: '#216DE0',
-    color: '#fff',
-    boxShadow: '0px 0px 10px rgba(33,109,224,0.3)'
+    background: "#216DE0",
+    color: "#fff",
+    boxShadow: "0px 0px 10px rgba(33,109,224,0.3)",
   };
 
-  return <>
-    <ResumeHeader user={user}/>
-    <div className="resume" id="resume">
-      <ResumeNav.Icon type='left' id="arr-right" onClick={() => setShowNav(true)}><BsArrowRight /></ResumeNav.Icon>
-      {<ResumeNav.Overlay showNav={showNav}/>}
-      {showNav && <ResumeNav.LockBody />}
-      <ResumeNav.Base id="resume-nav" showNav={showNav}>
-        <ResumeNav>
-          {items.map(item => (
-            <ResumeNav.Item to={item.to} activeStyle={activeStyle} key={item.id}>
-              <ResumeNav.Image src={location===item.to ? item.iconActive : item.icon}/>
-              <ResumeNav.Text>{item.title}</ResumeNav.Text>
-            </ResumeNav.Item>
-          ))}
-        </ResumeNav>
-      </ResumeNav.Base>
-      <div className="resume-form-cont">
-        {children}
+  return (
+    <>
+      <ResumeHeader />
+      <div className="resume" id="resume">
+        <ResumeNav.Icon
+          type="left"
+          id="arr-right"
+          onClick={() => setShowNav(true)}
+        >
+          <BsArrowRight />
+        </ResumeNav.Icon>
+        {<ResumeNav.Overlay showNav={showNav} />}
+        {showNav && <ResumeNav.LockBody />}
+        <ResumeNav.Base id="resume-nav" showNav={showNav}>
+          <ResumeNav>
+            {items.map((item) => (
+              <ResumeNav.Item
+                to={item.to}
+                activeStyle={activeStyle}
+                key={item.id}
+              >
+                <ResumeNav.Image
+                  src={location === item.to ? item.iconActive : item.icon}
+                />
+                <ResumeNav.Text>{item.title}</ResumeNav.Text>
+              </ResumeNav.Item>
+            ))}
+          </ResumeNav>
+        </ResumeNav.Base>
+        <div className="resume-form-cont">
+          <ResumeData.Provider value={{data, setData}}>{children}</ResumeData.Provider>
+        </div>
       </div>
-    </div>
-  </>  
+    </>
+  );
 }
