@@ -4,21 +4,10 @@ import $ from "jquery";
 import { ResumeHeader } from "../containers";
 import { ResumeNav } from "../components";
 import items from "../fixtures/resume.json";
-import { ResumeData } from "../context/resumeData";
 
 export default function Resume({ children }) {
   const location = window.location.pathname;
   const [showNav, setShowNav] = useState(false);
-  const [data, setData] = useState({
-    personalInfo: {},
-    education: [{}],
-    workExperience: [{}],
-    languages: [{}],
-    certifications: [{}],
-    achievements: [{}],
-    skills: [],
-    references: [{}],
-  });
 
   const resumeNav = $("#resume-nav");
   // const arrRight = $('#arr-right');
@@ -133,7 +122,7 @@ export default function Resume({ children }) {
           </ResumeNav>
         </ResumeNav.Base>
         <div className="resume-form-cont">
-          <ResumeData.Provider value={{data, setData}}>{children}</ResumeData.Provider>
+          {children}
         </div>
       </div>
     </>

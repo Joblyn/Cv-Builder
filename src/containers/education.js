@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../components";
 import { MdRemove, MdArrowDropDown } from "react-icons/md";
 import * as ROUTES from "../constants/routes";
 import { GoTrashcan } from "react-icons/go";
+import { updateResumeData } from "../actions/actions";
+import * as Actions from "../constants/actionsTypes";
 
 const months = [
   "Month",
@@ -21,14 +24,17 @@ const months = [
 ];
 
 export default function Education() {
-  const [control, setControl] = useState([
-    {
-      institutionName: "",
-      fieldOfStudy: "",
-      month: { start: "", end: "" },
-      year: { start: "", end: "" },
-    },
-  ]);
+  const dispatch = useDispatch();
+  const education = useSelector(state => state.resumeData.education);
+
+  // const [control, setControl] = useState([
+  //   {
+  //     institutionName: "",
+  //     fieldOfStudy: "",
+  //     month: { start: "", end: "" },
+  //     year: { start: "", end: "" },
+  //   },
+  // ]);
 
   const monthsDropdown = months.map((month, id) => (
     <option
@@ -56,35 +62,43 @@ export default function Education() {
   ));
 
   const handleChange = (target, id) => {
-    setControl((prevState) => [
-      ...prevState.slice(0, id),
-      {
-        ...prevState[id],
-        [target.dataset.category]: {
-          ...prevState[id][target.dataset.category],
-          [target.name]: target.value,
-        },
-      },
-      ...prevState.slice(id + 1),
-    ]);
+    dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
+
+    // setControl((prevState) => [
+    //   ...prevState.slice(0, id),
+    //   {
+    //     ...prevState[id],
+    //     [target.dataset.category]: {
+    //       ...prevState[id][target.dataset.category],
+    //       [target.name]: target.value,
+    //     },
+    //   },
+    //   ...prevState.slice(id + 1),
+    // ]);
   };
 
-  const addForm = () => {
-    setControl((prevState) => [
-      ...prevState,
-      {
-        month: { start: "", end: "" },
-        year: { start: "", end: "" },
-      },
-    ]);
+  const addItem = () => {
+    let target = null;
+    dispatch(updateResumeData("education", target, Actions.ADD_ITEM));
+
+    // setControl((prevState) => [
+    //   ...prevState,
+    //   {
+    //     month: { start: "", end: "" },
+    //     year: { start: "", end: "" },
+    //   },
+    // ]);
   };
 
   const removeItem = (id) => {
-    setControl((prevState) => {
-      let arr = [...prevState];
-      arr.splice(id, 1);
-      return arr;
-    });
+    let target = null;
+    dispatch(updateResumeData("education", target, Actions.REMOVE_ITEM, id));
+
+    // setControl((prevState) => {
+    //   let arr = [...prevState];
+    //   arr.splice(id, 1);
+    //   return arr;
+    // });
   };
 
   return (
@@ -92,11 +106,11 @@ export default function Education() {
       <Form.Title type="resume" showOnlyOnSmallViewPort>
         Education
       </Form.Title>
-      {control.length && (
+      {education.length && (
         <>
-          {control.map((cont, id) => (
+          {education.map((item, id) => (
             <div key={`edu-${id + 1}`}>
-              {control.length > 1 && (
+              {education.length > 1 && (
                 <div
                   className="position-relative d-flex"
                   style={{ marginBottom: "-3rem" }}
@@ -125,7 +139,7 @@ export default function Education() {
                     placeholder="e.g Fupre"
                     typ="resume"
                     name="institutionName"
-                    defaultValue={control[id].institutionName}
+                    defaultValue={item.institutionName}
                     onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
@@ -137,7 +151,7 @@ export default function Education() {
                     placeholder="e.g Engineering"
                     typ="resume"
                     name="fieldOfStudy"
-                    defaultValue={control[id].fieldOfStudy}
+                    defaultValue={item.fieldOfStudy}
                     onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
@@ -150,6 +164,9 @@ export default function Education() {
                     type="text"
                     placeholder="e.g Nigeria"
                     typ="resume"
+                    name="country"
+                    defaultValue={item.country}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
                 <Form.Group width="45%">
@@ -159,6 +176,9 @@ export default function Education() {
                     type="text"
                     placeholder="e.g Effurun"
                     typ="resume"
+                    name="city"
+                    defaultValue={item.city}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
               </Form.Group>
@@ -192,7 +212,7 @@ export default function Education() {
                         typ="resume"
                         name="start"
                         data-category="month"
-                        value={cont.month.start}
+                        defaultValue={item.month.start}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -212,7 +232,7 @@ export default function Education() {
                         typ="resume"
                         name="start"
                         data-category="year"
-                        value={cont.year.start}
+                        defaultValue={item.year.start}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -246,7 +266,7 @@ export default function Education() {
                         typ="resume"
                         name="end"
                         data-category="month"
-                        value={cont.month.end}
+                        defaultValue={item.month.end}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -266,7 +286,7 @@ export default function Education() {
                         typ="resume"
                         name="end"
                         data-category="year"
-                        value={cont.year.end}
+                        defaultValue={item.year.end}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -306,7 +326,7 @@ export default function Education() {
                       dropdownElements={monthsDropdown}
                       typ="resume"
                       name="start"
-                      value={cont.month.start}
+                      defaultValue={item.month.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -325,7 +345,7 @@ export default function Education() {
                       dropdownElements={yearsDropdown}
                       typ="resume"
                       name="start"
-                      value={cont.year.start}
+                      defaultValue={item.year.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -362,7 +382,7 @@ export default function Education() {
                       dropdownElements={monthsDropdown}
                       typ="resume"
                       name="end"
-                      value={cont.month.end}
+                      defaultValue={item.month.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -381,7 +401,7 @@ export default function Education() {
                       dropdownElements={yearsDropdown}
                       typ="resume"
                       name="end"
-                      value={cont.year.end}
+                      defaultValue={item.year.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -404,6 +424,9 @@ export default function Education() {
                   placeholder=""
                   height="12rem"
                   typ="resume"
+                  name="otherInfo"
+                  defaultValue={item.otherInfo}
+                  onChange={({ target }) => handleChange(target, id)}
                 />
               </Form.Group>
             </div>
@@ -417,7 +440,7 @@ export default function Education() {
                 cursor: "pointer",
                 fontWeight: "500",
               }}
-              onClick={addForm}
+              onClick={addItem}
             >
               + Add Another
             </span>

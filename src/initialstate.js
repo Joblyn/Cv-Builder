@@ -1,8 +1,13 @@
 export const data = {
   personalInfo: {},
-  education: [{}],
+  education: [
+    {
+      month: { start: "", end: "" },
+      year: { start: "", end: "" },
+    },
+  ],
   workExperience: [{}],
-  languages: [{}],
+  languages: [],
   certifications: [{}],
   achievements: [{}],
   skills: [],

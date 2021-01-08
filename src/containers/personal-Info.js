@@ -1,16 +1,16 @@
 import React from "react";
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from "react-redux";
+import * as Actions from "../constants/actionsTypes";
 import { Form } from "../components";
 import * as ROUTES from "../constants/routes";
-import { updateResumeData } from '../actions/actions';
+import { updateResumeData } from "../actions/actions";
 
 export default function PersonalInfo() {
   const dispatch = useDispatch();
   const personalInfo = useSelector(state => state.resumeData.personalInfo);
 
   const handleChange = ({ target }) => {
-    dispatch(updateResumeData('personalInfo', target))
+    dispatch(updateResumeData("personalInfo", target, Actions.PERS_INFO));
   };
 
   return (
@@ -51,6 +51,9 @@ export default function PersonalInfo() {
           type="email"
           placeholder="e.g example@gmail.com"
           typ="resume"
+          name="email"
+          defaultValue={personalInfo.email}
+          onChange={handleChange}
         />
       </Form.Group>
       <Form.Group type="resume">
@@ -60,6 +63,9 @@ export default function PersonalInfo() {
           type="text"
           placeholder="080 000 0000"
           typ="resume"
+          name="phoneNumber"
+          defaultValue={personalInfo.phoneNumber}
+          onChange={handleChange}
         />
       </Form.Group>
       <Form.Group type="resume">
@@ -67,13 +73,24 @@ export default function PersonalInfo() {
         <Form.Input
           id="location"
           type="text"
-          placeholder="e.g Lagos Nigeria"
+          placeholder="e.g Lagos, Nigeria"
           typ="resume"
+          name="location"
+          defaultValue={personalInfo.location}
+          onChange={handleChange}
         />
       </Form.Group>
       <Form.Group type="resume">
         <Form.Label htmlFor="info">Other Information</Form.Label>
-        <Form.TextArea id="info" placeholde="" height="12rem" typ="resume" />
+        <Form.TextArea 
+          id="info" 
+          placeholder="" 
+          height="12rem" 
+          typ="resume"
+          name="otherInfo"
+          defaultValue={personalInfo.otherInfo}
+          onChange={handleChange}
+        />
       </Form.Group>
       <Form.Button
         type="submit"

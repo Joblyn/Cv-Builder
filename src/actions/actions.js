@@ -1,8 +1,8 @@
-import * as Actions from '../constants/actions';
-export const updateResumeData = (category, payload) => {
+export const updateResumeData = (category, payload, type, id = null) => {
   return {
-    type: Actions.UPDATE,
+    type,
     category,
-    payload
-  }
-}
+    payload,
+    id,
+  };
+};
