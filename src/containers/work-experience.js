@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../components";
 import { MdRemove, MdArrowDropDown } from "react-icons/md";
 import * as ROUTES from "../constants/routes";
 import { GoTrashcan } from "react-icons/go";
+import { updateResumeData } from "../actions/actions";
+import * as Actions from "../constants/actionsTypes";
 
 const months = [
   "Month",
@@ -21,12 +24,10 @@ const months = [
 ];
 
 export default function WorkExperience() {
-  const [control, setControl] = useState([
-    {
-      month: { start: "", end: "" },
-      year: { start: "", end: "" },
-    },
-  ]);
+  const dispatch = useDispatch();
+  const workExperience = useSelector(
+    (state) => state.resumeData.workExperience
+  );
 
   const monthsDropdown = months.map((month, id) => (
     <option
@@ -54,35 +55,15 @@ export default function WorkExperience() {
   ));
 
   const handleChange = (target, id) => {
-    setControl((prevState) => [
-      ...prevState.slice(0, id),
-      {
-        ...prevState[id],
-        [target.dataset.category]: {
-          ...prevState[id][target.dataset.category],
-          [target.name]: target.value,
-        },
-      },
-      ...prevState.slice(id + 1),
-    ]);
+    dispatch(updateResumeData("workExperience", target, Actions.WORK_EXP, id));
   };
 
   const addForm = () => {
-    setControl((prevState) => [
-      ...prevState,
-      {
-        month: { start: "", end: "" },
-        year: { start: "", end: "" },
-      },
-    ]);
+    dispatch(updateResumeData("workExperience", null, Actions.ADD_ITEM));
   };
 
   const removeItem = (id) => {
-    setControl((prevState) => {
-      let arr = [...prevState];
-      arr.splice(id, 1);
-      return arr;
-    });
+    dispatch(updateResumeData("workExperience", null, Actions.REMOVE_ITEM, id));
   };
 
   return (
@@ -90,11 +71,11 @@ export default function WorkExperience() {
       <Form.Title type="resume" showOnlyOnSmallViewPort>
         Work Experience
       </Form.Title>
-      {control.length && (
+      {workExperience.length && (
         <>
-          {control.map((cont, id) => (
+          {workExperience.map((item, id) => (
             <div key={`work-exp-${id + 1}`}>
-              {control.length > 1 && (
+              {workExperience.length > 1 && (
                 <div
                   className="position-relative d-flex"
                   style={{ marginBottom: "-3rem" }}
@@ -116,19 +97,23 @@ export default function WorkExperience() {
                 <Form.Group type="resume" width="45%" marginRight="10%">
                   <Form.Label htmlFor="job">Job Title</Form.Label>
                   <Form.Input
-                    id="job"
                     type="text"
                     placeholder="e.g Fupre"
                     typ="resume"
+                    name="jobTitle"
+                    defaultValue={item.jobTitle}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
                 <Form.Group width="45%" type="resume">
                   <Form.Label htmlFor="company">Company Name</Form.Label>
                   <Form.Input
-                    id="company"
                     type="text"
                     placeholder="e.g Engineering"
                     typ="resume"
+                    name="company"
+                    defaultValue={item.company}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
               </Form.Group>
@@ -136,19 +121,23 @@ export default function WorkExperience() {
                 <Form.Group type="resume" width="45%" marginRight="10%">
                   <Form.Label htmlFor="country">Country</Form.Label>
                   <Form.Input
-                    id="country"
                     type="text"
                     placeholder="e.g Nigeria"
                     typ="resume"
+                    name="country"
+                    defaultValue={item.country}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
                 <Form.Group width="45%">
                   <Form.Label htmlFor="fieldOfStudy">City</Form.Label>
                   <Form.Input
-                    id="city"
                     type="text"
                     placeholder="e.g Effurun"
                     typ="resume"
+                    name="city"
+                    defaultValue={item.city}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
               </Form.Group>
@@ -182,7 +171,7 @@ export default function WorkExperience() {
                         typ="resume"
                         name="start"
                         data-category="month"
-                        value={cont.month.start}
+                        defaultValue={item.month.start}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -202,7 +191,7 @@ export default function WorkExperience() {
                         typ="resume"
                         name="start"
                         data-category="year"
-                        value={cont.year.start}
+                        defaultValue={item.year.start}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -219,7 +208,7 @@ export default function WorkExperience() {
                   </Form.Group>
                   <div
                     style={{ width: "10%" }}
-                    className="d-flex align-items-center justify-content-center"
+                    className="d-flex align-items-center justify-itement-center"
                   >
                     <MdRemove size={29} />
                   </div>
@@ -236,7 +225,7 @@ export default function WorkExperience() {
                         typ="resume"
                         name="end"
                         data-category="month"
-                        value={cont.month.end}
+                        defaultValue={item.month.end}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -256,7 +245,7 @@ export default function WorkExperience() {
                         typ="resume"
                         name="end"
                         data-category="year"
-                        value={cont.year.end}
+                        defaultValue={item.year.end}
                         onChange={({ target }) => handleChange(target, id)}
                       />
                       <MdArrowDropDown
@@ -296,7 +285,7 @@ export default function WorkExperience() {
                       dropdownElements={monthsDropdown}
                       typ="resume"
                       name="start"
-                      value={cont.month.start}
+                      defaultValue={item.month.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -315,7 +304,7 @@ export default function WorkExperience() {
                       dropdownElements={yearsDropdown}
                       typ="resume"
                       name="start"
-                      value={cont.year.start}
+                      defaultValue={item.year.start}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -352,7 +341,7 @@ export default function WorkExperience() {
                       dropdownElements={monthsDropdown}
                       typ="resume"
                       name="end"
-                      value={cont.month.end}
+                      defaultValue={item.month.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -371,7 +360,7 @@ export default function WorkExperience() {
                       dropdownElements={yearsDropdown}
                       typ="resume"
                       name="end"
-                      value={cont.year.end}
+                      defaultValue={item.year.end}
                       onChange={({ target }) => handleChange(target, id)}
                     />
                     <MdArrowDropDown
@@ -390,15 +379,17 @@ export default function WorkExperience() {
               <Form.Group type="resume" marginBottom="2rem">
                 <Form.Label htmlFor="info">Description</Form.Label>
                 <Form.TextArea
-                  id="info"
-                  placeholde=""
+                  placeholder=""
                   height="12rem"
                   typ="resume"
+                  name="description"
+                  defaultValue={item.description}
+                  onChange={({ target }) => handleChange(target, id)}
                 />
               </Form.Group>
             </div>
           ))}
-          <div className="d-flex justify-content-end">
+          <div className="d-flex justify-itement-end">
             <span
               className="btn-link text-decoration-none"
               style={{

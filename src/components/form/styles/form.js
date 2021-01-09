@@ -37,7 +37,7 @@ export const Input = styled.input`
   border-radius: 6px;
   height: ${({height}) => height ? height : '50px'}; 
   font-style: normal;
-  font-weight: 500;
+  font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   color: #216DE0;
@@ -59,10 +59,10 @@ export const InputDropdown = styled.select`
   border-radius: 6px;
   height: ${({height}) => height ? height : '50px'}; 
   font-style: normal;
-  font-weight: ${({ value }) => value ? '500' : '300'};
+  font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-  color: ${({ value }) => value ? '#216DE0' : '#B1B1B1'};
+  color: ${({ defaultValue }) => defaultValue ? '#216DE0' : '#B1B1B1'};
   opacity: 1;
   padding: .5rem;
   width: ${({ width }) => width ? width : '100%'};
@@ -70,7 +70,6 @@ export const InputDropdown = styled.select`
   -moz-appearance:none; /* Firefox */
   -webkit-appearance:none; /* Safari and Chrome */
   appearance:none;
-
 `;
 
 export const Button = styled(BootstrapButton)`
@@ -129,7 +128,7 @@ export const TextArea = styled.textarea`
   border-radius: 6px;
   height: ${({height}) => height ? height : '50px'}; 
   font-style: normal;
-  font-weight: 500;
+  font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   color: #216DE0;

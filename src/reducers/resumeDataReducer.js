@@ -11,11 +11,11 @@ export default function resumeDataReducer(state = data, action = {}) {
           [action.payload.name]: action.payload.value,
         },
       };
-    case Actions.EDUCATION ||
-      Actions.WORK_EXP ||
-      Actions.CERTS ||
-      Actions.ACHIEVEMENTS ||
-      Actions.REFERENCES:
+    case Actions.EDUCATION:
+    case Actions.WORK_EXP:
+    case Actions.CERTS:
+    case Actions.ACHIEVEMENTS:
+    case Actions.REFERENCES:
       if (action.payload.dataset.category) {
         return {
           ...state,
@@ -45,21 +45,19 @@ export default function resumeDataReducer(state = data, action = {}) {
             ...state[action.category].slice(action.id + 1),
           ],
         };
-    case Actions.LANGUAGES || Actions.SKILLS:
+    case Actions.LANGUAGES: 
+    case Actions.SKILLS:
       return {
         ...state,
-        [action.category]: [
-          ...state[action.category], 
-          action.payload.value
-        ],
+        [action.category]: [...state[action.category], action.payload.value],
       };
     case Actions.ADD_ITEM:
-      if (action.category === "languages" || "skills") {
+      if (action.category === ("languages" || "skills")) {
         return {
           ...state,
           [action.category]: [...state[action.category], ""],
         };
-      } else{
+      } else {
         return {
           ...state,
           [action.category]: [
@@ -72,9 +70,13 @@ export default function resumeDataReducer(state = data, action = {}) {
         };
       }
     case Actions.REMOVE_ITEM:
-      let newState = { ...state };
-      newState[action.category].splice(action.id, 1);
-      return newState;
+      return {
+        ...state,
+        [action.category]: [
+          ...state[action.category].slice(0, action.id),
+          ...state[action.category].slice(action.id + 1),
+        ],
+      };
     default:
       return state;
   }

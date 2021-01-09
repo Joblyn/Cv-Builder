@@ -6,7 +6,12 @@ export const data = {
       year: { start: "", end: "" },
     },
   ],
-  workExperience: [{}],
+  workExperience: [
+    {
+      month: { start: "", end: "" },
+      year: { start: "", end: "" },
+    },
+  ],
   languages: [],
   certifications: [{}],
   achievements: [{}],

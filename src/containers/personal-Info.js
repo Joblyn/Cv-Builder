@@ -94,7 +94,6 @@ export default function PersonalInfo() {
       </Form.Group>
       <Form.Button
         type="submit"
-        form="personal-info"
         position="right"
         typ="resume"
         href={ROUTES.EDU}

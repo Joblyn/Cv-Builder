@@ -26,15 +26,7 @@ const months = [
 export default function Education() {
   const dispatch = useDispatch();
   const education = useSelector(state => state.resumeData.education);
-
-  // const [control, setControl] = useState([
-  //   {
-  //     institutionName: "",
-  //     fieldOfStudy: "",
-  //     month: { start: "", end: "" },
-  //     year: { start: "", end: "" },
-  //   },
-  // ]);
+  console.log(education.length);
 
   const monthsDropdown = months.map((month, id) => (
     <option
@@ -63,42 +55,16 @@ export default function Education() {
 
   const handleChange = (target, id) => {
     dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
-
-    // setControl((prevState) => [
-    //   ...prevState.slice(0, id),
-    //   {
-    //     ...prevState[id],
-    //     [target.dataset.category]: {
-    //       ...prevState[id][target.dataset.category],
-    //       [target.name]: target.value,
-    //     },
-    //   },
-    //   ...prevState.slice(id + 1),
-    // ]);
   };
 
   const addItem = () => {
     let target = null;
     dispatch(updateResumeData("education", target, Actions.ADD_ITEM));
-
-    // setControl((prevState) => [
-    //   ...prevState,
-    //   {
-    //     month: { start: "", end: "" },
-    //     year: { start: "", end: "" },
-    //   },
-    // ]);
   };
 
   const removeItem = (id) => {
     let target = null;
     dispatch(updateResumeData("education", target, Actions.REMOVE_ITEM, id));
-
-    // setControl((prevState) => {
-    //   let arr = [...prevState];
-    //   arr.splice(id, 1);
-    //   return arr;
-    // });
   };
 
   return (
@@ -452,8 +418,8 @@ export default function Education() {
           type="submit"
           form="personal-info"
           typ="resume"
-          href={ROUTES.PERS_INFO}
           outline="true"
+          href={ROUTES.PERS_INFO}
         >
           Previous Section
         </Form.Button>

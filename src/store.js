@@ -17,8 +17,9 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
-// const load = storage.createLoader(engine);
-// load(store)
-//   .then((newState) => console.log("Loaded state:", newState))
-//   .catch(() => console.log("Failed to load previous state"));
+const load = storage.createLoader(engine);
+load(store)
+  .then((newState) => console.log("Loaded state:", newState))
+  .catch(() => console.log("Failed to load previous state"));
+  
 export default store;

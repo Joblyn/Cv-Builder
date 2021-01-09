@@ -12,7 +12,7 @@ import {
   Link,
   InputDropdown,
   SubHeading,
-  Icon
+  Icon,
 } from "./styles/form";
 
 const location = window.location.pathname;
@@ -65,14 +65,17 @@ Form.Error = function FormError({ children, ...restProps }) {
   return <Error {...restProps}>{children}</Error>;
 };
 
-Form.InputDropdown = function FormInputDropdown({ dropdownElements, ...restProps }) {
+Form.InputDropdown = function FormInputDropdown({
+  dropdownElements,
+  ...restProps
+}) {
   return <InputDropdown {...restProps}>{dropdownElements}</InputDropdown>;
 };
 
 Form.SubHeading = function FormSubHeading({ children, ...restProps }) {
-  return <SubHeading {...restProps}>{children}</SubHeading>
+  return <SubHeading {...restProps}>{children}</SubHeading>;
 };
 
 Form.Icon = function FormIcon({ children, ...restProps }) {
-  return <Icon {...restProps}>{children}</Icon>
+  return <Icon {...restProps}>{children}</Icon>;
 };
