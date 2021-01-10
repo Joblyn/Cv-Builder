@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { GoTrashcan } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResumeData } from "../actions/actions";
 import { Form } from "../components";
 import * as ROUTES from "../constants/routes";
+import * as Actions from "../constants/actionsTypes";
 
 export default function Achievements() {
-  const [control, setControl] = useState([
-    { achievement: "" },
-    { achievement: "" },
-    { achievement: "" },
-  ]);
+  const dispatch = useDispatch();
+  const achievements = useSelector(state => state.resumeData.achievements);
+
+  const handleChange = (target, id) => {
+    dispatch(updateResumeData("achievements", target, Actions.ACHIEVEMENTS, id));
+  }
 
   const addItem = () => {
-    setControl((prevState) => [...prevState, { achievement: "" }]);
+    dispatch(updateResumeData("achievements", null, Actions.ADD_ITEM));
   };
 
   const removeItem = (id) => {
-    setControl((prevState) => {
-      let arr = [...prevState];
-      arr.splice(id, 1);
-      return arr;
-    });
+    dispatch(updateResumeData("achievements", null, Actions.REMOVE_ITEM, id))
   };
 
   return (
@@ -27,8 +27,8 @@ export default function Achievements() {
       <Form.Title type="resume" showOnlyOnSmallViewPort>
         Achievemnts
       </Form.Title>
-      {control.length &&
-        control.map((item, id) => (
+      {achievements.length &&
+        achievements.map((item, id) => (
           <div key={`cert-${id + 1}`}>
             <div className="d-flex justify-content-end">
               <Form.Icon
@@ -41,7 +41,14 @@ export default function Achievements() {
               </Form.Icon>
             </div>
             <Form.Group>
-              <Form.Input type="text" typ="resume" placeholder="e.g Award winner at Microsoft" />
+              <Form.Input 
+                type="text" 
+                typ="resume" 
+                placeholder="e.g Award winner at Microsoft"
+                name="achievement" 
+                defaultValue={item.achievement}
+                onChange={({ target }) => handleChange(target, id)}
+              />
             </Form.Group>
           </div>
         ))}

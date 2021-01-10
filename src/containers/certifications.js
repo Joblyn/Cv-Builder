@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form } from "../components";
 import { MdArrowDropDown } from "react-icons/md";
 import { GoTrashcan } from "react-icons/go";
 import * as ROUTES from "../constants/routes";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResumeData } from "../actions/actions";
+import * as Actions from "../constants/actionsTypes";
 
 export default function Certifications() {
-  const [control, setControl] = useState([
-    { name: "", year: "" },
-    { name: "", year: "" },
-    { name: "", year: "" },
-  ]);
+  const dispatch = useDispatch();
+  const certifications = useSelector(state => state.resumeData.certifications);
+
   const start = new Date().getFullYear();
   const end = 1949;
   let len = start - end;
@@ -26,32 +27,15 @@ export default function Certifications() {
   ));
 
   const handleChange = (target, id) => {
-    setControl((prevState) => [
-      ...prevState.slice(0, id),
-      {
-        ...prevState[id],
-        [target.name]: target.value,
-      },
-      ...prevState.slice(id + 1),
-    ]);
+    dispatch(updateResumeData("certifications", target, Actions.CERTS, id));
   };
 
   const addItem = () => {
-    setControl((prevState) => [
-      ...prevState,
-      {
-        name: "",
-        year: "",
-      },
-    ]);
+    dispatch(updateResumeData("certifications", null, Actions.ADD_ITEM))
   };
 
   const removeItem = (id) => {
-    setControl((prevState) => {
-      let arr = [...prevState];
-      arr.splice(id, 1);
-      return arr;
-    });
+    dispatch(updateResumeData("certifications", null, Actions.REMOVE_ITEM, id));
   };
 
   return (
@@ -65,8 +49,8 @@ export default function Certifications() {
         </Form.Label>
         <Form.Label width="20%">Year</Form.Label>
       </div>
-      {control.length &&
-        control.map((cert, id) => (
+      {certifications.length &&
+        certifications.map((item, id) => (
           <div key={`cert-${id+1}`}>
             <div className="position-relative">
               <Form.Icon onClick={() => removeItem(id)} marginTop='1rem'>
@@ -90,6 +74,7 @@ export default function Certifications() {
                   name="name"
                   placeholder="e.g Figma Ambassador"
                   typ="resume"
+                  defaultValue={item.name}
                   onChange={({ target }) => handleChange(target, id)}
                 />
               </Form.Group>
@@ -108,7 +93,7 @@ export default function Certifications() {
                   <Form.InputDropdown
                     typ="resume"
                     name="year"
-                    value={cert.year}
+                    defaultValue={item.year}
                     dropdownElements={yearsDropdown}
                     onChange={({ target }) => handleChange(target, id)}
                   />

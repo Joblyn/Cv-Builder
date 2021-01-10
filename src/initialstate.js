@@ -12,9 +12,17 @@ export const data = {
       year: { start: "", end: "" },
     },
   ],
-  languages: [],
-  certifications: [{}],
-  achievements: [{}],
-  skills: [],
+  languages: ["", "", ""],
+  certifications: [
+    { name: "", year: "" },
+    { name: "", year: "" },
+    { name: "", year: "" },
+  ],
+  achievements: [
+    { achievement: "" }, 
+    { achievement: "" }, 
+    { achievement: "" }
+  ],
+  skills: ["", "", ""],
   references: [{}],
 };

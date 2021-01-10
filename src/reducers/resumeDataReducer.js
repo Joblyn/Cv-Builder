@@ -45,17 +45,34 @@ export default function resumeDataReducer(state = data, action = {}) {
             ...state[action.category].slice(action.id + 1),
           ],
         };
-    case Actions.LANGUAGES: 
+    case Actions.LANGUAGES:
     case Actions.SKILLS:
       return {
         ...state,
-        [action.category]: [...state[action.category], action.payload.value],
+        [action.category]: [
+          ...state[action.category].slice(0, action.id),
+          action.payload.value,
+          ...state[action.category].slice(action.id + 1),
+        ],
       };
     case Actions.ADD_ITEM:
       if (action.category === ("languages" || "skills")) {
         return {
           ...state,
           [action.category]: [...state[action.category], ""],
+        };
+      } else if (action.category === "certifications") {
+        return {
+          ...state,
+          [action.category]: [
+            ...state[action.category],
+            { name: "", year: "" },
+          ],
+        };
+      } else if (action.category === "achievements") {
+        return {
+          ...state,
+          [action.category]: [...state[action.category], { achievement: "" }],
         };
       } else {
         return {

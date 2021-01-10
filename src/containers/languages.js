@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { GoTrashcan } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResumeData } from "../actions/actions";
 import { Form } from "../components";
 import * as ROUTES from "../constants/routes";
+import * as Actions from "../constants/actionsTypes";
 
 export default function Languages() {
-  const [control, setControl] = useState([
-    { achievement: "" },
-    { achievement: "" },
-    { achievement: "" },
-  ]);
+  const dispatch = useDispatch();
+  const languages = useSelector(state => state.resumeData.languages);
+
+  const handleChange = (target, id) => {
+    dispatch(updateResumeData("languages", target, Actions.LANGUAGES, id));
+  }
 
   const addItem = () => {
-    setControl((prevState) => [...prevState, { achievement: "" }]);
+    dispatch(updateResumeData("languages", null, Actions.ADD_ITEM));
   };
 
   const removeItem = (id) => {
-    setControl((prevState) => {
-      let arr = [...prevState];
-      arr.splice(id, 1);
-      return arr;
-    });
+      dispatch(updateResumeData("languages", null, Actions.REMOVE_ITEM, id));
   };
 
   return (
@@ -27,9 +27,9 @@ export default function Languages() {
       <Form.Title type="resume" showOnlyOnSmallViewPort>
         Languages
       </Form.Title>
-      {control.length &&
-        control.map((item, id) => (
-          <div key={`cert-${id + 1}`}>
+      {languages.length &&
+        languages.map((item, id) => (
+          <div key={`language-${id + 1}`}>
             <div className="d-flex justify-content-end">
               <Form.Icon
                 onClick={() => removeItem(id)}
@@ -41,7 +41,13 @@ export default function Languages() {
               </Form.Icon>
             </div>
             <Form.Group>
-              <Form.Input type="text" typ="resume" placeholder="e.g English" />
+              <Form.Input 
+                type="text" 
+                typ="resume" 
+                placeholder="e.g English" 
+                defaultValue={item}
+                onChange={({ target }) => handleChange(target, id)}
+              />
             </Form.Group>
           </div>
         ))}

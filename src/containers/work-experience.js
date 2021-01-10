@@ -25,9 +25,7 @@ const months = [
 
 export default function WorkExperience() {
   const dispatch = useDispatch();
-  const workExperience = useSelector(
-    (state) => state.resumeData.workExperience
-  );
+  const workExperience = useSelector(state => state.resumeData.workExperience);
 
   const monthsDropdown = months.map((month, id) => (
     <option
@@ -58,7 +56,7 @@ export default function WorkExperience() {
     dispatch(updateResumeData("workExperience", target, Actions.WORK_EXP, id));
   };
 
-  const addForm = () => {
+  const addItem = () => {
     dispatch(updateResumeData("workExperience", null, Actions.ADD_ITEM));
   };
 
@@ -398,7 +396,7 @@ export default function WorkExperience() {
                 cursor: "pointer",
                 fontWeight: "500",
               }}
-              onClick={addForm}
+              onClick={addItem}
             >
               + Add Another
             </span>

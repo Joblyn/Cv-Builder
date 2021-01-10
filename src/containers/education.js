@@ -58,13 +58,11 @@ export default function Education() {
   };
 
   const addItem = () => {
-    let target = null;
-    dispatch(updateResumeData("education", target, Actions.ADD_ITEM));
+    dispatch(updateResumeData("education", null, Actions.ADD_ITEM));
   };
 
   const removeItem = (id) => {
-    let target = null;
-    dispatch(updateResumeData("education", target, Actions.REMOVE_ITEM, id));
+    dispatch(updateResumeData("education", null, Actions.REMOVE_ITEM, id));
   };
 
   return (
