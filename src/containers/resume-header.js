@@ -5,7 +5,7 @@ import { AiOutlineDownload } from "react-icons/ai";
 import { Header } from "../components";
 import * as ROUTES from "../constants/routes";
 import { FirebaseContext } from "../context/firebase";
-import { useAuthListener } from '../hooks';
+import { useAuthListener } from "../hooks";
 
 export default function ResumeHeader() {
   const { firebase } = useContext(FirebaseContext);
@@ -15,24 +15,34 @@ export default function ResumeHeader() {
 
   useEffect(() => {
     if (user) {
-    firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL()
-      .then(imgUrl => {
-        setPhotoUrl(imgUrl);
-      })
+      firebase
+        .storage()
+        .ref("users/" + user.uid + "/profile.jpg")
+        .getDownloadURL()
+        .then((imgUrl) => {
+          setPhotoUrl(imgUrl);
+        });
     }
   }, [firebase, user]);
 
   const photoUpdate = (target) => {
     const file = target.files[0];
-    firebase.storage().ref('users/' + user.uid + '/profile.jpg').put(file)
-    .then(() => {
-      firebase.storage().ref('users/' + user.uid + '/profile.jpg').getDownloadURL()
-      .then(imgUrl => {
-        setPhotoUrl(imgUrl);
+    firebase
+      .storage()
+      .ref("users/" + user.uid + "/profile.jpg")
+      .put(file)
+      .then(() => {
+        firebase
+          .storage()
+          .ref("users/" + user.uid + "/profile.jpg")
+          .getDownloadURL()
+          .then((imgUrl) => {
+            setPhotoUrl(imgUrl);
+          });
       })
-    }).catch(error => {
-      console.log(error.message);
-    })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
@@ -57,9 +67,14 @@ export default function ResumeHeader() {
           <Header.User
             displayName={user.displayName}
             photoURL={photoUrl}
-            onClick={() => setActive((active) => !active)}
+            onMouseEnter={() => setActive(true)}
+            onMouseLeave={() => setActive(false)}
           />
-          <Header.UserNav active={active}>
+          <Header.UserNav
+            active={active}
+            onMouseEnter={() => setActive(true)}
+            onMouseLeave={() => setActive(false)}
+          >
             <Header.Item>
               <Header.TextLink to={ROUTES.PERS_INFO} type="user">
                 Build Resume

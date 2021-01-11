@@ -1,32 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form } from "../components";
 import * as ROUTES from "../constants/routes";
 import { GoTrashcan } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResumeData } from "../actions/actions";
+import * as Actions from "../constants/actionsTypes";
 
 export default function Reference() {
-  const [control, setControl] = useState([
-    {
-      name: "",
-      job: "",
-    },
-  ]);
+  const dispatch = useDispatch();
+  const references = useSelector(state => state.resumeData.references);
+
+  const handleChange = (target, id) => {
+    dispatch(updateResumeData("references", target, Actions.REFERENCES, id));
+  };
 
   const addForm = () => {
-    setControl((prevState) => [
-      ...prevState,
-      {
-        name: "",
-        job: "",
-      },
-    ]);
+    dispatch(updateResumeData("references", null, Actions.ADD_ITEM));
   };
 
   const removeItem = (id) => {
-    setControl((prevState) => {
-      let arr = [...prevState];
-      arr.splice(id, 1);
-      return arr;
-    });
+    dispatch(updateResumeData("references", null, Actions.REMOVE_ITEM, id));
   };
 
   return (
@@ -34,11 +27,11 @@ export default function Reference() {
       <Form.Title type="resume" showOnlyOnSmallViewPort>
         References
       </Form.Title>
-      {control.length && (
+      {references.length && (
         <>
-          {control.map((ref, id) => (
+          {references.map((item, id) => (
             <div key={`ref-${id + 1}`}>
-              {control.length > 1 && (
+              {references.length > 1 && (
                 <div
                   className={`position-relative d-flex ${id > 0 && 'mt-5'}`}
                   style={{ marginBottom: "-3rem" }}
@@ -59,13 +52,15 @@ export default function Reference() {
               <Form.Group row>
                 <Form.Group type="resume" width="45%" marginRight="10%">
                   <Form.Label htmlFor={`name-${id + 1}`}>
-                    Reference Name
+                    Full Name
                   </Form.Label>
                   <Form.Input
-                    id={`name-${id + 1}`}
                     type="text"
                     placeholder="e.g John Doe"
                     typ="resume"
+                    name="fullName"
+                    defaultValue={item.fullName}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
                 <Form.Group type="resume" width="45%">
@@ -73,10 +68,12 @@ export default function Reference() {
                     Job Title
                   </Form.Label>
                   <Form.Input
-                    id={`job-title-${id + 1}`}
                     type="text"
                     placeholder="e.g Product Designer"
                     typ="resume"
+                    name="jobTitle"
+                    defaultValue={item.jobTitle}
+                    onChange={({ target }) => handleChange(target, id)}
                   />
                 </Form.Group>
               </Form.Group>
@@ -85,10 +82,12 @@ export default function Reference() {
                   Email Address
                 </Form.Label>
                 <Form.Input
-                  id={`email-${id + 1}`}
                   type="email"
                   placeholder="example@gmail.com"
                   typ="resume"
+                  name="email"
+                  defaultValue={item.email}
+                  onChange={({ target }) => handleChange(target, id)}
                 />
               </Form.Group>
               <Form.Group type="resume">
@@ -96,19 +95,23 @@ export default function Reference() {
                   Phone Number
                 </Form.Label>
                 <Form.Input
-                  id={`phoneNo.-${id + 1}`}
                   type="text"
                   placeholder="080 000 000"
                   typ="resume"
+                  name="phoneNo"
+                  defaultValue={item.phoneNo}
+                  onChange={({ target }) => handleChange(target, id)}
                 />
               </Form.Group>
               <Form.Group type="resume">
                 <Form.Label htmlFor={`location-${id + 1}`}>Location</Form.Label>
                 <Form.Input
-                  id={`location-${id + 1}`}
                   type="text"
                   placeholder="e.g Lagos, Nigeria"
                   typ="resume"
+                  name="location"
+                  defaultValue={item.location}
+                  onChange={({ target }) => handleChange(target, id)}
                 />
               </Form.Group>
             </div>

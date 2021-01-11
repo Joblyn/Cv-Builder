@@ -62,7 +62,7 @@ export const InputDropdown = styled.select`
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
-  color: ${({ defaultValue }) => defaultValue ? '#216DE0' : '#B1B1B1'};
+  color: ${({ defaultValue }) => defaultValue === 'present' || "" ? '#B1B1B1' : '#216DE0'};
   opacity: 1;
   padding: .5rem;
   width: ${({ width }) => width ? width : '100%'};
@@ -70,6 +70,10 @@ export const InputDropdown = styled.select`
   -moz-appearance:none; /* Firefox */
   -webkit-appearance:none; /* Safari and Chrome */
   appearance:none;
+
+  :disabled {
+    opacity: .3;
+  }
 `;
 
 export const Button = styled(BootstrapButton)`

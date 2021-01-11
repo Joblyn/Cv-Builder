@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "../components";
 import { MdRemove, MdArrowDropDown } from "react-icons/md";
@@ -26,7 +26,8 @@ const months = [
 export default function Education() {
   const dispatch = useDispatch();
   const education = useSelector(state => state.resumeData.education);
-  console.log(education.length);
+
+  const [checked, setChecked] = useState(false);
 
   const monthsDropdown = months.map((month, id) => (
     <option
@@ -54,7 +55,15 @@ export default function Education() {
   ));
 
   const handleChange = (target, id) => {
-    dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
+    if (target.type === 'checkbox') {
+      setChecked(!checked);
+      if (checked) {
+        dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
+      }
+    }
+    else {
+      dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
+    }
   };
 
   const addItem = () => {
@@ -159,7 +168,7 @@ export default function Education() {
                   <Form.Label style={{ marginRight: "auto" }}>
                     Time Period
                   </Form.Label>
-                  <input type="checkbox" style={{ margin: ".4rem" }} />
+                  <input type="checkbox" style={{ margin: ".4rem" }} checked={checked} onChange={({ target }) => handleChange(target, id)}/>
                   Currently study here
                 </span>
                 <Form.Group row>
@@ -232,6 +241,7 @@ export default function Education() {
                         data-category="month"
                         defaultValue={item.month.end}
                         onChange={({ target }) => handleChange(target, id)}
+                        disabled={checked}
                       />
                       <MdArrowDropDown
                         size={35}
@@ -241,6 +251,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
+                          opacity: `${checked && '.3'}`
                         }}
                       />
                     </div>
@@ -252,6 +263,7 @@ export default function Education() {
                         data-category="year"
                         defaultValue={item.year.end}
                         onChange={({ target }) => handleChange(target, id)}
+                        disabled={checked}
                       />
                       <MdArrowDropDown
                         size={35}
@@ -261,6 +273,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
+                          opacity: `${checked && '.3'}`
                         }}
                       />
                     </div>
@@ -328,11 +341,17 @@ export default function Education() {
                   style={{
                     color: "#216DE0",
                     marginBottom: ".4rem",
-                    marginTop: ".5rem",
+                    marginTop: "1.2rem",
                     fontSize: "1.12rem",
+                    display: 'flex',
+                    justifyContent: 'space-between'
                   }}
                 >
                   To
+                  <span style={{ marginLeft: 'auto'}}>
+                    <input type="checkbox" style={{ margin: ".4rem" }} checked={checked} onChange={({ target }) => handleChange(target, id)}/>
+                    Currently study here
+                  </span>
                 </span>
                 <Form.Group style={{ flexDirection: "row" }} marginTop="0">
                   <div
@@ -348,6 +367,7 @@ export default function Education() {
                       name="end"
                       defaultValue={item.month.end}
                       onChange={({ target }) => handleChange(target, id)}
+                      disabled={checked}
                     />
                     <MdArrowDropDown
                       size={35}
@@ -357,6 +377,7 @@ export default function Education() {
                         right: "0",
                         color: "#474747",
                         transform: "translate(0, -50%)",
+                        opacity: `${checked ? '.3' : '1'}`
                       }}
                     />
                   </div>
@@ -367,6 +388,7 @@ export default function Education() {
                       name="end"
                       defaultValue={item.year.end}
                       onChange={({ target }) => handleChange(target, id)}
+                      disabled={checked}
                     />
                     <MdArrowDropDown
                       size={35}
@@ -376,6 +398,7 @@ export default function Education() {
                         right: "0",
                         color: "#474747",
                         transform: "translate(0, -50%)",
+                        opacity: `${checked ? '.3' : '1'}`
                       }}
                     />
                   </div>

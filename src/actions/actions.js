@@ -1,8 +1,9 @@
-export const updateResumeData = (category, payload, type, id = null) => {
+export const updateResumeData = (category, payload, actionType, id = null) => {
+  const { type, name, value, dataset } = payload;
   return {
-    type,
+    type: actionType,
     category,
-    payload,
+    payload : { type, name, value, dataset },
     id,
   };
 };
