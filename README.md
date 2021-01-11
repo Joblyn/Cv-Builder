@@ -1,1 +1,1 @@
-# Resume Builder front-end with ReactJs
+# Resume Builder with ReactJs
