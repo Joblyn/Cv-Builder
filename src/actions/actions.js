@@ -1,9 +1,10 @@
 export const updateResumeData = (category, payload, actionType, id = null) => {
-  const { type, name, value, dataset } = payload;
+  const subset = ({ type, name, value, dataset, checked }) => ({ type, name, value, dataset, checked });
   return {
     type: actionType,
     category,
-    payload : { type, name, value, dataset },
+    payload : payload ?  subset(payload) : payload,
     id,
   };
 };
+  

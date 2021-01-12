@@ -71,7 +71,9 @@ export default function WorkExperience() {
       </Form.Title>
       {workExperience.length && (
         <>
-          {workExperience.map((item, id) => (
+          {workExperience.map((item, id) => {
+            let disabled = (item.month.end === 'present') || (item.year.end === 'present');
+            return (
             <div key={`work-exp-${id + 1}`}>
               {workExperience.length > 1 && (
                 <div
@@ -152,8 +154,8 @@ export default function WorkExperience() {
                   <Form.Label style={{ marginRight: "auto" }}>
                     Time Period
                   </Form.Label>
-                  <input type="checkbox" style={{ margin: ".4rem" }} />
-                  Currently study here
+                  <input type="checkbox" style={{ margin: ".4rem" }} checked={disabled} onChange={({ target }) => handleChange(target, id)}/>
+                  Currently work here
                 </span>
                 <Form.Group row>
                   <Form.Group row width="45%">
@@ -206,7 +208,7 @@ export default function WorkExperience() {
                   </Form.Group>
                   <div
                     style={{ width: "10%" }}
-                    className="d-flex align-items-center justify-itement-center"
+                    className="d-flex align-items-center justify-content-center"
                   >
                     <MdRemove size={29} />
                   </div>
@@ -225,6 +227,7 @@ export default function WorkExperience() {
                         data-category="month"
                         defaultValue={item.month.end}
                         onChange={({ target }) => handleChange(target, id)}
+                        disabled={disabled}
                       />
                       <MdArrowDropDown
                         size={35}
@@ -234,6 +237,7 @@ export default function WorkExperience() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
+                          opacity: `${disabled ? '.3' : '1'}`
                         }}
                       />
                     </div>
@@ -245,6 +249,7 @@ export default function WorkExperience() {
                         data-category="year"
                         defaultValue={item.year.end}
                         onChange={({ target }) => handleChange(target, id)}
+                        disabled={disabled}
                       />
                       <MdArrowDropDown
                         size={35}
@@ -254,6 +259,7 @@ export default function WorkExperience() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
+                          opacity: `${disabled ? '.3' : '1'}`
                         }}
                       />
                     </div>
@@ -323,9 +329,15 @@ export default function WorkExperience() {
                     marginBottom: ".4rem",
                     marginTop: ".5rem",
                     fontSize: "1.12rem",
+                    display: 'flex',
+                    justifyContent: 'space-between'
                   }}
                 >
                   To
+                  <span>
+                    <input type='checkbox' style={{ margin: '.4rem'}} checked={disabled} onChange={({target }) => handleChange(target, id)}/>
+                    Currently work here
+                  </span>
                 </span>
                 <Form.Group style={{ flexDirection: "row" }} marginTop="0">
                   <div
@@ -341,6 +353,7 @@ export default function WorkExperience() {
                       name="end"
                       defaultValue={item.month.end}
                       onChange={({ target }) => handleChange(target, id)}
+                      disabled={disabled}
                     />
                     <MdArrowDropDown
                       size={35}
@@ -350,6 +363,7 @@ export default function WorkExperience() {
                         right: "0",
                         color: "#474747",
                         transform: "translate(0, -50%)",
+                        opacity: `${disabled ? '.3' : '1'}`
                       }}
                     />
                   </div>
@@ -360,6 +374,7 @@ export default function WorkExperience() {
                       name="end"
                       defaultValue={item.year.end}
                       onChange={({ target }) => handleChange(target, id)}
+                      disabled={disabled}
                     />
                     <MdArrowDropDown
                       size={35}
@@ -369,6 +384,7 @@ export default function WorkExperience() {
                         right: "0",
                         color: "#474747",
                         transform: "translate(0, -50%)",
+                        opacity: `${disabled ? '.3' : '1'}`
                       }}
                     />
                   </div>
@@ -386,8 +402,8 @@ export default function WorkExperience() {
                 />
               </Form.Group>
             </div>
-          ))}
-          <div className="d-flex justify-itement-end">
+          )})}
+          <div className="d-flex justify-content-end">
             <span
               className="btn-link text-decoration-none"
               style={{
