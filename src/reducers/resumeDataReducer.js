@@ -17,7 +17,7 @@ export default function resumeDataReducer(state = data, action = {}) {
     case Actions.ACHIEVEMENTS:
     case Actions.REFERENCES:
       if (action.payload.type === 'checkbox') {
-        console.log(action.payload.type);
+        console.log(action.payload);
         return {
           ...state,
           [action.category]: [
@@ -78,7 +78,7 @@ export default function resumeDataReducer(state = data, action = {}) {
         ],
       };
     case Actions.ADD_ITEM:
-      if (action.category === "languages" || "skills") {
+      if (action.category === "languages" || action.category === "skills") {
         return {
           ...state,
           [action.category]: [...state[action.category], ""],

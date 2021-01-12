@@ -56,14 +56,9 @@ export default function Education() {
 
   const handleChange = (target, id) => {
     if (target.type === 'checkbox') {
-      setChecked(!checked);
-      if (checked) {
-        dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
-      }
-    }
-    else {
-      dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
-    }
+      setChecked(checked => !checked);
+    };
+    dispatch(updateResumeData("education", target, Actions.EDUCATION, id));
   };
 
   const addItem = () => {
@@ -81,7 +76,9 @@ export default function Education() {
       </Form.Title>
       {education.length && (
         <>
-          {education.map((item, id) => (
+          {education.map((item, id) => {
+            let disabled = (item.month.end === 'present');
+            return (
             <div key={`edu-${id + 1}`}>
               {education.length > 1 && (
                 <div
@@ -251,7 +248,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
-                          opacity: `${checked && '.3'}`
+                          opacity: `${checked ? '.3' : '1'}`
                         }}
                       />
                     </div>
@@ -273,7 +270,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
-                          opacity: `${checked && '.3'}`
+                          oopacity: `${checked ? '.3' : '1'}`
                         }}
                       />
                     </div>
@@ -417,7 +414,7 @@ export default function Education() {
                 />
               </Form.Group>
             </div>
-          ))}
+          )})}
           <div className="d-flex justify-content-end">
             <span
               className="btn-link text-decoration-none"
