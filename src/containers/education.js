@@ -243,7 +243,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
-                          opacity: `${checked ? '.3' : '1'}`
+                          opacity: `${disabled ? '.3' : '1'}`
                         }}
                       />
                     </div>
@@ -265,7 +265,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
-                          oopacity: `${checked ? '.3' : '1'}`
+                          oopacity: `${disabled ? '.3' : '1'}`
                         }}
                       />
                     </div>
