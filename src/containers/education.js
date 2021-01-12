@@ -243,7 +243,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
-                          opacity: `${disabled ? '.3' : '1'}`
+                          opacity: `${checked ? '.3' : '1'}`
                         }}
                       />
                     </div>
@@ -265,7 +265,7 @@ export default function Education() {
                           right: "0",
                           color: "#474747",
                           transform: "translate(0, -50%)",
-                          opacity: `${disabled ? '.3' : '1'}`
+                          oopacity: `${checked ? '.3' : '1'}`
                         }}
                       />
                     </div>
@@ -273,7 +273,9 @@ export default function Education() {
                 </Form.Group>
               </Form.Group>
               <Form.Group showOnlyOnSmallViewPort>
-                <Form.Label>Time Period</Form.Label>
+                <Form.Label>
+                  Time Period
+                </Form.Label>
                 <span
                   style={{
                     color: "#216DE0",

@@ -6,5 +6,5 @@ export const updateResumeData = (category, payload, actionType, id = null) => {
     payload : payload ?  subset(payload) : payload,
     id,
   };
-};
   
+};
