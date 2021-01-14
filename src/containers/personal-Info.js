@@ -75,20 +75,20 @@ export default function PersonalInfo() {
           type="text"
           placeholder="e.g Lagos, Nigeria"
           typ="resume"
-          name="location"
-          defaultValue={personalInfo.location}
+          name="address"
+          defaultValue={personalInfo.address}
           onChange={handleChange}
         />
       </Form.Group>
       <Form.Group type="resume">
-        <Form.Label htmlFor="info">Other Information</Form.Label>
+        <Form.Label htmlFor="info">Professional statement</Form.Label>
         <Form.TextArea 
           id="info" 
           placeholder="" 
-          height="12rem" 
+          height="10rem" 
           typ="resume"
-          name="otherInfo"
-          defaultValue={personalInfo.otherInfo}
+          name="statement"
+          defaultValue={personalInfo.statement}
           onChange={handleChange}
         />
       </Form.Group>

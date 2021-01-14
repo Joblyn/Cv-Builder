@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { IoMdEye } from "react-icons/io";
 import { AiOutlineDownload } from "react-icons/ai";
+import ReactPDF from '@react-pdf/renderer';
 
 import { Header } from "../components";
 import * as ROUTES from "../constants/routes";
 import { FirebaseContext } from "../context/firebase";
 import { useAuthListener } from "../hooks";
+import { ResumeDoc } from '../components';
 
 export default function ResumeHeader() {
   const { firebase } = useContext(FirebaseContext);
@@ -24,6 +26,10 @@ export default function ResumeHeader() {
         });
     }
   }, [firebase, user]);
+
+  const downloadResume = () => {
+    ReactPDF.render(<ResumeDoc />, `${user.displayName}.pdf`);  
+  }
 
   const photoUpdate = (target) => {
     const file = target.files[0];
@@ -51,13 +57,13 @@ export default function ResumeHeader() {
       <Header.Toggle aria-controls="basic-navbar-nav" />
       <Header.Collapse id="basic-navbar-nav">
         <Header.Group>
-          <Header.TextLink type="header" to="#">
+          <Header.TextLink type="header" to={ROUTES.PREVIEW_RESUME}>
             <Header.Icon>
               <IoMdEye />
             </Header.Icon>
             Preview Resume
           </Header.TextLink>
-          <Header.TextLink type="header" to="#">
+          <Header.TextLink type="header" onClick={downloadResume} to='#'>
             <Header.Icon>
               <AiOutlineDownload />
             </Header.Icon>

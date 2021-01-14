@@ -9,3 +9,4 @@ export { default as Info } from './Info';
 export { default as Form } from './form';
 export { default as Aside } from './aside';
 export { default as ResumeNav } from './resume-nav';
+export { default as ResumeDoc } from './resumeDoc';

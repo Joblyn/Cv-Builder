@@ -7,6 +7,8 @@ import { Loading } from "./components/loading";
 import { useAuthListener } from "./hooks";
 import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 import Resume from './pages/resume';
+import { ResumeDoc } from './components';
+import { ResumeHeader } from "./containers";
 
 const Home = lazy(() => import("./pages/home"));
 const About = lazy(() => import("./pages/about"));
@@ -48,15 +50,19 @@ export default function App() {
             <SignIn />
           </IsUserRedirect>
 
+          <div>
+            <ResumeHeader />
+            <ProtectedRoute exact user={user} path={ROUTES.PREVIEW_RESUME} component={ResumeDoc}/>
+          </div>
           <Resume>
-            <ProtectedRoute user={user} path={ROUTES.PERS_INFO} component={PersonalInfo} />
-            <ProtectedRoute user={user} path={ROUTES.EDU} component={Education} />
-            <ProtectedRoute user={user} path={ROUTES.WORK_EXP} component={WorkExperience} />
-            <ProtectedRoute user={user} path={ROUTES.LANG} component={Languages} />
-            <ProtectedRoute user={user} path={ROUTES.CERT} component={Certifications} />
-            <ProtectedRoute user={user} path={ROUTES.ACHIEVE} component={Achievements} />
-            <ProtectedRoute user={user} path={ROUTES.SKILLS} component={Skills} />
-            <ProtectedRoute user={user} path={ROUTES.REF} component={Reference} />
+            <ProtectedRoute exact user={user} path={ROUTES.PERS_INFO} component={PersonalInfo} />
+            <ProtectedRoute exact user={user} path={ROUTES.EDU} component={Education} />
+            <ProtectedRoute exact user={user} path={ROUTES.WORK_EXP} component={WorkExperience} />
+            <ProtectedRoute exact user={user} path={ROUTES.LANG} component={Languages} />
+            <ProtectedRoute exact user={user} path={ROUTES.CERT} component={Certifications} />
+            <ProtectedRoute exact user={user} path={ROUTES.ACHIEVE} component={Achievements} />
+            <ProtectedRoute exact user={user} path={ROUTES.SKILLS} component={Skills} />
+            <ProtectedRoute exact user={user} path={ROUTES.REF} component={Reference} />
           </Resume>
         </Switch>
       </Suspense>
