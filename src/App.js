@@ -8,7 +8,6 @@ import { useAuthListener } from "./hooks";
 import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 import Resume from './pages/resume';
 import { ResumeDoc } from './components';
-import { ResumeHeader } from "./containers";
 
 const Home = lazy(() => import("./pages/home"));
 const About = lazy(() => import("./pages/about"));
@@ -50,10 +49,6 @@ export default function App() {
             <SignIn />
           </IsUserRedirect>
 
-          <div>
-            <ResumeHeader />
-            <ProtectedRoute exact user={user} path={ROUTES.PREVIEW_RESUME} component={ResumeDoc}/>
-          </div>
           <Resume>
             <ProtectedRoute exact user={user} path={ROUTES.PERS_INFO} component={PersonalInfo} />
             <ProtectedRoute exact user={user} path={ROUTES.EDU} component={Education} />
@@ -63,6 +58,7 @@ export default function App() {
             <ProtectedRoute exact user={user} path={ROUTES.ACHIEVE} component={Achievements} />
             <ProtectedRoute exact user={user} path={ROUTES.SKILLS} component={Skills} />
             <ProtectedRoute exact user={user} path={ROUTES.REF} component={Reference} />
+            <ProtectedRoute exact user={user} path={ROUTES.PREVIEW_RESUME} component={ResumeDoc}/>
           </Resume>
         </Switch>
       </Suspense>

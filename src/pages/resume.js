@@ -4,6 +4,7 @@ import $ from "jquery";
 import { ResumeHeader } from "../containers";
 import { ResumeNav } from "../components";
 import items from "../fixtures/resume.json";
+import * as ROUTES from "../constants/routes";
 
 export default function Resume({ children }) {
   const location = window.location.pathname;
@@ -96,34 +97,36 @@ export default function Resume({ children }) {
     <>
       <ResumeHeader />
       <div className="resume" id="resume">
-        <ResumeNav.Icon
-          type="left"
-          id="arr-right"
-          onClick={() => setShowNav(true)}
-        >
-          <BsArrowRight />
-        </ResumeNav.Icon>
-        {<ResumeNav.Overlay showNav={showNav} />}
-        {showNav && <ResumeNav.LockBody />}
-        <ResumeNav.Base id="resume-nav" showNav={showNav}>
-          <ResumeNav>
-            {items.map((item) => (
-              <ResumeNav.Item
-                to={item.to}
-                activeStyle={activeStyle}
-                key={item.id}
-              >
-                <ResumeNav.Image
-                  src={location === item.to ? item.iconActive : item.icon}
-                />
-                <ResumeNav.Text>{item.title}</ResumeNav.Text>
-              </ResumeNav.Item>
-            ))}
-          </ResumeNav>
-        </ResumeNav.Base>
-        <div className="resume-form-cont">
-          {children}
-        </div>
+        {location !== ROUTES.PREVIEW_RESUME && (
+          <>
+            <ResumeNav.Icon
+              type="left"
+              id="arr-right"
+              onClick={() => setShowNav(true)}
+            >
+              <BsArrowRight />
+            </ResumeNav.Icon>
+            {<ResumeNav.Overlay showNav={showNav} />}
+            {showNav && <ResumeNav.LockBody />}
+            <ResumeNav.Base id="resume-nav" showNav={showNav}>
+              <ResumeNav>
+                {items.map((item) => (
+                  <ResumeNav.Item
+                    to={item.to}
+                    activeStyle={activeStyle}
+                    key={item.id}
+                  >
+                    <ResumeNav.Image
+                      src={location === item.to ? item.iconActive : item.icon}
+                    />
+                    <ResumeNav.Text>{item.title}</ResumeNav.Text>
+                  </ResumeNav.Item>
+                ))}
+              </ResumeNav>
+            </ResumeNav.Base>
+          </>
+        )}
+        <div className="resume-form-cont">{children}</div>
       </div>
     </>
   );

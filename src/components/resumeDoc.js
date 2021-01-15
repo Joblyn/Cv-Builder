@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     width: '30%'
   }
 });
-export const MyDocument = ({ counter }) => {
+
+const MyDocument = ({ counter }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -47,4 +48,4 @@ export default function ResumeDoc() {
       <MyDocument counter={counter}/>
     </PDFViewer>
   );
-}
+};
