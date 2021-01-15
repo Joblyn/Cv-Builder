@@ -11,4 +11,4 @@ export const CERT = '/resume/certifications';
 export const ACHIEVE = '/resume/achievements';
 export const SKILLS = '/resume/skills';
 export const REF = '/resume/reference';
-export const PREVIEW_RESUME = '/preview';
+export const PREVIEW_RESUME = '/resume/preview';
