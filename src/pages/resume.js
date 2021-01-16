@@ -5,6 +5,7 @@ import { ResumeHeader } from "../containers";
 import { ResumeNav } from "../components";
 import items from "../fixtures/resume.json";
 import * as ROUTES from "../constants/routes";
+import "../app.css";
 
 export default function Resume({ children }) {
   const location = window.location.pathname;
@@ -126,7 +127,18 @@ export default function Resume({ children }) {
             </ResumeNav.Base>
           </>
         )}
-        <div className="resume-form-cont">{children}</div>
+        <div
+          className={`resume-form-cont`}
+          style={
+            (location === ROUTES.PREVIEW_RESUME) ? {
+              width: "100%",
+              maxWidth: "1000px",
+              margin: "0 auto",
+            } : {}
+          }
+        >
+          {children}
+        </div>
       </div>
     </>
   );

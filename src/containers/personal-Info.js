@@ -75,8 +75,8 @@ export default function PersonalInfo() {
           type="text"
           placeholder="e.g Lagos, Nigeria"
           typ="resume"
-          name="address"
-          defaultValue={personalInfo.address}
+          name="location"
+          defaultValue={personalInfo.location}
           onChange={handleChange}
         />
       </Form.Group>
@@ -87,8 +87,8 @@ export default function PersonalInfo() {
           placeholder="" 
           height="10rem" 
           typ="resume"
-          name="statement"
-          defaultValue={personalInfo.statement}
+          name="otherInfo"
+          defaultValue={personalInfo.otherInfo}
           onChange={handleChange}
         />
       </Form.Group>
