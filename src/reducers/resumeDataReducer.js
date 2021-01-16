@@ -17,7 +17,6 @@ export default function resumeDataReducer(state = data, action = {}) {
     case Actions.ACHIEVEMENTS:
     case Actions.REFERENCES:
       if (action.payload.type === 'checkbox') {
-        console.log(action.payload);
         return {
           ...state,
           [action.category]: [
@@ -54,7 +53,24 @@ export default function resumeDataReducer(state = data, action = {}) {
               ...state[action.category].slice(action.id + 1),
             ],
           };
-        } else
+        } else if (action.payload.name === 'highlight') {
+          return {
+            ...state,
+            [action.category]: [
+              ...state[action.category].slice(0, action.id),
+              {
+                ...state[action.category][action.id],
+                highlights: [
+                  ...state[action.category][action.id].highlights.slice(0, action.index),
+                  action.payload.value,
+                  ...state[action.category][action.id].highlights.slice(action.index + 1)
+                ]
+              },
+              ...state[action.category].slice(action.id + 1),
+            ]
+          }
+        }
+        else
           return {
             ...state,
             [action.category]: [
@@ -101,7 +117,20 @@ export default function resumeDataReducer(state = data, action = {}) {
           ...state,
           [action.category]: [...state[action.category], {}],
         };
-      } else {
+      } else if (action.category === "workExperience") {
+        return {
+          ...state,
+          [action.category]: [
+            ...state[action.category],
+            {
+              month: { start: "", end: "" },
+              year: { start: "", end: "" },
+              highlight: ["", ""]
+            },
+          ],
+        };
+      }       
+      else {
         return {
           ...state,
           [action.category]: [

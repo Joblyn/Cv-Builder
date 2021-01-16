@@ -10,6 +10,7 @@ export const data = {
     {
       month: { start: "", end: "" },
       year: { start: "", end: "" },
+      highlights: ['', '']
     },
   ],
   languages: ["", "", ""],

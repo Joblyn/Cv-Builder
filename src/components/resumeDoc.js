@@ -1,12 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-} from "@react-pdf/renderer";
+import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import { pdfjs } from "react-pdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -51,16 +45,35 @@ const styles = StyleSheet.create({
   section: {
     display: "flex",
     flexDirection: "column",
-    marginTop: 10,
+    margin: '15pt 10pt 0',
   },
   text: {
     fontSize: 15,
     lineHeight: 1.2,
+    opacity: 0.85,
+  },
+  title: {
+    fontSize: 17.5,
+    fontWeight: 500,
+    opacity: 1,
+    display: "block",
+  },
+  subTitle: {
+    fontSize: 15.5,
+    display: "block",
+  },
+  date: {
+    display: "block",
+    fontSize: 13.5,
+    fontStyle: "italic",
+  },
+  list: {
+    margin: "0 20pt",
   },
 });
 
 const MyDocument = ({ data }) => {
-  const { personalInfo } = data;
+  const { personalInfo, workExperience } = data;
 
   // address, skills, certs, languages
   // statement, education, experience, reference
@@ -78,10 +91,34 @@ const MyDocument = ({ data }) => {
             <Text style={styles.heading}>Professional Statement</Text>
             <Text style={styles.text}>{personalInfo.otherInfo}</Text>
           </View>
-          <View style={styles.section}>
-            <Text style={styles.heading}>Work experience</Text>
-            <Text></Text>
-          </View>
+          {workExperience.length && (
+            <View style={styles.section}>
+              <Text style={styles.heading}>Work experience</Text>
+              {workExperience.map((item, id) => (
+                <View>
+                  <Text
+                    style={styles.title}
+                  >{`${item.jobTitle} - ${item.company}`}</Text>
+                  <Text style={styles.subTitle}>
+                    {item.city + " " + item.country}
+                  </Text>
+                  {item.month.end === "present" ||
+                  item.year.end === "present" ? (
+                    <Text
+                      style={styles.date}
+                    >{`${item.month.start} ${item.year.start} - present`}</Text>
+                  ) : (
+                    <Text
+                      style={styles.date}
+                    >{`${item.month.start} ${item.year.start} - ${item.month.end} ${item.year.end}`}</Text>
+                  )}
+                  <View style={styles.list}>
+                    <Text style={styles.listItem}>- {item.description}</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
         </View>
         <View style={styles.column2}>
           <Text>Section #3</Text>
