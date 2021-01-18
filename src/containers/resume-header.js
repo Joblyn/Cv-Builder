@@ -21,7 +21,7 @@ export default function ResumeHeader() {
         .storage()
         .ref("users/" + user.uid + "/profile.jpg")
         .getDownloadURL()
-        .then((imgUrl) => {
+        .then(imgUrl => {
           setPhotoUrl(imgUrl);
         });
     }

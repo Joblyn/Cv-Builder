@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  StyleSheet,
+} from "@react-pdf/renderer";
 import { pdfjs } from "react-pdf";
+import { FirebaseContext } from "../context/firebase";
+import { useAuthListener } from "../hooks";
+import { Loading } from "./loading";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -34,6 +44,12 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: "bold",
   },
+  jobTitle: {
+    display: 'block',
+    fontSize: 20,
+    fontWeight: 500,
+    color: 'orange'
+  },
   heading: {
     fontSize: 13,
     color: "#216DE0",
@@ -45,7 +61,7 @@ const styles = StyleSheet.create({
   section: {
     display: "flex",
     flexDirection: "column",
-    margin: '15pt 10pt 0',
+    margin: "15pt 10pt 0",
   },
   text: {
     fontSize: 15,
@@ -70,23 +86,51 @@ const styles = StyleSheet.create({
   list: {
     margin: "0 20pt",
   },
+  image: {
+    width: 150,
+    height: 150,
+    alt: "Photo",
+    borderRadius: "50%",
+    opacity: 1,
+  },
 });
 
 const MyDocument = ({ data }) => {
   const { personalInfo, workExperience } = data;
+  const { firebase } = useContext(FirebaseContext);
+  const { user } = useAuthListener();
+  const [photoUrl, setPhotoUrl] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      firebase
+        .storage()
+        .ref("users/" + user.uid + "/profile.jpg")
+        .getDownloadURL()
+        .then((imgUrl) => {
+          setPhotoUrl(imgUrl);
+        });
+    }
+  }, [firebase, user]);
 
   // address, skills, certs, languages
   // statement, education, experience, reference
 
-  return (
+  return data && photoUrl ? (
     <Document
       title={`${personalInfo.firstName + personalInfo.lastName}_resume`}
     >
       <Page style={styles.page}>
         <View style={styles.column1}>
-          <Text style={styles.name}>
-            {personalInfo.firstName + " " + personalInfo.lastName}
-          </Text>
+          <View style={{display: 'flex', flexDirection:'row', alignItems:'center'}}>
+            <Image style={styles.image} src={photoUrl} />
+            <View>
+              <Text style={styles.name}>
+                {personalInfo.firstName + " " + personalInfo.lastName}
+              </Text>
+              <Text style={styles.jobTitle}>{personalInfo.jobTitle}</Text>
+            </View>
+          </View>
           <View style={styles.section}>
             <Text style={styles.heading}>Professional Statement</Text>
             <Text style={styles.text}>{personalInfo.otherInfo}</Text>
@@ -112,9 +156,6 @@ const MyDocument = ({ data }) => {
                       style={styles.date}
                     >{`${item.month.start} ${item.year.start} - ${item.month.end} ${item.year.end}`}</Text>
                   )}
-                  <View style={styles.list}>
-                    <Text style={styles.listItem}>- {item.description}</Text>
-                  </View>
                 </View>
               ))}
             </View>
@@ -126,6 +167,8 @@ const MyDocument = ({ data }) => {
         </View>
       </Page>
     </Document>
+  ) : (
+    <Loading />
   );
 };
 

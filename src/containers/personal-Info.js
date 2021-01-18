@@ -45,6 +45,18 @@ export default function PersonalInfo() {
         </Form.Group>
       </Form.Group>
       <Form.Group type="resume">
+        <Form.Label htmlFor="email">Job Title</Form.Label>
+        <Form.Input
+          id="email"
+          type="text"
+          placeholder="e.g Software Developer"
+          typ="resume"
+          name="jobTitle"
+          defaultValue={personalInfo.jobTitle}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group type="resume">
         <Form.Label htmlFor="email">Email Address</Form.Label>
         <Form.Input
           id="email"

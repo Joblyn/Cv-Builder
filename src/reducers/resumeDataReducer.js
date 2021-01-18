@@ -16,25 +16,25 @@ export default function resumeDataReducer(state = data, action = {}) {
     case Actions.CERTS:
     case Actions.ACHIEVEMENTS:
     case Actions.REFERENCES:
-      if (action.payload.type === 'checkbox') {
+      if (action.payload.type === "checkbox") {
         return {
           ...state,
           [action.category]: [
             ...state[action.category].slice(0, action.id),
             {
               ...state[action.category][action.id],
-              month: { 
-                ...state[action.category][action.id].month, 
-                end: action.payload.checked ? 'present' : '' 
+              month: {
+                ...state[action.category][action.id].month,
+                end: action.payload.checked ? "present" : "",
               },
-              year: { 
-                ...state[action.category][action.id].year, 
-                end: action.payload.checked ? 'present' : ''  
-              }
+              year: {
+                ...state[action.category][action.id].year,
+                end: action.payload.checked ? "present" : "",
+              },
             },
-            ...state[action.category].slice(action.id + 1)
-          ]
-        }
+            ...state[action.category].slice(action.id + 1),
+          ],
+        };
       } else {
         if (action.payload.dataset.category) {
           return {
@@ -53,7 +53,7 @@ export default function resumeDataReducer(state = data, action = {}) {
               ...state[action.category].slice(action.id + 1),
             ],
           };
-        } else if (action.payload.name === 'highlight') {
+        } else if (action.payload.name === "highlight") {
           return {
             ...state,
             [action.category]: [
@@ -61,16 +61,20 @@ export default function resumeDataReducer(state = data, action = {}) {
               {
                 ...state[action.category][action.id],
                 highlights: [
-                  ...state[action.category][action.id].highlights.slice(0, action.index),
+                  ...state[action.category][action.id].highlights.slice(
+                    0,
+                    action.index
+                  ),
                   action.payload.value,
-                  ...state[action.category][action.id].highlights.slice(action.index + 1)
-                ]
+                  ...state[action.category][action.id].highlights.slice(
+                    action.index + 1
+                  ),
+                ],
               },
               ...state[action.category].slice(action.id + 1),
-            ]
-          }
-        }
-        else
+            ],
+          };
+        } else
           return {
             ...state,
             [action.category]: [
@@ -125,12 +129,11 @@ export default function resumeDataReducer(state = data, action = {}) {
             {
               month: { start: "", end: "" },
               year: { start: "", end: "" },
-              highlight: ["", ""]
+              highlights: ["", ""],
             },
           ],
         };
-      }       
-      else {
+      } else {
         return {
           ...state,
           [action.category]: [
@@ -142,14 +145,46 @@ export default function resumeDataReducer(state = data, action = {}) {
           ],
         };
       }
-    case Actions.REMOVE_ITEM:
+    case Actions.ADD_SUBITEM: {
       return {
         ...state,
         [action.category]: [
           ...state[action.category].slice(0, action.id),
-          ...state[action.category].slice(action.id + 1),
-        ],
-      };
+          {
+            ...state[action.category][action.id],
+            highlights: [
+              ...state[action.category][action.id].highlights,
+              "",
+            ]
+          },
+          ...state[action.category].slice(action.id + 1)
+        ]
+      }
+    }
+    case Actions.REMOVE_ITEM:
+      if (action.index) {
+        return {
+          ...state,
+          [action.category]: [
+            ...state[action.category].slice(0, action.id),
+            {
+              ...state[action.category][action.id],
+              highlights: [
+                ...state[action.category][action.id].highlights.slice(0, action.index),
+                ...state[action.category][action.id].highlights.slice(action.index + 1),
+              ],
+            },
+            ...state[action.category].slice(action.id + 1),
+          ],
+        }
+      } else
+        return {
+          ...state,
+          [action.category]: [
+            ...state[action.category].slice(0, action.id),
+            ...state[action.category].slice(action.id + 1),
+          ],
+        };
     default:
       return state;
   }

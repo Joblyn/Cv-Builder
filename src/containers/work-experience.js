@@ -55,15 +55,21 @@ export default function WorkExperience() {
   ));
 
   const handleChange = (target, id, index = null) => {
-    dispatch(updateResumeData("workExperience", target, Actions.WORK_EXP, id, index));
+    dispatch(
+      updateResumeData("workExperience", target, Actions.WORK_EXP, id, index)
+    );
   };
 
   const addItem = () => {
     dispatch(updateResumeData("workExperience", null, Actions.ADD_ITEM));
   };
 
-  const removeItem = (id) => {
-    dispatch(updateResumeData("workExperience", null, Actions.REMOVE_ITEM, id));
+  const addSubtItem = id => {
+    dispatch(updateResumeData("workExperience", null, Actions.ADD_SUBITEM, id));
+  };
+
+  const removeItem = (id, index = null) => {
+    dispatch(updateResumeData("workExperience", null, Actions.REMOVE_ITEM, id, index));
   };
 
   return (
@@ -405,23 +411,49 @@ export default function WorkExperience() {
                 </Form.Group>
                 <Form.Group type="resume" marginBottom="2rem">
                   <Form.Label htmlFor="info">Highlights</Form.Label>
-                  {item.highlights &&
-                    item.highlights.map((highlight, index) => (
-                      <Form.Input
-                        placeholder=""
-                        typ="resume"
-                        name="highlight"
-                        defaultValue={highlight}
-                        onChange={({ target }) => handleChange(target, id, index)}
-                      />
-                    ))}
+                  {item.highlights.length && (
+                    <>
+                      {item.highlights.map((highlight, index) => (
+                        <div className="position-relative mt-2">
+                          <Form.Icon
+                            onClick={() => removeItem(id, index)}
+                            className="m-2"
+                          >
+                            <GoTrashcan size={18} />
+                          </Form.Icon>
+                          <Form.Input
+                            placeholder=""
+                            typ="resume"
+                            name="highlight"
+                            defaultValue={highlight}
+                            onChange={({ target }) =>
+                              handleChange(target, id, index)
+                            }
+                          />
+                        </div>
+                      ))}
+                      <div className="d-flex justify-content-end">
+                        <span
+                          style={{
+                            color: "#216DE0",
+                            fontSize: "1.2rem",
+                            cursor: "pointer",
+                            fontWeight: "500",
+                            marginRight: '1rem',
+                          }}
+                          onClick={() => addSubtItem(id)}
+                        >
+                          +
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </Form.Group>
               </div>
             );
           })}
           <div className="d-flex justify-content-end">
             <span
-              className="btn-link text-decoration-none"
               style={{
                 color: "#216DE0",
                 fontSize: "1.15rem",
