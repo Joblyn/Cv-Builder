@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   jobTitle: {
-    display: 'block',
+    display: "block",
     fontSize: 20,
     fontWeight: 500,
-    color: 'orange'
+    color: "orange",
   },
   heading: {
     fontSize: 13,
@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
     fontSize: 13.5,
     fontStyle: "italic",
   },
-  list: {
-    margin: "0 20pt",
-  },
+  // list: {
+  //   paddingLeft: "20pt"
+  // },
   image: {
     width: 150,
     height: 150,
@@ -93,10 +93,18 @@ const styles = StyleSheet.create({
     borderRadius: "50%",
     opacity: 1,
   },
+  listItem: {
+    fontStyle: "italic",
+    paddingLeft: "20pt",
+    display: 'block'
+  },
+  block: {
+    marginTop: 15
+  }
 });
 
 const MyDocument = ({ data }) => {
-  const { personalInfo, workExperience } = data;
+  const { personalInfo, workExperience, education } = data;
   const { firebase } = useContext(FirebaseContext);
   const { user } = useAuthListener();
   const [photoUrl, setPhotoUrl] = useState("");
@@ -122,7 +130,13 @@ const MyDocument = ({ data }) => {
     >
       <Page style={styles.page}>
         <View style={styles.column1}>
-          <View style={{display: 'flex', flexDirection:'row', alignItems:'center'}}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
             <Image style={styles.image} src={photoUrl} />
             <View>
               <Text style={styles.name}>
@@ -139,7 +153,7 @@ const MyDocument = ({ data }) => {
             <View style={styles.section}>
               <Text style={styles.heading}>Work experience</Text>
               {workExperience.map((item, id) => (
-                <View>
+                <View style={id ? styles.block : {}}>
                   <Text
                     style={styles.title}
                   >{`${item.jobTitle} - ${item.company}`}</Text>
@@ -156,10 +170,40 @@ const MyDocument = ({ data }) => {
                       style={styles.date}
                     >{`${item.month.start} ${item.year.start} - ${item.month.end} ${item.year.end}`}</Text>
                   )}
+                  <View style={styles.list}>
+                    {Object.values(item.highlights).map((highlight, index) => (
+                      <Text style={styles.listItem} key={`highligh- ${index + 1}`}>{`- ${highlight}`}</Text>
+                    ))}
+                  </View>
                 </View>
               ))}
             </View>
           )}
+          {education.length && (
+            <View style={styles.section}>
+              <Text style={styles.heading}>Education</Text>
+              {education.map((item, id) =>(
+                <View style={id ? styles.block : {}}>
+                  <Text 
+                    style={styles.title}
+                  >{item.institutionName}</Text>
+                  <Text style={styles.subTitle}>{`${item.city}, ${item.country}`}</Text>
+                  {item.month.end === "present" ||
+                  item.year.end === "present" ? (
+                    <Text
+                      style={styles.date}
+                    >{`${item.month.start} ${item.year.start} - present`}</Text>
+                  ) : (
+                    <Text
+                      style={styles.date}
+                    >{`${item.month.start} ${item.year.start} - ${item.month.end} ${item.year.end}`}</Text>
+                  )}
+                </View>
+              ))}
+            </View>
+
+          )
+          }
         </View>
         <View style={styles.column2}>
           <Text>Section #3</Text>
@@ -175,5 +219,5 @@ const MyDocument = ({ data }) => {
 export default function ResumeDoc() {
   const data = useSelector((state) => state.resumeData);
 
-  return data ? <MyDocument data={data} /> : <button>View pdf</button>;
+  return data ? <MyDocument data={data} /> : <button>Preview Resume</button>;
 }
