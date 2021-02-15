@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyDocument = ({ data }) => {
+export const MyDocument = ({ data }) => {
   const {
     personalInfo,
     workExperience,
@@ -129,7 +129,6 @@ const MyDocument = ({ data }) => {
     }
   }, [firebase, user]);
 
-  console.log(photoUrl.slice(8));
   return data && photoUrl ? (
     <Document
       title={`${personalInfo.firstName + personalInfo.lastName}_resume`}
@@ -314,4 +313,4 @@ export default function ResumeDoc() {
   const data = useSelector((state) => state.resumeData);
 
   return data ? <MyDocument data={data} /> : <button>Preview Resume</button>;
-}
+};

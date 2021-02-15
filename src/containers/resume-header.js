@@ -1,19 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
 import { IoMdEye } from "react-icons/io";
 import { AiOutlineDownload } from "react-icons/ai";
-import ReactPDF from '@react-pdf/renderer';
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 import { Header } from "../components";
 import * as ROUTES from "../constants/routes";
 import { FirebaseContext } from "../context/firebase";
 import { useAuthListener } from "../hooks";
-import { ResumeDoc } from '../components';
+import { MyDocument } from "../components/resumeDoc";
+import { useSelector } from "react-redux";
 
 export default function ResumeHeader() {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useAuthListener();
   const [active, setActive] = useState(false);
   const [photoUrl, setPhotoUrl] = useState();
+  const data = useSelector((state) => state.resumeData);
 
   useEffect(() => {
     if (user) {
@@ -21,15 +23,11 @@ export default function ResumeHeader() {
         .storage()
         .ref("users/" + user.uid + "/profile.jpg")
         .getDownloadURL()
-        .then(imgUrl => {
+        .then((imgUrl) => {
           setPhotoUrl(imgUrl);
         });
     }
   }, [firebase, user]);
-
-  const downloadResume = () => {
-    ReactPDF.render(<ResumeDoc />, `${user.displayName}.pdf`);  
-  }
 
   const photoUpdate = (target) => {
     const file = target.files[0];
@@ -63,11 +61,20 @@ export default function ResumeHeader() {
             </Header.Icon>
             Preview Resume
           </Header.TextLink>
-          <Header.TextLink type="header" onClick={downloadResume} to='#'>
+          <Header.TextLink type="header" to="#">
             <Header.Icon>
               <AiOutlineDownload />
             </Header.Icon>
-            Download
+            {data && (
+              <PDFDownloadLink
+                document={<MyDocument data={data} />}
+                fileName={`${user.displayName}.pdf`}
+              >
+                {({ blob, url, loading, error }) =>
+                  loading ? "Loading document..." : "Download"
+                }
+              </PDFDownloadLink>
+            )}
           </Header.TextLink>
 
           <Header.User
