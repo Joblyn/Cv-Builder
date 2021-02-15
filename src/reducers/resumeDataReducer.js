@@ -152,14 +152,11 @@ export default function resumeDataReducer(state = data, action = {}) {
           ...state[action.category].slice(0, action.id),
           {
             ...state[action.category][action.id],
-            highlights: [
-              ...state[action.category][action.id].highlights,
-              "",
-            ]
+            highlights: [...state[action.category][action.id].highlights, ""],
           },
-          ...state[action.category].slice(action.id + 1)
-        ]
-      }
+          ...state[action.category].slice(action.id + 1),
+        ],
+      };
     }
     case Actions.REMOVE_ITEM:
       if (action.index) {
@@ -170,13 +167,18 @@ export default function resumeDataReducer(state = data, action = {}) {
             {
               ...state[action.category][action.id],
               highlights: [
-                ...state[action.category][action.id].highlights.slice(0, action.index),
-                ...state[action.category][action.id].highlights.slice(action.index + 1),
+                ...state[action.category][action.id].highlights.slice(
+                  0,
+                  action.index
+                ),
+                ...state[action.category][action.id].highlights.slice(
+                  action.index + 1
+                ),
               ],
             },
             ...state[action.category].slice(action.id + 1),
           ],
-        }
+        };
       } else
         return {
           ...state,

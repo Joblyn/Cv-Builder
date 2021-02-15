@@ -64,12 +64,14 @@ export default function WorkExperience() {
     dispatch(updateResumeData("workExperience", null, Actions.ADD_ITEM));
   };
 
-  const addSubtItem = id => {
+  const addSubtItem = (id) => {
     dispatch(updateResumeData("workExperience", null, Actions.ADD_SUBITEM, id));
   };
 
   const removeItem = (id, index = null) => {
-    dispatch(updateResumeData("workExperience", null, Actions.REMOVE_ITEM, id, index));
+    dispatch(
+      updateResumeData("workExperience", null, Actions.REMOVE_ITEM, id, index)
+    );
   };
 
   return (
@@ -111,7 +113,10 @@ export default function WorkExperience() {
                       typ="resume"
                       name="jobTitle"
                       defaultValue={item.jobTitle}
-                      onChange={({ target }) => handleChange(target, id)}
+                      onChange={({ target }) => {
+                        console.log(target.value);
+                        handleChange(target, id);
+                      }}
                     />
                   </Form.Group>
                   <Form.Group width="45%" type="resume">
@@ -136,7 +141,7 @@ export default function WorkExperience() {
                       name="country"
                       defaultValue={item.country}
                       onChange={({ target }) => handleChange(target, id)}
-                    />
+                    />{" "}
                   </Form.Group>
                   <Form.Group width="45%">
                     <Form.Label htmlFor="fieldOfStudy">City</Form.Label>
@@ -414,7 +419,10 @@ export default function WorkExperience() {
                   {item.highlights.length && (
                     <>
                       {item.highlights.map((highlight, index) => (
-                        <div className="position-relative mt-2">
+                        <div
+                          key={`highlight-${index + 1}`}
+                          className="position-relative mt-2"
+                        >
                           <Form.Icon
                             onClick={() => removeItem(id, index)}
                             className="m-2"
@@ -439,7 +447,7 @@ export default function WorkExperience() {
                             fontSize: "1.2rem",
                             cursor: "pointer",
                             fontWeight: "500",
-                            marginRight: '1rem',
+                            marginRight: "1rem",
                           }}
                           onClick={() => addSubtItem(id)}
                         >
