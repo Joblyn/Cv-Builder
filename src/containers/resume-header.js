@@ -44,7 +44,7 @@ export default function ResumeHeader() {
             setPhotoUrl(imgUrl);
           });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.message);
       });
   };
@@ -65,7 +65,7 @@ export default function ResumeHeader() {
             <Header.Icon>
               <AiOutlineDownload />
             </Header.Icon>
-            {/* {data && (
+            {(
               <PDFDownloadLink
                 document={<MyDocument data={data} />}
                 fileName={`${user.displayName}.pdf`}
@@ -74,7 +74,7 @@ export default function ResumeHeader() {
                   loading ? "Loading document..." : "Download"
                 }
               </PDFDownloadLink>
-            )} */}
+            )}
           </Header.TextLink>
 
           <Header.User
