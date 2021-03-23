@@ -44,88 +44,100 @@ export default function ResumeHeader() {
             setPhotoUrl(imgUrl);
           });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
       });
   };
 
   return (
-    <Header bg="blue" expand="md">
-      <Header.Brand to={ROUTES.HOME} type="dashboard" />
-      <Header.Toggle aria-controls="basic-navbar-nav" />
-      <Header.Collapse id="basic-navbar-nav">
-        <Header.Group>
-          <Header.TextLink type="header" to={ROUTES.PREVIEW_RESUME}>
-            <Header.Icon>
-              <IoMdEye />
-            </Header.Icon>
-            Preview Resume
-          </Header.TextLink>
-          <Header.TextLink type="header" to="#">
-            <Header.Icon>
-              <AiOutlineDownload />
-            </Header.Icon>
-            {(
-              <PDFDownloadLink
-                document={<MyDocument data={data} />}
-                fileName={`${user.displayName}.pdf`}
-              >
-                {({ blob, url, loading, error }) =>
-                  loading ? "Loading document..." : "Download"
-                }
-              </PDFDownloadLink>
-            )}
-          </Header.TextLink>
+    user && (
+      <Header bg="blue" expand="md">
+        <Header.Brand to={ROUTES.HOME} type="dashboard" />
+        <Header.Toggle aria-controls="basic-navbar-nav" />
+        <Header.Collapse id="basic-navbar-nav">
+          <Header.Group>
+            <Header.TextLink type="header" to={ROUTES.PREVIEW_RESUME}>
+              <Header.Icon>
+                <IoMdEye />
+              </Header.Icon>
+              Preview Resume
+            </Header.TextLink>
+              {
+                <PDFDownloadLink
+                  document={<MyDocument data={data} />}
+                  fileName="resume.pdf"
+                  style={{
+                    color: "#fff",
+                    textDecoration: "none",
+                    marginLeft: '3rem'
+                  }}
+                >
+                  {({ blob, url, loading, error }) => {
+                    return loading ? (
+                      "Loading document... "
+                    ) : (
+                      <>
+                        <Header.Icon>
+                          <AiOutlineDownload />
+                        </Header.Icon>
+                        Download
+                      </>
+                    );
+                  }}
+                </PDFDownloadLink>
+              }
+            {/* </Header.TextLink> */}
 
-          <Header.User
-            displayName={user.displayName}
-            photoURL={photoUrl}
-            onMouseEnter={() => setActive(true)}
-            onMouseLeave={() => setActive(false)}
-          />
-          <Header.UserNav
-            active={active}
-            onMouseEnter={() => setActive(true)}
-            onMouseLeave={() => setActive(false)}
-          >
-            <Header.Item>
-              <Header.TextLink to={ROUTES.PERS_INFO} type="user">
-                Build Resume
-              </Header.TextLink>
-            </Header.Item>
-            <Header.Item className="position-relative">
-              <Header.TextLink to="#" type="user">
-                Update photo
-              </Header.TextLink>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={({ target }) => photoUpdate(target)}
-                style={{
-                  opacity: 0,
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  height: "100%",
-                  width: "100%",
-                  cursor: "pointer",
-                  zIndex: "10",
-                  fontSIze: 0,
-                }}
-              />
-            </Header.Item>
-            <Header.Item>
-              <Header.TextLink
-                onClick={() => firebase.auth().signOut()}
-                to="#"
-                type="user"
-              >
-                Log out
-              </Header.TextLink>
-            </Header.Item>
-          </Header.UserNav>
-        </Header.Group>
-      </Header.Collapse>
-    </Header>
+            <Header.User
+              displayName={user.displayName}
+              photoURL={photoUrl}
+              onMouseEnter={() => setActive(true)}
+              onMouseLeave={() => setActive(false)}
+            />
+            <Header.UserNav
+              active={active}
+              onMouseEnter={() => setActive(true)}
+              onMouseLeave={() => setActive(false)}
+            >
+              <Header.Item>
+                <Header.TextLink to={ROUTES.PERS_INFO} type="user">
+                  Build Resume
+                </Header.TextLink>
+              </Header.Item>
+              <Header.Item className="position-relative">
+                <Header.TextLink to="#" type="user">
+                  Update photo
+                </Header.TextLink>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={({ target }) => photoUpdate(target)}
+                  style={{
+                    opacity: 0,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    height: "100%",
+                    width: "100%",
+                    cursor: "pointer",
+                    zIndex: "10",
+                    fontSIze: 0,
+                  }}
+                />
+              </Header.Item>
+              <Header.Item>
+                <Header.TextLink
+                  onClick={() => firebase.auth().signOut()}
+                  to="#"
+                  type="user"
+                >
+                  Log out
+                </Header.TextLink>
+              </Header.Item>
+            </Header.UserNav>
+          </Header.Group>
+        </Header.Collapse>
+      </Header>
+    )
   );
 }

@@ -143,7 +143,7 @@ export const MyDocument = ({ data }) => {
                 alignItems: "center",
               }}
             >
-              <Image style={styles.image} src={""} />
+              {/* <Image style={styles.image} src={""} /> */}
               <View>
                 <Text style={styles.name}>
                   {personalInfo.firstName + " " + personalInfo.lastName}
