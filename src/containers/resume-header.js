@@ -62,7 +62,7 @@ export default function ResumeHeader() {
               </Header.Icon>
               Preview Resume
             </Header.TextLink>
-              {
+              {(window.location.pathname === ROUTES.PREVIEW_RESUME && data) ? 
                 <PDFDownloadLink
                   document={<MyDocument data={data} />}
                   fileName="resume.pdf"
@@ -73,6 +73,10 @@ export default function ResumeHeader() {
                   }}
                 >
                   {({ blob, url, loading, error }) => {
+                    if (error) {
+                      console.log(error);
+                      alert('Error downloading file, please refresh and try again.');
+                    }
                     return loading ? (
                       "Loading document... "
                     ) : (
@@ -84,10 +88,8 @@ export default function ResumeHeader() {
                       </>
                     );
                   }}
-                </PDFDownloadLink>
+                </PDFDownloadLink> : ''
               }
-            {/* </Header.TextLink> */}
-
             <Header.User
               displayName={user.displayName}
               photoURL={photoUrl}

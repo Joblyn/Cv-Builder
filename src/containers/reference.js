@@ -147,8 +147,9 @@ export default function Reference() {
           form="work-exp"
           position="right"
           typ="resume"
+          href={ROUTES.PREVIEW_RESUME}
         >
-          Finish
+          Finish/View
         </Form.Button>
       </div>
     </Form>
