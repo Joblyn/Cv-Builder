@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   date: {
     display: "block",
-    fontSize: '6rem',
+    fontSize: 6,
     fontStyle: "italic",
   },
   image: {
