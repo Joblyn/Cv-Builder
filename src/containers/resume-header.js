@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import { IoMdEye } from "react-icons/io";
 import { AiOutlineDownload } from "react-icons/ai";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-
+import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
 import { Header } from "../components";
 import * as ROUTES from "../constants/routes";
 import { FirebaseContext } from "../context/firebase";
 import { useAuthListener } from "../hooks";
 import { MyDocument } from "../components/resumeDoc";
 import { useSelector } from "react-redux";
+// import queue from "queue";
 
 export default function ResumeHeader() {
   const { firebase } = useContext(FirebaseContext);
@@ -49,6 +49,26 @@ export default function ResumeHeader() {
       });
   };
 
+  // const renderQueue = queue({
+  //   autostart: true, // Directly start when pushing.
+  //   concurrency: 1, // One concurrent job => run in series.
+  // });
+
+  const saveBlob = (blob, filename) => {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style.display = "none";
+    let url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const savePdf = async (document, filename) => {
+    saveBlob(await pdf(document).toBlob(), filename);
+  };
+
   return (
     user && (
       <Header bg="blue" expand="md">
@@ -62,21 +82,29 @@ export default function ResumeHeader() {
               </Header.Icon>
               Preview Resume
             </Header.TextLink>
-              {(window.location.pathname === ROUTES.PREVIEW_RESUME && data) ? 
+            {window.location.pathname === ROUTES.PREVIEW_RESUME ? <Header.TextLink
+              type="header"
+              onClick={() => savePdf(<MyDocument data={data} />, "resume.pdf")}
+            >
+              <Header.Icon>
+                <AiOutlineDownload />
+              </Header.Icon>
+              Download
+            </Header.TextLink> : null}
+            {/* {
+              // Without a queue, render would happen in parallel, accessing the same
+              // stream, which will lead to "Error: stream.push() after EOF".
+              renderQueue.push(() => (
                 <PDFDownloadLink
                   document={<MyDocument data={data} />}
                   fileName="resume.pdf"
                   style={{
                     color: "#fff",
                     textDecoration: "none",
-                    marginLeft: '3rem'
+                    marginLeft: "3rem",
                   }}
                 >
                   {({ blob, url, loading, error }) => {
-                    if (error) {
-                      console.log(error);
-                      alert('Error downloading file, please refresh and try again.');
-                    }
                     return loading ? (
                       "Loading document... "
                     ) : (
@@ -88,8 +116,9 @@ export default function ResumeHeader() {
                       </>
                     );
                   }}
-                </PDFDownloadLink> : ''
-              }
+                </PDFDownloadLink>
+              ))
+            } */}
             <Header.User
               displayName={user.displayName}
               photoURL={photoUrl}

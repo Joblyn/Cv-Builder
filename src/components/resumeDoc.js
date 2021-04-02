@@ -20,41 +20,42 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "#fff",
-    padding: 57.6,
+    padding: 10,
+    fontSize: 10,
+    opacity: 0.85,
+    lineHeight: 1.2,
   },
   column1: {
     padding: 15,
-    margin: "0 15pt 0 10pt",
+    // margin: "0 15pt 0 10pt",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
     flexGrow: 1,
+    // justifyContent: "space-between",
     width: "70%",
-    fontSize: 15,
   },
   column2: {
     padding: 15,
-    margin: "0 10pt 0 15pt",
+    // margin: "0 10pt 0 15pt",
     display: "flex",
     flexGrow: 1,
     flexDirection: "column",
     width: "30%",
-    fontSize: 15,
   },
   name: {
-    fontSize: 35,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: 600,
   },
   jobTitle: {
     display: "block",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 500,
     color: "orange",
   },
   heading: {
-    fontSize: 13,
+    fontSize: 12,
     color: "#216DE0",
-    fontWeight: "bold",
+    fontWeight: 600,
     textTransform: "uppercase",
     letterSpacing: 1,
     marginBottom: 5,
@@ -62,26 +63,26 @@ const styles = StyleSheet.create({
   section: {
     display: "flex",
     flexDirection: "column",
-    margin: "15pt 0 0",
+    margin: "8pt 0 0",
   },
   text: {
-    fontSize: 15,
-    lineHeight: 1.2,
-    opacity: 0.85,
+    // fontSize: 15,
+    // lineHeight: 1.2,
+    // opacity: 0.85,
   },
   title: {
-    fontSize: 17.5,
+    fontSize: 10,
     fontWeight: 500,
     opacity: 1,
     display: "block",
   },
   subTitle: {
-    fontSize: 15.5,
+    fontSize: 8,
     display: "block",
   },
   date: {
     display: "block",
-    fontSize: 13.5,
+    fontSize: '6rem',
     fontStyle: "italic",
   },
   image: {
@@ -144,16 +145,16 @@ export const MyDocument = ({ data }) => {
               }}
             >
               {/* <Image style={styles.image} src={""} /> */}
-              <View>
+              <View style={{ padding: "10pt 5pt"}}>
                 <Text style={styles.name}>
                   {personalInfo.firstName + " " + personalInfo.lastName}
                 </Text>
-                <Text style={styles.jobTitle}> {personalInfo.jobTitle} </Text>
+                <Text style={styles.jobTitle}>{personalInfo.jobTitle}</Text>
               </View>
             </View>
             <View style={styles.section}>
               <Text style={styles.heading}> Professional Statement </Text>
-              <Text style={styles.text}> {personalInfo.otherInfo} </Text>
+              <Text style={styles.text}>{personalInfo.otherInfo}</Text>
             </View>
             {workExperience.length && (
               <View style={styles.section}>
@@ -200,7 +201,7 @@ export const MyDocument = ({ data }) => {
                 <Text style={styles.heading}>Education</Text>
                 {education.map((item, id) => (
                   <View style={id ? styles.block : {}} key={`edu-${id + 1}`}>
-                    <Text style={styles.title}> {item.institutionName} </Text>
+                    <Text style={styles.title}>{item.institutionName}</Text>
                     <Text style={styles.subTitle}>
                       {`${item.city}, ${item.country}`}
                     </Text>
@@ -223,15 +224,7 @@ export const MyDocument = ({ data }) => {
                 <Text style={styles.heading}>Referrals</Text>
                 {references.map((item, id) => (
                   <View style={id ? styles.block : {}} key={`ref-${id + 1}`}>
-                    <Text
-                      style={{
-                        display: "block",
-                        fontSize: 15.5,
-                        fontWeight: "500",
-                      }}
-                    >
-                      {item.fullName}
-                    </Text>
+                    <Text style={styles.title}>{item.fullName}</Text>
                     <Text style={{ display: "block" }}>{item.jobTitle}</Text>
                     <Text style={{ display: "block" }}>{item.email}</Text>
                     <Text style={{ display: "block" }}>{item.phoneNo}</Text>
@@ -248,10 +241,10 @@ export const MyDocument = ({ data }) => {
                 {personalInfo.phoneNumber}
               </Text>
               <Text style={{ display: "block" }}>{personalInfo.email}</Text>
-              <View>
+              <View style={{display:'flex', justifyContent:'space-between'}}>
                 <Text>TW</Text>
-                <Text style={{ marginLeft: 20 }}>LN</Text>
-                <Text style={{ marginLeft: 20 }}>FB</Text>
+                <Text>LN</Text>
+                <Text>FB</Text>
               </View>
             </View>
 
@@ -260,7 +253,7 @@ export const MyDocument = ({ data }) => {
                 <Text style={styles.heading}>Skills</Text>
                 <View>
                   {skills.map((item, id) => (
-                    <Text key={`skill-${id + 1}`} style={{ display: "block" }}>
+                    <Text key={`skill-${id + 1}`} style={{ display: "block", marginTop: '3pt' }}>
                       {item}
                     </Text>
                   ))}
@@ -275,7 +268,7 @@ export const MyDocument = ({ data }) => {
                   {achievements.map((item, id) => (
                     <Text
                       key={`achievement-${id + 1}`}
-                      style={{ display: "block" }}
+                      style={{ display: "block", marginTop: "3pt" }}
                     >
                       {item.achievement}
                     </Text>
