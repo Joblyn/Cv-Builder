@@ -77,4 +77,7 @@ export const Name = styled.p`
   color: #2E2E2E;
 `;
 
-export const Portrait = styled.img``;
+export const Portrait = styled.img`
+  width: 150px;
+  height: auto;
+`;

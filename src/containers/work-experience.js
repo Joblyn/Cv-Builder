@@ -308,6 +308,7 @@ export default function WorkExperience() {
                         dropdownElements={monthsDropdown}
                         typ="resume"
                         name="start"
+                        data-category="month"
                         defaultValue={item.month.start}
                         onChange={({ target }) => handleChange(target, id)}
                       />
@@ -327,6 +328,7 @@ export default function WorkExperience() {
                         dropdownElements={yearsDropdown}
                         typ="resume"
                         name="start"
+                        data-category="year"
                         defaultValue={item.year.start}
                         onChange={({ target }) => handleChange(target, id)}
                       />
@@ -375,6 +377,7 @@ export default function WorkExperience() {
                         dropdownElements={monthsDropdown}
                         typ="resume"
                         name="end"
+                        data-category="month"
                         defaultValue={item.month.end}
                         onChange={({ target }) => handleChange(target, id)}
                         disabled={disabled}
@@ -396,6 +399,7 @@ export default function WorkExperience() {
                         dropdownElements={yearsDropdown}
                         typ="resume"
                         name="end"
+                        data-category="year"
                         defaultValue={item.year.end}
                         onChange={({ target }) => handleChange(target, id)}
                         disabled={disabled}

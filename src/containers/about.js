@@ -6,7 +6,7 @@ export default function AboutContainer(){
     <>
       <About.Heading>About Us</About.Heading>
       <About className="d-flex flex-wrap w-100">
-        <About.Inner className="col-lg-6 col-md-6 col-sm-12 d-flex flex-column py-3 pl-5" paddingRight="5rem!important">
+        <About.Inner className="col-lg-6 col-md-6 col-sm-12 d-flex flex-column py-3 pl-5" paddingRight="5rem!important" style={{marginBottom: "10rem"}}>
           <About.Group className="py-3 text-left">
             <About.Title>Who We Are</About.Title>
             <About.Content>
@@ -31,9 +31,9 @@ export default function AboutContainer(){
         <About.Inner className="py-3 col-lg-6 col-md-6 col-sm-12">
           <About.Image src="./images/about.svg"/>
         </About.Inner>
-        <About.Inner className="px-3 my-4 col-12" marginTop="6rem">
-          <About.Title className="text-center my-5 col-12" marginTop=".5rem">Meet Our Team</About.Title>
-          <About.Team className="col-12 row px-5 py-4 text-center mt-5">
+        {/* <About.Inner className="px-3 my-4 col-12" marginTop="6rem">
+          <About.Title className="text-center my-5 col-12" marginTop=".5rem">Developer</About.Title>
+          <About.Team className="col-12 px-5 py-4 text-center d-flex align-items-center justify-content-center">
             <About.Member className="col-lg-3 col-md-3 col-sm-12">
               <About.Portrait src="./images/team-1.svg"/>
               <About.Name>Olowookere Emmanuel</About.Name>
@@ -43,7 +43,7 @@ export default function AboutContainer(){
               <About.Name>Ifedubem Ezike</About.Name>
             </About.Member>
             <About.Member className="col-lg-3 col-md-3 col-sm-12">
-              <About.Portrait src="./images/team-3.svg"/>
+              <About.Portrait src="./images/profile.jpg"/>
               <About.Name>Job Oaikhenah</About.Name>
             </About.Member>
             <About.Member className="col-lg-3 col-md-3 col-sm-12">
@@ -51,7 +51,7 @@ export default function AboutContainer(){
               <About.Name>Raffia city hub</About.Name>
             </About.Member>
           </About.Team>
-        </About.Inner>
+        </About.Inner> */}
       </About>
     </>
   )

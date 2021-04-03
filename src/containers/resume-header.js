@@ -1,7 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { IoMdEye } from "react-icons/io";
 import { AiOutlineDownload } from "react-icons/ai";
-import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
+import { 
+  // PDFDownloadLink, 
+  pdf 
+} from "@react-pdf/renderer";
 import { Header } from "../components";
 import * as ROUTES from "../constants/routes";
 import { FirebaseContext } from "../context/firebase";

@@ -45,9 +45,9 @@ export default function PersonalInfo() {
         </Form.Group>
       </Form.Group>
       <Form.Group type="resume">
-        <Form.Label htmlFor="email">Job Title</Form.Label>
+        <Form.Label htmlFor="jobTitle">Job Title</Form.Label>
         <Form.Input
-          id="email"
+          id="jobTitle"
           type="text"
           placeholder="e.g Software Developer"
           typ="resume"
@@ -89,6 +89,42 @@ export default function PersonalInfo() {
           typ="resume"
           name="location"
           defaultValue={personalInfo.location}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group type="resume">
+        <Form.Label htmlFor="twitter">Twitter Username</Form.Label>
+        <Form.Input
+          id="twitter"
+          type="text"
+          placeholder="e.g @johnDoe"
+          typ="resume"
+          name="twitter"
+          defaultValue={personalInfo.twitter}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group type="resume">
+        <Form.Label htmlFor="facebook">Facebook Username</Form.Label>
+        <Form.Input
+          id="facebook"
+          type="text"
+          placeholder="e.g John Doe"
+          typ="resume"
+          name="facebook"
+          defaultValue={personalInfo.facebook}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group type="resume">
+        <Form.Label htmlFor="linkedIn">LinkedIn Username</Form.Label>
+        <Form.Input
+          id="linkedIn"
+          type="text"
+          placeholder="e.g John Doe"
+          typ="resume"
+          name="linkedIn"
+          defaultValue={personalInfo.linkedIn}
           onChange={handleChange}
         />
       </Form.Group>

@@ -1,4 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { 
+  // useContext, useState, useEffect 
+} from "react";
 import { useSelector } from "react-redux";
 import {
   Page,
@@ -6,12 +8,16 @@ import {
   View,
   Document,
   Image,
+  // Link,
   StyleSheet,
 } from "@react-pdf/renderer";
 import { pdfjs } from "react-pdf";
-import { FirebaseContext } from "../context/firebase";
-import { useAuthListener } from "../hooks";
+// import { FirebaseContext } from "../context/firebase";
+// import { useAuthListener } from "../hooks";
 import { Loading } from "./loading";
+import Twitter from "../icons/twitter.png";
+import Facebook from "../icons/facebook.png";
+import LinkedIn from "../icons/linkedin.png";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -23,7 +29,7 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 10,
     opacity: 0.85,
-    lineHeight: 1.2,
+    lineHeight: 1.4,
   },
   column1: {
     padding: 15,
@@ -43,27 +49,28 @@ const styles = StyleSheet.create({
     width: "30%",
   },
   name: {
-    fontSize: 20,
-    fontWeight: 600,
+    fontSize: 23,
+    fontWeight: 800,
   },
   jobTitle: {
     display: "block",
-    fontSize: 18,
-    fontWeight: 500,
+    fontSize: 16,
+    fontWeight: 600,
     color: "orange",
   },
   heading: {
     fontSize: 12,
     color: "#216DE0",
-    fontWeight: 600,
+    fontWeight: 800,
     textTransform: "uppercase",
     letterSpacing: 1,
     marginBottom: 5,
+    lineHeight: "normal",
   },
   section: {
     display: "flex",
     flexDirection: "column",
-    margin: "8pt 0 0",
+    margin: "10pt 0 0",
   },
   text: {
     // fontSize: 15,
@@ -71,19 +78,22 @@ const styles = StyleSheet.create({
     // opacity: 0.85,
   },
   title: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: 500,
     opacity: 1,
     display: "block",
+    // lineHeight: 1.8,
   },
   subTitle: {
-    fontSize: 8,
+    fontSize: 10,
     display: "block",
+    lineHeight: 1.6,
   },
   date: {
     display: "block",
-    fontSize: 6,
+    fontSize: 8,
     fontStyle: "italic",
+    lineHeight: 1.6,
   },
   image: {
     width: 150,
@@ -94,12 +104,24 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   listItem: {
-    fontStyle: "italic",
+    // fontStyle: "italic",
     paddingLeft: "20pt",
     display: "block",
+    // lineHeight: 1.,
+    // fontSize: 15
   },
   block: {
-    marginTop: 10,
+    marginTop: 12,
+  },
+  social: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: 'center'
+  },
+  icon: {
+    width: 20,
+    height: 20,
+    display: "block",
   },
 });
 
@@ -114,6 +136,7 @@ export const MyDocument = ({ data }) => {
     certifications,
     languages,
   } = data;
+
   // const { firebase } = useContext(FirebaseContext);
   // const { user } = useAuthListener();
   // const [photoUrl, setPhotoUrl] = useState("");
@@ -144,8 +167,8 @@ export const MyDocument = ({ data }) => {
                 alignItems: "center",
               }}
             >
-              {/* <Image style={styles.image} src={""} /> */}
-              <View style={{ padding: "10pt 5pt"}}>
+              {/* <Image style={styles.image} src={photoUrl} /> */}
+              <View style={{ padding: "10pt 5pt" }}>
                 <Text style={styles.name}>
                   {personalInfo.firstName + " " + personalInfo.lastName}
                 </Text>
@@ -184,7 +207,11 @@ export const MyDocument = ({ data }) => {
                       {Object.values(item.highlights).map(
                         (highlight, index) => (
                           <Text
-                            style={styles.listItem}
+                            style={
+                              index === 0
+                                ? { ...styles.listItem, marginTop: 3 }
+                                : { ...styles.listItem, marginTop: 1 }
+                            }
                             key={`highligh- ${index + 1}`}
                           >
                             {`- ${highlight}`}
@@ -225,10 +252,18 @@ export const MyDocument = ({ data }) => {
                 {references.map((item, id) => (
                   <View style={id ? styles.block : {}} key={`ref-${id + 1}`}>
                     <Text style={styles.title}>{item.fullName}</Text>
-                    <Text style={{ display: "block" }}>{item.jobTitle}</Text>
-                    <Text style={{ display: "block" }}>{item.email}</Text>
-                    <Text style={{ display: "block" }}>{item.phoneNo}</Text>
-                    <Text style={{ display: "block" }}>{item.location}</Text>
+                    <Text style={{ display: "block", marginTop: "2pt" }}>
+                      {item.jobTitle}
+                    </Text>
+                    <Text style={{ display: "block", marginTop: "2pt" }}>
+                      {item.email}
+                    </Text>
+                    <Text style={{ display: "block", marginTop: "2pt" }}>
+                      {item.phoneNo}
+                    </Text>
+                    <Text style={{ display: "block", marginTop: "2pt" }}>
+                      {item.location}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -241,10 +276,31 @@ export const MyDocument = ({ data }) => {
                 {personalInfo.phoneNumber}
               </Text>
               <Text style={{ display: "block" }}>{personalInfo.email}</Text>
-              <View style={{display:'flex', justifyContent:'space-between'}}>
-                <Text>TW</Text>
-                <Text>LN</Text>
-                <Text>FB</Text>
+              <View style={{ display: "flex", flexDirection: "column" }}>
+                <View style={styles.social}>
+                  <Image 
+                    src={Twitter} 
+                    style={styles.icon} 
+                    name="twitter"   
+                  />
+                  <Text>{personalInfo.twitter}</Text>
+                </View>
+                <View style={styles.social}>
+                  <Image 
+                    src={Facebook} 
+                    style={styles.icon} 
+                    name="facebook" 
+                  />
+                  <Text>{personalInfo.facebook}</Text>
+                </View>
+                <View style={styles.social}>
+                  <Image 
+                    src={LinkedIn} 
+                    style={styles.icon} 
+                    name="linkedin" 
+                  />
+                  <Text>{personalInfo.linkedIn}</Text>
+                </View>
               </View>
             </View>
 
@@ -253,7 +309,10 @@ export const MyDocument = ({ data }) => {
                 <Text style={styles.heading}>Skills</Text>
                 <View>
                   {skills.map((item, id) => (
-                    <Text key={`skill-${id + 1}`} style={{ display: "block", marginTop: '3pt' }}>
+                    <Text
+                      key={`skill-${id + 1}`}
+                      style={{ display: "block", marginTop: "3pt" }}
+                    >
                       {item}
                     </Text>
                   ))}

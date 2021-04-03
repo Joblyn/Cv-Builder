@@ -126,6 +126,6 @@ export default function Contact() {
         </div>
         {isSent && <RequestSuccessful setIsSent={setIsSent} />}
       </div> 
-      <FooterContainer/>
+      <FooterContainer style={{marginTop: '5rem'}}/>
     </>
 }

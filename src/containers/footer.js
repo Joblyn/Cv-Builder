@@ -2,9 +2,9 @@ import React from 'react';
 import { Footer } from '../components';
 import * as ROUTES from '../constants/routes';
 
-export default function FooterContainer(){
+export default function FooterContainer({ ...restProps }){
   return (
-    <Footer>
+    <Footer {...restProps}>
       <Footer.Row className="p-2 pt-5">
         <Footer.Column className="col-md-4 col-lg-4 col-sm-12">
           <Footer.Brand />
