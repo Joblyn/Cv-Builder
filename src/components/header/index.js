@@ -16,7 +16,8 @@ import {
   Icon,
   Item,
 } from "./styles/header";
-import { AiOutlineMenu } from "react-icons/ai";
+// import { AiOutlineMenu } from "react-icons/ai";
+import { BiMenuAltRight } from 'react-icons/bi';
 import { Spinner } from "../loading";
 
 export default function Header({ expand, bg, children, restProps }) {
@@ -38,7 +39,8 @@ Header.Brand = function HeaderBrand({ to, ...restProps }) {
 Header.Toggle = function HeaderToggle({ ...restProps }) {
   return (
     <Toggle {...restProps}>
-      <AiOutlineMenu />
+      <BiMenuAltRight style={{color: '#216de0',
+  border: 'none',}} size={27}/>
     </Toggle>
   );
 };

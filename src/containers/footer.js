@@ -25,7 +25,7 @@ export default function FooterContainer({ ...restProps }){
             Office Address:
             24 Lekki Street Lagos, Nigeria
             </Footer.Link>
-            <Footer.Link to="#">Call: 090 - 000 - 0000</Footer.Link>
+            <Footer.Link to="#">Call: 081 - 3676 - 7175</Footer.Link>
             <Footer.Link to="#">Email: hello@resumebuilder.com</Footer.Link>
           </Footer.Content>
         </Footer.Column>

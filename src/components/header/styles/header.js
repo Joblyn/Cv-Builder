@@ -31,7 +31,13 @@ export const Brand = styled(ReactRouterLink)`
   }
 `;
 
-export const Toggle = styled(Navbar.Toggle)``;
+export const Toggle = styled(Navbar.Toggle)`
+  border: none;
+
+  :focus {
+    outline: none;
+  }
+`;
 
 export const Group = styled(Nav)`
   margin-left: ${({ type }) => (type === "user" ? "0" : "auto")};

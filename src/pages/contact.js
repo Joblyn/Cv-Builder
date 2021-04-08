@@ -70,7 +70,7 @@ export default function Contact() {
             </Info.Group>
             <Info.Group>
               <Info.Icon src="./icons/phone.svg"/>
-              <Info.Contact>090 - 000 - 0000</Info.Contact>
+              <Info.Contact>081 - 3676 - 7175</Info.Contact>
             </Info.Group>
             <Info.Group>
               <Info.Icon src="./icons/mail.svg"/>
