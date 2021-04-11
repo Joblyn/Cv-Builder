@@ -121,14 +121,14 @@ export const Item = styled.div`
 export const NavButton = styled(Button)`
   margin: 0 1rem;
   text-decoration: none;
-  padding: 1rem 2rem;
+  padding: .8rem 2rem;
   background-color: #216de0;
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 29px;
   border-radius: 6px;
   color: #fff;
-  box-shadow: 0px 1px 20px -10px #216de0;
+  ${'' /* box-shadow: 0px 1px 20px -10px #216de0; */}
   border: none;
   cursor: pointer;
 

@@ -1,6 +1,4 @@
-import React, { 
-  // useContext, useState, useEffect 
-} from "react";
+import React from "react"; // useContext, useState, useEffect
 import { useSelector } from "react-redux";
 import {
   Page,
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
   social: {
     display: "flex",
     flexDirection: "row",
-    alignItems: 'center'
+    alignItems: "center",
   },
   icon: {
     width: 20,
@@ -170,14 +168,15 @@ export const MyDocument = ({ data }) => {
               {/* <Image style={styles.image} src={photoUrl} /> */}
               <View style={{ padding: "10pt 5pt" }}>
                 <Text style={styles.name}>
-                  {personalInfo.firstName + " " + personalInfo.lastName}
+                  {(personalInfo.firstName || personalInfo.lastName) &&
+                    personalInfo.firstName + " " + personalInfo.lastName}
                 </Text>
-                <Text style={styles.jobTitle}>{personalInfo.jobTitle}</Text>
+                <Text style={styles.jobTitle}>{personalInfo.jobTitle && personalInfo.jobTitle}</Text>
               </View>
             </View>
             <View style={styles.section}>
               <Text style={styles.heading}> Professional Statement </Text>
-              <Text style={styles.text}>{personalInfo.otherInfo}</Text>
+              <Text style={styles.text}>{personalInfo.otherInfo && personalInfo.otherInfo}</Text>
             </View>
             {workExperience.length && (
               <View style={styles.section}>
@@ -271,36 +270,40 @@ export const MyDocument = ({ data }) => {
           </View>
           <View style={styles.column2}>
             <View style={{ height: 150 }}>
-              <Text style={{ display: "block" }}>{personalInfo.location}</Text>
-              <Text style={{ display: "block" }}>
-                {personalInfo.phoneNumber}
-              </Text>
-              <Text style={{ display: "block" }}>{personalInfo.email}</Text>
+              {personalInfo.location && (
+                <Text style={{ display: "block" }}>
+                  {personalInfo.location}
+                </Text>
+              )}
+              {personalInfo.phoneNumber && (
+                <Text style={{ display: "block" }}>
+                  {personalInfo.phoneNumber}
+                </Text>
+              )}
+              {personalInfo.email && (
+                <Text style={{ display: "block" }}>{personalInfo.email}</Text>
+              )}
               <View style={{ display: "flex", flexDirection: "column" }}>
-                <View style={styles.social}>
-                  <Image 
-                    src={Twitter} 
-                    style={styles.icon} 
-                    name="twitter"   
-                  />
-                  <Text>{personalInfo.twitter}</Text>
-                </View>
-                <View style={styles.social}>
-                  <Image 
-                    src={Facebook} 
-                    style={styles.icon} 
-                    name="facebook" 
-                  />
-                  <Text>{personalInfo.facebook}</Text>
-                </View>
-                <View style={styles.social}>
-                  <Image 
-                    src={LinkedIn} 
-                    style={styles.icon} 
-                    name="linkedin" 
-                  />
-                  <Text>{personalInfo.linkedIn}</Text>
-                </View>
+                {personalInfo.twitter && (
+                  <View style={styles.social}>
+                    <Image src={Twitter} style={styles.icon} name="twitter" />
+                    <Text>{personalInfo.twitter}</Text>
+                  </View>
+                )}
+                {personalInfo.facebook && (
+                  <View style={styles.social}>
+                    <Image src={Facebook} style={styles.icon} name="facebook" />
+                    <Text>
+                      {personalInfo.facebook && personalInfo.facebook}
+                    </Text>
+                  </View>
+                )}
+                {personalInfo.linkedIn && (
+                  <View style={styles.social}>
+                    <Image src={LinkedIn} style={styles.icon} name="linkedin" />
+                    <Text>{personalInfo.linkedIn}</Text>
+                  </View>
+                )}
               </View>
             </View>
 
