@@ -28,7 +28,8 @@ export const Caption = styled.h1`
   text-align: left;
 
   @media(max-width:1000px) {
-    font-size: 45px;
+    ${'' /* font-size: 45px; */}
+    font-size: 3rem;
     line-height: normal;
   }
 `;

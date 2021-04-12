@@ -11,6 +11,7 @@ export default function HomeHeader() {
   const [active, setActive] = useState(false);
   const { user } = useAuthListener();
   const [photoUrl, setPhotoUrl] = useState();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -50,7 +51,11 @@ export default function HomeHeader() {
         <Header.Brand to={ROUTES.HOME} />
         {location === ROUTES.SIGN_IN || location === ROUTES.SIGN_UP ? null : (
           <>
-            <Header.Toggle aria-controls="basic-navbar-nav" />
+            <Header.Toggle
+              aria-controls="basic-navbar-nav"
+              onClick={() => setShow(!show)}
+              show = {show}
+            />
             <Header.Collapse id="basic-navbar-nav">
               <Header.Group>
                 <Header.Link

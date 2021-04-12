@@ -16,8 +16,8 @@ import {
   Icon,
   Item,
 } from "./styles/header";
-import { 
-  // AiOutlineMenu, 
+import {
+  // AiOutlineMenu,
   AiOutlineAlignCenter,
   AiOutlineClose,
 } from "react-icons/ai";
@@ -40,12 +40,20 @@ Header.Brand = function HeaderBrand({ to, ...restProps }) {
   );
 };
 
-Header.Toggle = function HeaderToggle({ ...restProps }) {
+Header.Toggle = function HeaderToggle({ show, ...restProps }) {
   return (
     <Toggle {...restProps}>
-      <AiOutlineAlignCenter style={{color: '#216de0',
-  border: 'none',}} size={27}/>
-      
+      {show ? (
+        <AiOutlineClose
+          style={{ color: "#216de0", border: "none" }}
+          size={27}
+        />
+      ) : (
+        <AiOutlineAlignCenter
+          style={{ color: "#216de0", border: "none" }}
+          size={27}
+        />
+      )}
     </Toggle>
   );
 };

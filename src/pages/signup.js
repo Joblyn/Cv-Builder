@@ -8,6 +8,7 @@ import { Spinner } from "../components/loading";
 import { SignUpSuccessful } from "../components/request-success";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { useHistory } from "react-router";
+// import { googleSignUp } from "../actions/google";
 
 export default function SignUp() {
   const { firebase } = useContext(FirebaseContext);
@@ -53,6 +54,28 @@ export default function SignUp() {
       }, 3000);
     };
   }, [success, history]);
+
+  const googleSignUp = () => {
+    var provider = new firebase.auth.GoogleAuthProvider(); 
+    provider.addScope('profile');
+    provider.addScope('email');
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(result => {
+        var credential = result.credential;
+        var token = credential.accessToken;
+        var user = result.user;
+        console.log('token', token);
+        console.log('user', user);
+      }) 
+      .catch(error => {
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        // var credential = error.credential;
+      })
+  };
 
   const togglePasswordView = () => {
     let target = document.querySelector("#password");
@@ -103,7 +126,7 @@ export default function SignUp() {
                 type="password"
                 value={password}
                 id="password"
-                onChange={({ target }) => setPassword(target.value)}
+                onChange={({ target }) => setPassword(target.value)}s
               />
             </div>
             <Form.Text type="note">
@@ -117,7 +140,7 @@ export default function SignUp() {
         <div className="alt">
           <p>Create account with:</p>
           <div>
-            <BrandIcon src="./icons/brands/google.svg" />
+            <BrandIcon src="./icons/brands/google.svg" onClick={googleSignUp}/>
             <BrandIcon src="./icons/brands/linkedIn.svg" />
             <BrandIcon src="./icons/brands/facebook.svg" />
           </div>

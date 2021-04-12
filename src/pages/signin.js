@@ -15,7 +15,7 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
-  const handleSignup = e => {
+  const handleSignIn = e => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -35,12 +35,32 @@ export default function SignUp() {
       })
   };
 
+  const googleSignIn = () => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(result => {
+        var credential = result.credential;
+        var token = credential.accessToken;
+        var user = result.user;
+        console.log('user', user);
+        console.log('token', token)
+      }) 
+      .catch(error => {
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+        // var credential = error.credential;
+      })
+  };
+
   return (
     <>
       <HomeHeader />
       <div className="sign-up">
         <img src="./images/sign-up-bg.svg" className="bg-img" alt='' />
-        <Form id="sign-in" onSubmit={handleSignup} marginLeft="5%">
+        <Form id="sign-in" onSubmit={handleSignIn} marginLeft="5%">
           <Form.Title>Welcome back!</Form.Title>
           <Form.Text>Login to continue!</Form.Text>
           {error && <Form.Error fontSize='1.05rem'>{error}</Form.Error>}
@@ -74,7 +94,7 @@ export default function SignUp() {
         <div className="alt">
           <p>Log In with:</p>
           <div>
-            <BrandIcon src='./icons/brands/google.svg' />
+            <BrandIcon src='./icons/brands/google.svg' onClick={googleSignIn}/>
             <BrandIcon src='./icons/brands/linkedIn.svg' />
             <BrandIcon src='./icons/brands/facebook.svg' />
           </div>
