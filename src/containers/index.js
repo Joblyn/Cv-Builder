@@ -6,4 +6,5 @@ export { default as TestimonialsSection } from './testimonials-section';
 export { default as FooterContainer } from './footer';
 export { default as AboutContainer } from './about';
 export { default as ResumeHeader } from './resume-header';
+export { default as Parent } from './parent';
 

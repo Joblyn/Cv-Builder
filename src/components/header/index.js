@@ -23,6 +23,7 @@ import {
 } from "react-icons/ai";
 // import { BiMenuAltRight } from 'react-icons/bi';
 import { Spinner } from "../loading";
+import ProgressiveImage from "react-progressive-image";
 
 export default function Header({ expand, bg, children, restProps }) {
   return (
@@ -40,17 +41,17 @@ Header.Brand = function HeaderBrand({ to, ...restProps }) {
   );
 };
 
-Header.Toggle = function HeaderToggle({ show, ...restProps }) {
+Header.Toggle = function HeaderToggle({ show, resume, ...restProps }) {
   return (
     <Toggle {...restProps}>
       {show ? (
         <AiOutlineClose
-          style={{ color: "#216de0", border: "none" }}
+          style={{ color: resume ? "ffffff": "#216de0", border: "none" }}
           size={27}
         />
       ) : (
         <AiOutlineAlignCenter
-          style={{ color: "#216de0", border: "none" }}
+          style={{ color: resume ? "ffffff": "#216de0", border: "none" }}
           size={27}
         />
       )}
@@ -91,17 +92,21 @@ Header.User = function HeaderUser({ photoURL, displayName, ...restProps }) {
     <User {...restProps}>
       {displayName ? (
         <>
-          {photoURL ? (
-            <img
-              src={photoURL}
-              width={35}
-              height={35}
-              alt=""
-              style={{ borderRadius: "50%" }}
-            />
-          ) : (
-            <Avatar icon={faUserCircle} />
-          )}
+          <ProgressiveImage src={photoURL} placeholder={photoURL}>
+            {src =>
+              src ? (
+                <img
+                  src={src}
+                  width={35}
+                  height={35}
+                  alt=""
+                  style={{ borderRadius: "50%" }}
+                />
+              ) : (
+                <Avatar icon={faUserCircle} size='2x' />
+              )
+            }
+          </ProgressiveImage>
           <UserName>{displayName}</UserName>
         </>
       ) : (

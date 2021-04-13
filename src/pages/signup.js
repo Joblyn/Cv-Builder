@@ -8,6 +8,7 @@ import { Spinner } from "../components/loading";
 import { SignUpSuccessful } from "../components/request-success";
 import { BsEyeSlash, BsEye } from "react-icons/bs";
 import { useHistory } from "react-router";
+import ProgressiveImage from "react-progressive-image";
 // import { googleSignUp } from "../actions/google";
 
 export default function SignUp() {
@@ -92,7 +93,11 @@ export default function SignUp() {
       {success && <SignUpSuccessful />}
       <HomeHeader />
       <div className="sign-up">
-        <img src="./images/sign-up-bg.svg" className="bg-img" alt="" />
+        <ProgressiveImage src="./images/sign-up-bg.svg" placeholder="./images/sign-up-bg.svg">
+          {(src, loading) => (
+            <img src={src} style={{ opacity: loading ? 0.5 : 1 }} className="bg-img" alt="" />
+          )}
+        </ProgressiveImage>
         <Form id="sign-up" onSubmit={handleSignup} marginLeft="5%">
           <Form.Title>Create Account</Form.Title>
           <Form.Text>Register your account!</Form.Text>
@@ -155,7 +160,11 @@ export default function SignUp() {
           <Aside.Text>Already have an account?</Aside.Text>
           <Aside.Button href={ROUTES.SIGN_IN}>Log In</Aside.Button>
         </Aside.Group>
-        <Aside.Image src="./images/sign-up-aside.svg" />
+        <ProgressiveImage src="./images/sign-up-aside.svg" placeholder="./images/sign-up-aside.svg">
+          {(src, loading) => (
+            <Aside.Image src={src} style={{ opacity: loading ? 0.5 : 1 }}/>
+          )}
+        </ProgressiveImage>
       </Aside>
     </>
   );

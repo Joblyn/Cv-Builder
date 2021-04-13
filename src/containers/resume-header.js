@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { IoMdEye } from "react-icons/io";
 import { AiOutlineDownload } from "react-icons/ai";
-import { 
-  // PDFDownloadLink, 
-  pdf 
+import {
+  // PDFDownloadLink,
+  pdf,
 } from "@react-pdf/renderer";
 import { Header } from "../components";
 import * as ROUTES from "../constants/routes";
@@ -19,6 +19,7 @@ export default function ResumeHeader() {
   const [active, setActive] = useState(false);
   const [photoUrl, setPhotoUrl] = useState();
   const data = useSelector((state) => state.resumeData);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -76,7 +77,12 @@ export default function ResumeHeader() {
     user && (
       <Header bg="blue" expand="md">
         <Header.Brand to={ROUTES.HOME} type="dashboard" />
-        <Header.Toggle aria-controls="basic-navbar-nav" />
+        <Header.Toggle
+          aria-controls="basic-navbar-nav"
+          onClick={() => setShow(!show)}
+          show={show}
+          resume
+        />
         <Header.Collapse id="basic-navbar-nav">
           <Header.Group>
             <Header.TextLink type="header" to={ROUTES.PREVIEW_RESUME}>
@@ -85,15 +91,19 @@ export default function ResumeHeader() {
               </Header.Icon>
               Preview Resume
             </Header.TextLink>
-            {window.location.pathname === ROUTES.PREVIEW_RESUME ? <Header.TextLink
-              type="header"
-              onClick={() => savePdf(<MyDocument data={data} />, "resume.pdf")}
-            >
-              <Header.Icon>
-                <AiOutlineDownload />
-              </Header.Icon>
-              Download
-            </Header.TextLink> : null}
+            {window.location.pathname === ROUTES.PREVIEW_RESUME ? (
+              <Header.TextLink
+                type="header"
+                onClick={() =>
+                  savePdf(<MyDocument data={data} />, "resume.pdf")
+                }
+              >
+                <Header.Icon>
+                  <AiOutlineDownload />
+                </Header.Icon>
+                Download
+              </Header.TextLink>
+            ) : null}
             {/* {
               // Without a queue, render would happen in parallel, accessing the same
               // stream, which will lead to "Error: stream.push() after EOF".

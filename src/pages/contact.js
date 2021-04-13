@@ -4,6 +4,7 @@ import { Info, Form } from "../components";
 import { RequestSuccessful } from '../components/request-success';
 import { Spinner } from '../components/loading';
 import { FirebaseContext } from '../context/firebase';
+import ProgressiveImage from 'react-progressive-image';
 
 export default function Contact() {
   const [email, setEmail] = useState('');
@@ -55,8 +56,10 @@ export default function Contact() {
 
     return <>
       <HomeHeader/>
-      <div className="abt-page">
-       <img src="./images/contact.svg" alt='' className="bg-img"/>
+      <div className="abt-page progressive">
+        <ProgressiveImage src="./images/contact.svg" placeholder="">
+          {src => <img src={src} alt='' className="bg-img" />}
+        </ProgressiveImage>
          <div className="abt-cont">
           <Info>
             <Info.Heading>Contact Us</Info.Heading>

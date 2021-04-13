@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom";
 
 export const LockBody = createGlobalStyle`
   body { 
-    overflow: hidden
+    ${'' /* overflowY: auto;
+    overflowX: none; */}
   };
 `;
 export const Base = styled.div`
@@ -11,10 +12,12 @@ export const Base = styled.div`
     position: absolute;
     left: ${({ showNav }) => (showNav ? "0" : "-280px")};
     top: 0;
-    height: calc(100vh - (57.59px + 1.2rem));
+    height: 100%;
     background: #f8f8f8;
-    transition: all 0.4s ease-in-out;
+    transition: all 0.2s ease-in-out;
     z-index: 10;
+    overflow-y: auto;
+    overflow-x: none;
   }
 `;
 export const Container = styled.nav`
@@ -41,6 +44,7 @@ export const Overlay = styled.div`
   top: 0;
   left: 0;
   z-index: 1;
+  height: 100%;
   @media (max-width: 992px) {
     display: block;
     visibility: ${({ showNav }) => showNav ? 'visible' : 'hidden'};

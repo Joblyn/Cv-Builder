@@ -7,6 +7,7 @@ import { Loading } from "./components/loading";
 import { useAuthListener } from "./hooks";
 import { IsUserRedirect, ProtectedRoute } from "./helpers/routes";
 import Resume from './pages/resume';
+// import { Parent } from './containers';
 import { ResumeDoc } from './components';
 
 const Home = lazy(() => import("./pages/home"));
@@ -31,23 +32,19 @@ export default function App() {
     <Router>
       <Suspense fallback={<Loading />}>
         <Switch>
-          <Route exact path={ROUTES.HOME}>
-            <Home />
-          </Route>
-          <Route exact path={ROUTES.ABOUT}>
-            <About />
-          </Route>
-          <Route exact path={ROUTES.CONTACT}>
-            <Contact />
-          </Route>
-          <Route exact path={ROUTES.SIGN_UP} component={SignUp} />
-          <IsUserRedirect
-            user={user}
-            loggedInPath={ROUTES.PERS_INFO}
-            path={ROUTES.SIGN_IN}
-          >
-            <SignIn />
-          </IsUserRedirect>
+          {/* <Parent> */}
+            <Route exact path={ROUTES.HOME} component={Home} />
+            <Route exact path={ROUTES.ABOUT} component={About}/>
+            <Route exact path={ROUTES.CONTACT} component={Contact}/>
+            <Route exact path={ROUTES.SIGN_UP} component={SignUp} />
+            <IsUserRedirect
+              user={user}
+              loggedInPath={ROUTES.PERS_INFO}
+              path={ROUTES.SIGN_IN}
+            >
+              <SignIn />
+            </IsUserRedirect>
+          {/* </Parent> */}
 
           <Resume>
             <ProtectedRoute exact user={user} path={ROUTES.PERS_INFO} component={PersonalInfo} />

@@ -130,11 +130,13 @@ export default function Resume({ children }) {
         <div
           className={`resume-form-cont`}
           style={
-            (location === ROUTES.PREVIEW_RESUME) ? {
-              width: "100%",
-              maxWidth: "1000px",
-              margin: "0 auto",
-            } : {}
+            location === ROUTES.PREVIEW_RESUME
+              ? {
+                  width: "100%",
+                  maxWidth: "1000px",
+                  margin: "0 auto",
+                }
+              : { overflowY: `${showNav ? "hidden" : "auto"}` }
           }
         >
           {children}

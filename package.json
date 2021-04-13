@@ -17,12 +17,14 @@
     "jquery": "^3.5.1",
     "node-libs-browser": "^2.2.1",
     "normalize.css": "^8.0.1",
+    "progressive-image": "^1.2.0",
     "queue": "^6.0.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",
     "react-pdf": "^5.1.0",
+    "react-progressive-image": "^0.6.0",
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
@@ -57,6 +59,11 @@
     ]
   },
   "devDependencies": {
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^9.0.0",
     "redux-devtools": "^3.7.0"
   }
 }
