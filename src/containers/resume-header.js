@@ -11,7 +11,6 @@ import { FirebaseContext } from "../context/firebase";
 import { useAuthListener } from "../hooks";
 import { MyDocument } from "../components/resumeDoc";
 import { useSelector } from "react-redux";
-// import queue from "queue";
 
 export default function ResumeHeader() {
   const { firebase } = useContext(FirebaseContext);
@@ -52,11 +51,6 @@ export default function ResumeHeader() {
         console.log(error.message);
       });
   };
-
-  // const renderQueue = queue({
-  //   autostart: true, // Directly start when pushing.
-  //   concurrency: 1, // One concurrent job => run in series.
-  // });
 
   const saveBlob = (blob, filename) => {
     var a = document.createElement("a");
@@ -104,34 +98,6 @@ export default function ResumeHeader() {
                 Download
               </Header.TextLink>
             ) : null}
-            {/* {
-              // Without a queue, render would happen in parallel, accessing the same
-              // stream, which will lead to "Error: stream.push() after EOF".
-              renderQueue.push(() => (
-                <PDFDownloadLink
-                  document={<MyDocument data={data} />}
-                  fileName="resume.pdf"
-                  style={{
-                    color: "#fff",
-                    textDecoration: "none",
-                    marginLeft: "3rem",
-                  }}
-                >
-                  {({ blob, url, loading, error }) => {
-                    return loading ? (
-                      "Loading document... "
-                    ) : (
-                      <>
-                        <Header.Icon>
-                          <AiOutlineDownload />
-                        </Header.Icon>
-                        Download
-                      </>
-                    );
-                  }}
-                </PDFDownloadLink>
-              ))
-            } */}
             <Header.User
               displayName={user.displayName}
               photoURL={photoUrl}

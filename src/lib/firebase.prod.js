@@ -1,7 +1,7 @@
-import Firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import 'firebase/storage';
+import Firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/storage";
 
 const config = {
   apiKey: "AIzaSyASOat6CaIWxzwnepoGBHDpltnf9jH1QH0",
@@ -11,7 +11,7 @@ const config = {
   storageBucket: "cv-builder-c0429.appspot.com",
   messagingSenderId: "345713103785",
   appId: "1:345713103785:web:a5e9fa0e81052f80d46ab8",
-  measurementId: "G-XBCF2TTQ2R"
+  measurementId: "G-XBCF2TTQ2R",
 };
 
 const firebase = Firebase.initializeApp(config);

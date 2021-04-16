@@ -1,4 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React
+//  { useContext, useState, useEffect } 
+ from "react";
 import { useSelector } from "react-redux";
 import {
   Page,
@@ -10,8 +12,8 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 import { pdfjs } from "react-pdf";
-import { FirebaseContext } from "../context/firebase";
-import { useAuthListener } from "../hooks";
+// import { FirebaseContext } from "../context/firebase";
+// import { useAuthListener } from "../hooks";
 import { Loading } from "./loading";
 import Twitter from "../icons/twitter.png";
 import Facebook from "../icons/facebook.png";
@@ -135,21 +137,21 @@ export const MyDocument = ({ data }) => {
     languages,
   } = data;
 
-  const { firebase } = useContext(FirebaseContext);
-  const { user } = useAuthListener();
-  const [photoUrl, setPhotoUrl] = useState("");
+  // const { firebase } = useContext(FirebaseContext);
+  // const { user } = useAuthListener();
+  // const [photoUrl, setPhotoUrl] = useState("");
 
-  useEffect(() => {
-    if (user) {
-      firebase
-        .storage()
-        .ref("users/" + user.uid + "/profile.jpg")
-        .getDownloadURL()
-        .then((imgUrl) => {
-          setPhotoUrl(imgUrl);
-        });
-    }
-  }, [firebase, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     firebase
+  //       .storage()
+  //       .ref("users/" + user.uid + "/profile.jpg")
+  //       .getDownloadURL()
+  //       .then((imgUrl) => {
+  //         setPhotoUrl(imgUrl);
+  //       });
+  //   }
+  // }, [firebase, user]);
 
   return (
     data && (
@@ -165,7 +167,7 @@ export const MyDocument = ({ data }) => {
                 alignItems: "center",
               }}
             >
-              <Image style={styles.image} src={photoUrl} />
+              {/* {photoUrl ? <Image style={styles.image} src={photoUrl} alt="profile" /> : ''} */}
               <View style={{ padding: "10pt 5pt" }}>
                 <Text style={styles.name}>
                   {(personalInfo.firstName || personalInfo.lastName) &&
@@ -286,13 +288,13 @@ export const MyDocument = ({ data }) => {
               <View style={{ display: "flex", flexDirection: "column" }}>
                 {personalInfo.twitter && (
                   <View style={styles.social}>
-                    <Image src={Twitter} style={styles.icon} name="twitter" />
+                    <Image src={Twitter} style={styles.icon} name="twitter" alt="" />
                     <Text>{personalInfo.twitter}</Text>
                   </View>
                 )}
                 {personalInfo.facebook && (
                   <View style={styles.social}>
-                    <Image src={Facebook} style={styles.icon} name="facebook" />
+                    <Image src={Facebook} style={styles.icon} name="facebook" alt="" />
                     <Text>
                       {personalInfo.facebook && personalInfo.facebook}
                     </Text>
@@ -300,7 +302,7 @@ export const MyDocument = ({ data }) => {
                 )}
                 {personalInfo.linkedIn && (
                   <View style={styles.social}>
-                    <Image src={LinkedIn} style={styles.icon} name="linkedin" />
+                    <Image src={LinkedIn} style={styles.icon} name="linkedin" alt="" />
                     <Text>{personalInfo.linkedIn}</Text>
                   </View>
                 )}
