@@ -38,24 +38,15 @@ export default function SignUp() {
 
   const googleSignIn = () => {
     var provider = new firebase.auth.GoogleAuthProvider();
-
-    firebase
-      .auth()
+      
+      firebase.auth()
       .signInWithPopup(provider)
       .then((result) => {
-        var credential = result.credential;
-        var token = credential.accessToken;
-        var user = result.user;
-        console.log("user", user);
-        console.log("token", token);
-      })
-      .catch((error) => {
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        // var credential = error.credential;
+        /** @type {firebase.auth.OAuthCredential} */
+      }).catch((error) => {
+        console.log(error);
       });
   };
-  console.log(googleSignIn);
 
 
   return (
@@ -102,17 +93,18 @@ export default function SignUp() {
           </Form.Button>
         </Form>
 
-        <div className="alt">
+        {/* <div className="alt">
           <p>Log In with:</p>
           <div>
             <BrandIcon src="./icons/brands/google.svg" 
+              onClick={googleSignIn}
             />
             <BrandIcon src="./icons/brands/linkedIn.svg" />
             <BrandIcon src="./icons/brands/facebook.svg" />
           </div>
-        </div>
+        </div> */}
         <Form.Text showOnlyOnSmallView>
-          Don't have an account?{" "}
+          Don't have an account?
           <Form.Link to={ROUTES.SIGN_UP}>Sign up</Form.Link>
         </Form.Text>
       </div>

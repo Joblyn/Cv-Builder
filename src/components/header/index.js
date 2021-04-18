@@ -87,9 +87,9 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
   return <Group {...restProps}>{children}</Group>;
 };
 
-Header.User = function HeaderUser({ photoURL, displayName, ...restProps }) {
+Header.User = function HeaderUser({ photoURL, displayName, showOnlyOnLargeViewPort, ...restProps }) {
   return (
-    <User {...restProps}>
+    <User showOnlyOnLargeViewPort {...restProps}>
       {displayName ? (
         <>
           <ProgressiveImage src={photoURL} placeholder={photoURL}>

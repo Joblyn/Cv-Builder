@@ -101,10 +101,19 @@ export default function ResumeHeader() {
             <Header.User
               displayName={user.displayName}
               photoURL={photoUrl}
+              onClick={() => setActive(!active)}
+              onMouseEnter={() => setActive(true)}
+              showOnlyOnSmallViewPort
+            />
+            <Header.User
+              displayName={user.displayName}
+              photoURL={photoUrl}
+              onClick={() => setActive(!active)}
               onMouseEnter={() => setActive(true)}
               onMouseLeave={() => setActive(false)}
+              showOnlyOnLargeViewPort
             />
-            <Header.UserNav
+            <Header.UserNav 
               active={active}
               onMouseEnter={() => setActive(true)}
               onMouseLeave={() => setActive(false)}

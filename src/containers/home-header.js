@@ -54,7 +54,7 @@ export default function HomeHeader() {
             <Header.Toggle
               aria-controls="basic-navbar-nav"
               onClick={() => setShow(!show)}
-              show = {show}
+              show={show}
             />
             <Header.Collapse id="basic-navbar-nav">
               <Header.Group>
@@ -81,8 +81,17 @@ export default function HomeHeader() {
                     <Header.User
                       displayName={user.displayName}
                       photoURL={photoUrl}
+                      onClick={() => setActive(!active)}
+                      onMouseEnter={() => setActive(true)}
+                      showOnlyOnSmallViewPort
+                    />
+                    <Header.User
+                      displayName={user.displayName}
+                      photoURL={photoUrl}
+                      onClick={() => setActive(!active)}
                       onMouseEnter={() => setActive(true)}
                       onMouseLeave={() => setActive(false)}
+                      showOnlyOnLargeViewPort
                     />
                     <Header.UserNav
                       active={active}
