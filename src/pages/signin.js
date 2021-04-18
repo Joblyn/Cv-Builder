@@ -93,7 +93,7 @@ export default function SignUp() {
           </Form.Button>
         </Form>
 
-        {/* <div className="alt">
+        <div className="alt">
           <p>Log In with:</p>
           <div>
             <BrandIcon src="./icons/brands/google.svg" 
@@ -102,7 +102,7 @@ export default function SignUp() {
             <BrandIcon src="./icons/brands/linkedIn.svg" />
             <BrandIcon src="./icons/brands/facebook.svg" />
           </div>
-        </div> */}
+        </div>
         <Form.Text showOnlyOnSmallView>
           Don't have an account?
           <Form.Link to={ROUTES.SIGN_UP}>Sign up</Form.Link>
