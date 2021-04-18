@@ -140,14 +140,14 @@ export default function SignUp() {
             {isLoading ? <Spinner /> : "Sign Up"}
           </Form.Button>
         </Form>
-        {/* <div className="alt">
+        <div className="alt">
           <p>Create account with:</p>
           <div>
             <BrandIcon src="./icons/brands/google.svg" onClick={}/>
             <BrandIcon src="./icons/brands/linkedIn.svg" />
             <BrandIcon src="./icons/brands/facebook.svg" />
           </div>
-        </div> */}
+        </div>
         <Form.Text showOnlyOnSmallView>
           Already have an account?{" "}
           <Form.Link to={ROUTES.SIGN_IN}>Log in</Form.Link>
