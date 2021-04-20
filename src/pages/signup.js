@@ -72,9 +72,7 @@ export default function SignUp() {
         console.log('user', user);
       }) 
       .catch(error => {
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        // var credential = error.credential;
+        console.log(error);
       })
   };
 
@@ -119,6 +117,7 @@ export default function SignUp() {
               value={email}
               id="email"
               onChange={({ target }) => setEmail(target.value)}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -131,7 +130,8 @@ export default function SignUp() {
                 type="password"
                 value={password}
                 id="password"
-                onChange={({ target }) => setPassword(target.value)}s
+                onChange={({ target }) => setPassword(target.value)}
+                required
               />
             </div>
             <Form.Text type="note">
@@ -142,14 +142,14 @@ export default function SignUp() {
             {isLoading ? <Spinner /> : "Sign Up"}
           </Form.Button>
         </Form>
-        <div className="alt">
+        {/* <div className="alt">
           <p>Create account with:</p>
           <div>
-            <BrandIcon src="./icons/brands/google.svg" onClick={googleSignUp}/>
+            <BrandIcon src="./icons/brands/google.svg" onClick={}/>
             <BrandIcon src="./icons/brands/linkedIn.svg" />
             <BrandIcon src="./icons/brands/facebook.svg" />
           </div>
-        </div>
+        </div> */}
         <Form.Text showOnlyOnSmallView>
           Already have an account?{" "}
           <Form.Link to={ROUTES.SIGN_IN}>Log in</Form.Link>

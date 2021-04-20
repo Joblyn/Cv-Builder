@@ -176,23 +176,23 @@ export const MyDocument = ({ data }) => {
                 <Text style={styles.jobTitle}>{personalInfo.jobTitle && personalInfo.jobTitle}</Text>
               </View>
             </View>
-            <View style={styles.section}>
-              <Text style={styles.heading}> Professional Statement </Text>
-              <Text style={styles.text}>{personalInfo.otherInfo && personalInfo.otherInfo}</Text>
-            </View>
+            {personalInfo.otherInfo && <View style={styles.section}>
+              <Text style={styles.heading}>Professional Statement </Text>
+              <Text style={{...styles.text, minHeight: 50}}>{personalInfo.otherInfo}</Text>
+            </View>}
             {workExperience.length && (
               <View style={styles.section}>
-                <Text style={styles.heading}> Work experience </Text>
+                {(workExperience[0].jobTitle || workExperience[0].companyName) && <Text style={styles.heading}>Work experience</Text>}
                 {workExperience.map((item, id) => (
                   <View
-                    style={id ? styles.block : {}}
+                    style={id ? {...styles.block, minHeight: 80} : {minHeight: 80}}
                     key={`work-exp-${id + 1}`}
                   >
                     <Text style={styles.title}>
-                      {`${item.jobTitle} - ${item.company}`}
+                      {(item.jobTitle && item.companyName) ? `${item.jobTitle} - ${item.company}` : ''}
                     </Text>
                     <Text style={styles.subTitle}>
-                      {item.city + " " + item.country}
+                      {(item.city && item.country) ? item.city + " " + item.country : ''}
                     </Text>
                     {item.month.end === "present" ||
                     item.year.end === "present" ? (
@@ -201,7 +201,7 @@ export const MyDocument = ({ data }) => {
                       </Text>
                     ) : (
                       <Text style={styles.date}>
-                        {`${item.month.start} ${item.year.start} - ${item.month.end} ${item.year.end}`}
+                        {`${item.month.start} ${item.year.start} ${item.month.end && (`, ${item.month.end}`)} ${item.year.end}`}
                       </Text>
                     )}
                     <View style={styles.list}>
@@ -215,7 +215,7 @@ export const MyDocument = ({ data }) => {
                             }
                             key={`highligh- ${index + 1}`}
                           >
-                            {`- ${highlight}`}
+                            {highlight && `- ${highlight}`}
                           </Text>
                         )
                       )}
@@ -226,12 +226,12 @@ export const MyDocument = ({ data }) => {
             )}
             {education.length && (
               <View style={styles.section}>
-                <Text style={styles.heading}>Education</Text>
+                {education[0].institutionName && <Text style={styles.heading}>Education</Text>}
                 {education.map((item, id) => (
-                  <View style={id ? styles.block : {}} key={`edu-${id + 1}`}>
-                    <Text style={styles.title}>{item.institutionName}</Text>
+                  <View style={id ? styles.block : {minHeight: 20}} key={`edu-${id + 1}`}>
+                    <Text style={styles.title}>{item.institutionName && item.institutionName}</Text>
                     <Text style={styles.subTitle}>
-                      {`${item.city}, ${item.country}`}
+                      {`${item.city && item.city}${item.country  && (`, ${item.country}`)}`}
                     </Text>
                     {item.month.end === "present" ||
                     item.year.end === "present" ? (
@@ -240,7 +240,7 @@ export const MyDocument = ({ data }) => {
                       </Text>
                     ) : (
                       <Text style={styles.date}>
-                        {`${item.month.start} ${item.year.start} - ${item.month.end} ${item.year.end}`}
+                        {`${item.month.start} ${item.year.start} ${item.month.end && (`- ${item.month.end}`)} ${item.year.end}`}
                       </Text>
                     )}
                   </View>
@@ -248,8 +248,8 @@ export const MyDocument = ({ data }) => {
               </View>
             )}
             {references.length && (
-              <View style={styles.section}>
-                <Text style={styles.heading}>Referrals</Text>
+              <View style={{...styles.section, minHeight: 30}}>
+                {references[0].fullName && <Text style={styles.heading}>Referrals</Text>}
                 {references.map((item, id) => (
                   <View style={id ? styles.block : {}} key={`ref-${id + 1}`}>
                     <Text style={styles.title}>{item.fullName}</Text>
@@ -309,7 +309,7 @@ export const MyDocument = ({ data }) => {
               </View>
             </View>
 
-            {skills.length && (
+            {skills.length > 0 && (
               <View style={styles.section}>
                 <Text style={styles.heading}>Skills</Text>
                 <View>
@@ -325,7 +325,7 @@ export const MyDocument = ({ data }) => {
               </View>
             )}
 
-            {achievements.length && (
+            {achievements.length > 0 && (
               <View style={styles.section}>
                 <Text style={styles.heading}>Achievements</Text>
                 <View>
@@ -341,7 +341,7 @@ export const MyDocument = ({ data }) => {
               </View>
             )}
 
-            {certifications.length && (
+            {certifications.length > 0 && (
               <View style={styles.section}>
                 <Text style={styles.heading}>Certifications</Text>
                 <View>
@@ -360,7 +360,7 @@ export const MyDocument = ({ data }) => {
               </View>
             )}
 
-            {languages.length && (
+            {languages.length > 0 && (
               <View style={styles.section}>
                 <Text style={styles.heading}>Languages</Text>
                 <View>

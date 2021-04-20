@@ -184,6 +184,14 @@ export const User = styled.div`
   @media (min-width: 768px) {
     margin-left: 5rem;
   }
+
+  @media (max-width: 992px) {
+    ${({ showOnlyOnLargeViewPort }) => showOnlyOnLargeViewPort && 'display: none'};
+  };
+
+  @media (min-width: 992px) {
+    ${({ showOnlyOnSmallViewPort }) => showOnlyOnSmallViewPort && 'display: none'};
+  }
 `;
 
 export const Avatar = styled(FontAwesomeIcon)`

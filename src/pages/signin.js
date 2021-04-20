@@ -1,13 +1,15 @@
 import React, { useState, useContext } from "react";
-import { FirebaseContext } from "../context/firebase";
+import { useHistory } from "react-router";
 import ProgressiveImage from "react-progressive-image";
-import { HomeHeader } from '../containers';
+// import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
+import { FirebaseContext } from "../context/firebase";
+import { HomeHeader } from '../containers';
 import { Form, Aside } from "../components";
 import { BrandIcon } from "../components/icons";
 import * as ROUTES from "../constants/routes";
 import { Spinner } from "../components/loading";
-import { useHistory } from "react-router";
+// import { provider } from '../lib/firebase.prod';
 
 export default function SignUp() {
   const history = useHistory();
@@ -36,26 +38,25 @@ export default function SignUp() {
       });
   };
 
-  const googleSignIn = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
+  const googleSignUp = () => {
+    var provider = new firebase.auth.GoogleAuthProvider(); 
+    provider.addScope('profile');
+    provider.addScope('email');
 
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then((result) => {
+      .then(result => {
         var credential = result.credential;
         var token = credential.accessToken;
         var user = result.user;
-        console.log("user", user);
-        console.log("token", token);
+        console.log('token', token);
+        console.log('user', user);
+      }) 
+      .catch(error => {
+        console.log(error);
       })
-      .catch((error) => {
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
-        // var credential = error.credential;
-      });
   };
-  console.log(googleSignIn);
 
 
   return (
@@ -86,6 +87,7 @@ export default function SignUp() {
               value={email}
               id="email"
               onChange={({ target }) => setEmail(target.value)}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -95,6 +97,7 @@ export default function SignUp() {
               value={password}
               id="password"
               onChange={({ target }) => setPassword(target.value)}
+              required
             />
           </Form.Group>
           <Form.Button form="sign-in" type="submit" disabled={isLoading}>
@@ -102,17 +105,18 @@ export default function SignUp() {
           </Form.Button>
         </Form>
 
-        <div className="alt">
+        {/* <div className="alt">
           <p>Log In with:</p>
           <div>
             <BrandIcon src="./icons/brands/google.svg" 
+              onClick={googleSignIn}
             />
             <BrandIcon src="./icons/brands/linkedIn.svg" />
             <BrandIcon src="./icons/brands/facebook.svg" />
           </div>
-        </div>
+        </div> */}
         <Form.Text showOnlyOnSmallView>
-          Don't have an account?{" "}
+          Don't have an account?
           <Form.Link to={ROUTES.SIGN_UP}>Sign up</Form.Link>
         </Form.Text>
       </div>
