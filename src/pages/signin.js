@@ -38,26 +38,17 @@ export default function SignUp() {
       });
   };
 
-  const googleSignUp = () => {
-    var provider = new firebase.auth.GoogleAuthProvider(); 
-    provider.addScope('profile');
-    provider.addScope('email');
-
-    firebase
-      .auth()
+  const googleSignIn = () => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+      
+      firebase.auth()
       .signInWithPopup(provider)
-      .then(result => {
-        var credential = result.credential;
-        var token = credential.accessToken;
-        var user = result.user;
-        console.log('token', token);
-        console.log('user', user);
-      }) 
-      .catch(error => {
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+      }).catch((error) => {
         console.log(error);
-      })
+      });
   };
-
 
   return (
     <>
