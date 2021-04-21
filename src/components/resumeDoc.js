@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "#fff",
-    padding: 10,
+    padding: 20,
     fontSize: 10,
     opacity: 0.85,
     lineHeight: 1.4,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 10,
     color: "#216DE0",
-    fontWeight: 600,
+    fontWeight: 'bolder',
     textTransform: "uppercase",
     letterSpacing: 1,
     marginBottom: 5,
@@ -165,7 +165,7 @@ export const MyDocument = ({ data }) => {
       <Document
         title={`${personalInfo.firstName + personalInfo.lastName}_resume`}
       >
-        <Page style={styles.page}>
+        <Page size="A4" style={styles.page}>
           <View style={styles.column1}>
             <View
               style={{

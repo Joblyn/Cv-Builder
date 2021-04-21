@@ -12,7 +12,7 @@ export default function Resume({ children }) {
   const location = window.location.pathname;
   const [showNav, setShowNav] = useState(false);
 
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
 
   const resumeNav = $("#resume-nav");
@@ -132,7 +132,7 @@ export default function Resume({ children }) {
           </>
         )}
         <div
-          className={isLoading ? '' : "resume-form-cont"}
+          className={location === ROUTES.PREVIEW_RESUME ? (isLoading ? '' : "resume-form-cont") : 'resume-form-cont'}
           style={
             location === ROUTES.PREVIEW_RESUME
               ? {
