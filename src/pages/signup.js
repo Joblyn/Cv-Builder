@@ -77,7 +77,6 @@ export default function SignUp() {
   };
   console.log(googleSignUp);
 
-
   const togglePasswordView = () => {
     let target = document.querySelector("#password");
     setPasswordView((prevState) => !prevState);
