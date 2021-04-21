@@ -14,9 +14,9 @@ export function Loading() {
   )
 };
 
-export function Spinner({ ...restProps }){
+export function Spinner({loadingPdf, ...restProps }){
   return (
-    <div className="lds-ring" {...restProps}>
+    <div className={`lds-ring ${loadingPdf && 'pdfLoader'}`} {...restProps}>
       <div></div>
       <div></div>
       <div></div>

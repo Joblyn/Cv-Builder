@@ -6,9 +6,10 @@ import ProgressiveImage from "react-progressive-image";
 import { FirebaseContext } from "../context/firebase";
 import { HomeHeader } from '../containers';
 import { Form, Aside } from "../components";
-import { BrandIcon } from "../components/icons";
+// import { BrandIcon } from "../components/icons";
 import * as ROUTES from "../constants/routes";
 import { Spinner } from "../components/loading";
+import { ForgotPasswordPopup } from "../components/request-success";
 // import { provider } from '../lib/firebase.prod';
 
 export default function SignUp() {
@@ -18,6 +19,7 @@ export default function SignUp() {
   const [password, setPassword] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const [resetPasswordPopup, setResetPasswordPopupsetPopUp] = useState(false);
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -49,6 +51,7 @@ export default function SignUp() {
         console.log(error);
       });
   };
+  console.log(googleSignIn); 
 
   return (
     <>
@@ -91,11 +94,14 @@ export default function SignUp() {
               required
             />
           </Form.Group>
-          <Form.Button form="sign-in" type="submit" disabled={isLoading}>
+          <Form.Text style={{textAlign: 'right', marginTop: '1.2rem'}}>
+            <Form.Link onClick={() => setResetPasswordPopupsetPopUp(true)}>Forgot password?</Form.Link>
+          </Form.Text>
+          <Form.Button form="sign-in" type="submit" disabled={isLoading} style={{ marginTop: '3rem'}}>
             {isLoading ? <Spinner /> : "Log In"}
           </Form.Button>
         </Form>
-
+        {resetPasswordPopup && <ForgotPasswordPopup setResetPasswordPopupsetPopUp={setResetPasswordPopupsetPopUp}/>}
         {/* <div className="alt">
           <p>Log In with:</p>
           <div>
@@ -107,7 +113,7 @@ export default function SignUp() {
           </div>
         </div> */}
         <Form.Text showOnlyOnSmallView>
-          Don't have an account?
+          Don't have an account?{" "}
           <Form.Link to={ROUTES.SIGN_UP}>Sign up</Form.Link>
         </Form.Text>
       </div>

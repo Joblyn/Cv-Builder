@@ -17,6 +17,10 @@
   animation: lds-ring 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #fff transparent transparent transparent;
 }
+.pdfLoader div {
+  border: 2px solid  #216de0 !important; 
+  border-color:  #216de0 transparent transparent transparent!important;
+}
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }

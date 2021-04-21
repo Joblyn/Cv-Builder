@@ -8,7 +8,7 @@ export const LockBody = createGlobalStyle`
   }
 `;
 export const Overlay = styled.div`
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -21,7 +21,7 @@ export const Container = styled.div`
   position: relative;
   top: 50%;
   left: 50%;
-  width: 100%;
+  width: 90%;
   max-width: 800px;
   transform: translate(-50%, -50%);
   padding: 5rem 1rem;
@@ -100,13 +100,13 @@ export const Icon = styled(FontAwesomeIcon)`
 `; 
 export const Notice = styled.p`
   font-style: normal;
-  font-weight: 600;
-  font-size: 36.9412px;
+  font-weight: 500;
+  font-size: 20px;
   line-height: 45px;
   color: #2E2E2E;
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 20px;
     line-height: normal;
   }
 `; 

@@ -8,7 +8,7 @@ export const LockBody = createGlobalStyle`
     overflow: hidden;
     position: relative;
     width: 100vw;
-    height: 100vh; 
+    height: ${({ resumeLoading }) => resumeLoading ? '100%' : '100vh'}; 
   }
 `;
 

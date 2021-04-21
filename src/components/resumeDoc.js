@@ -1,6 +1,10 @@
-import React
-//  { useContext, useState, useEffect } 
- from "react";
+import React, {
+  // useContext,
+  // useState,
+  useEffect,
+  // createContext,
+  useContext,
+} from "react";
 import { useSelector } from "react-redux";
 import {
   Page,
@@ -14,10 +18,13 @@ import {
 import { pdfjs } from "react-pdf";
 // import { FirebaseContext } from "../context/firebase";
 // import { useAuthListener } from "../hooks";
-import { Loading } from "./loading";
+// import { Loading } from "./isLoading";
 import Twitter from "../icons/twitter.png";
 import Facebook from "../icons/facebook.png";
 import LinkedIn from "../icons/linkedin.png";
+import { Spinner } from "./loading";
+import { LockBody } from "./loading/styles/loading";
+import { PdfLoaderContext } from '../context/pdfLoader';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -38,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flexGrow: 1,
     // justifyContent: "space-between",
-    width: "70%",
+    width: "65%",
   },
   column2: {
     padding: 15,
@@ -46,7 +53,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexGrow: 1,
     flexDirection: "column",
-    width: "30%",
+    width: "35%",
   },
   name: {
     fontSize: 23,
@@ -59,9 +66,9 @@ const styles = StyleSheet.create({
     color: "orange",
   },
   heading: {
-    fontSize: 12,
+    fontSize: 10,
     color: "#216DE0",
-    fontWeight: 800,
+    fontWeight: 600,
     textTransform: "uppercase",
     letterSpacing: 1,
     marginBottom: 5,
@@ -105,7 +112,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     // fontStyle: "italic",
-    paddingLeft: "20pt",
+    paddingLeft: "10pt",
     display: "block",
     // lineHeight: 1.,
     // fontSize: 15
@@ -173,26 +180,35 @@ export const MyDocument = ({ data }) => {
                   {(personalInfo.firstName || personalInfo.lastName) &&
                     personalInfo.firstName + " " + personalInfo.lastName}
                 </Text>
-                <Text style={styles.jobTitle}>{personalInfo.jobTitle && personalInfo.jobTitle}</Text>
+                <Text style={styles.jobTitle}>
+                  {personalInfo.jobTitle && personalInfo.jobTitle}
+                </Text>
               </View>
             </View>
-            {personalInfo.otherInfo && <View style={styles.section}>
-              <Text style={styles.heading}>Professional Statement </Text>
-              <Text style={{...styles.text, minHeight: 50}}>{personalInfo.otherInfo}</Text>
-            </View>}
+            {personalInfo.otherInfo && (
+              <View style={styles.section}>
+                <Text style={styles.heading}>Professional Statement </Text>
+                <Text style={{ ...styles.text }}>{personalInfo.otherInfo}</Text>
+              </View>
+            )}
             {workExperience.length && (
               <View style={styles.section}>
-                {(workExperience[0].jobTitle || workExperience[0].companyName) && <Text style={styles.heading}>Work experience</Text>}
+                {(workExperience[0].jobTitle ||
+                  workExperience[0].companyName) && (
+                  <Text style={styles.heading}>Work experience</Text>
+                )}
                 {workExperience.map((item, id) => (
                   <View
-                    style={id ? {...styles.block, minHeight: 80} : {minHeight: 80}}
+                    style={id ? { ...styles.block } : {}}
                     key={`work-exp-${id + 1}`}
                   >
                     <Text style={styles.title}>
-                      {(item.jobTitle && item.companyName) ? `${item.jobTitle} - ${item.company}` : ''}
+                      {`${item.jobTitle ? item.jobTitle : ''} ${item.company ? `- ${item.company}` : ''}`}
                     </Text>
                     <Text style={styles.subTitle}>
-                      {(item.city && item.country) ? item.city + " " + item.country : ''}
+                      {item.city && item.country
+                        ? item.city + " " + item.country
+                        : ""}
                     </Text>
                     {item.month.end === "present" ||
                     item.year.end === "present" ? (
@@ -201,7 +217,9 @@ export const MyDocument = ({ data }) => {
                       </Text>
                     ) : (
                       <Text style={styles.date}>
-                        {`${item.month.start} ${item.year.start} ${item.month.end && (`, ${item.month.end}`)} ${item.year.end}`}
+                        {`${item.month.start} ${item.year.start} ${
+                          item.month.end && `, ${item.month.end}`
+                        } ${item.year.end}`}
                       </Text>
                     )}
                     <View style={styles.list}>
@@ -215,7 +233,7 @@ export const MyDocument = ({ data }) => {
                             }
                             key={`highligh- ${index + 1}`}
                           >
-                            {highlight && `- ${highlight}`}
+                            {highlight && `* ${highlight}`}
                           </Text>
                         )
                       )}
@@ -226,12 +244,21 @@ export const MyDocument = ({ data }) => {
             )}
             {education.length && (
               <View style={styles.section}>
-                {education[0].institutionName && <Text style={styles.heading}>Education</Text>}
+                {education[0].institutionName && (
+                  <Text style={styles.heading}>Education</Text>
+                )}
                 {education.map((item, id) => (
-                  <View style={id ? styles.block : {minHeight: 20}} key={`edu-${id + 1}`}>
-                    <Text style={styles.title}>{item.institutionName && item.institutionName}</Text>
+                  <View
+                    style={id ? styles.block : { minHeight: 20 }}
+                    key={`edu-${id + 1}`}
+                  >
+                    <Text style={styles.title}>
+                      {item.institutionName && item.institutionName}
+                    </Text>
                     <Text style={styles.subTitle}>
-                      {`${item.city && item.city}${item.country  && (`, ${item.country}`)}`}
+                      {`${item.city && item.city}${
+                        item.country && `, ${item.country}`
+                      }`}
                     </Text>
                     {item.month.end === "present" ||
                     item.year.end === "present" ? (
@@ -240,7 +267,9 @@ export const MyDocument = ({ data }) => {
                       </Text>
                     ) : (
                       <Text style={styles.date}>
-                        {`${item.month.start} ${item.year.start} ${item.month.end && (`- ${item.month.end}`)} ${item.year.end}`}
+                        {`${item.month.start} ${item.year.start} ${
+                          item.month.end && `- ${item.month.end}`
+                        } ${item.year.end}`}
                       </Text>
                     )}
                   </View>
@@ -248,8 +277,10 @@ export const MyDocument = ({ data }) => {
               </View>
             )}
             {references.length && (
-              <View style={{...styles.section, minHeight: 30}}>
-                {references[0].fullName && <Text style={styles.heading}>Referrals</Text>}
+              <View style={{ ...styles.section, minHeight: 30 }}>
+                {references[0].fullName && (
+                  <Text style={styles.heading}>Referrals</Text>
+                )}
                 {references.map((item, id) => (
                   <View style={id ? styles.block : {}} key={`ref-${id + 1}`}>
                     <Text style={styles.title}>{item.fullName}</Text>
@@ -271,7 +302,7 @@ export const MyDocument = ({ data }) => {
             )}
           </View>
           <View style={styles.column2}>
-            <View style={{ height: 150 }}>
+            <View style={{ marginBottom: 10 }}>
               {personalInfo.location && (
                 <Text style={{ display: "block" }}>
                   {personalInfo.location}
@@ -288,13 +319,23 @@ export const MyDocument = ({ data }) => {
               <View style={{ display: "flex", flexDirection: "column" }}>
                 {personalInfo.twitter && (
                   <View style={styles.social}>
-                    <Image src={Twitter} style={styles.icon} name="twitter" alt="" />
+                    <Image
+                      src={Twitter}
+                      style={styles.icon}
+                      name="twitter"
+                      alt=""
+                    />
                     <Text>{personalInfo.twitter}</Text>
                   </View>
                 )}
                 {personalInfo.facebook && (
                   <View style={styles.social}>
-                    <Image src={Facebook} style={styles.icon} name="facebook" alt="" />
+                    <Image
+                      src={Facebook}
+                      style={styles.icon}
+                      name="facebook"
+                      alt=""
+                    />
                     <Text>
                       {personalInfo.facebook && personalInfo.facebook}
                     </Text>
@@ -302,7 +343,12 @@ export const MyDocument = ({ data }) => {
                 )}
                 {personalInfo.linkedIn && (
                   <View style={styles.social}>
-                    <Image src={LinkedIn} style={styles.icon} name="linkedin" alt="" />
+                    <Image
+                      src={LinkedIn}
+                      style={styles.icon}
+                      name="linkedin"
+                      alt=""
+                    />
                     <Text>{personalInfo.linkedIn}</Text>
                   </View>
                 )}
@@ -311,7 +357,9 @@ export const MyDocument = ({ data }) => {
 
             {skills.length > 0 && (
               <View style={styles.section}>
-                <Text style={styles.heading}>Skills</Text>
+                {skills[0].length > 0 && (
+                  <Text style={styles.heading}>Skills</Text>
+                )}
                 <View>
                   {skills.map((item, id) => (
                     <Text
@@ -327,7 +375,9 @@ export const MyDocument = ({ data }) => {
 
             {achievements.length > 0 && (
               <View style={styles.section}>
-                <Text style={styles.heading}>Achievements</Text>
+                {achievements[0].achievement && (
+                  <Text style={styles.heading}>Achievements</Text>
+                )}
                 <View>
                   {achievements.map((item, id) => (
                     <Text
@@ -343,7 +393,9 @@ export const MyDocument = ({ data }) => {
 
             {certifications.length > 0 && (
               <View style={styles.section}>
-                <Text style={styles.heading}>Certifications</Text>
+                {certifications[0].name && (
+                  <Text style={styles.heading}>Certifications</Text>
+                )}
                 <View>
                   {certifications.map((item, id) => (
                     <View
@@ -351,9 +403,9 @@ export const MyDocument = ({ data }) => {
                       style={{ display: "block", marginTop: "3pt" }}
                     >
                       <Text>{item.name}</Text>
-                      <Text
-                        style={{ fontStyle: "italic" }}
-                      >{` - ${item.year}`}</Text>
+                      <Text style={{ fontStyle: "italic" }}>
+                        {item.year && ` - ${item.year}`}
+                      </Text>
                     </View>
                   ))}
                 </View>
@@ -362,7 +414,9 @@ export const MyDocument = ({ data }) => {
 
             {languages.length > 0 && (
               <View style={styles.section}>
-                <Text style={styles.heading}>Languages</Text>
+                {languages[0].length > 0 && (
+                  <Text style={styles.heading}>Languages</Text>
+                )}
                 <View>
                   {languages.map((item, id) => (
                     <Text style={{ display: "block" }} key={`lang-${id + 1}`}>
@@ -379,8 +433,24 @@ export const MyDocument = ({ data }) => {
   );
 };
 
+
 export default function ResumeDoc() {
   const data = useSelector((state) => state.resumeData);
+  const { isLoading, setIsLoading } = useContext(PdfLoaderContext);
 
-  return data ? <MyDocument data={data} /> : <Loading />;
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 3000);
+  }, [isLoading, setIsLoading]);
+
+  return isLoading ? (
+    <div className="d-flex flex-column align-items-center justify-content-center h-100 position-relative">
+      <LockBody resumeLoading />
+      <div style={{ marginTop: '-15rem'}}>
+        <Spinner loadingPdf />
+        <div>Processing...</div>
+      </div>
+    </div>
+  ) : (
+    <MyDocument data={data} />
+  );
 }

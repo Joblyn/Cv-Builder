@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { FirebaseContext } from "../context/firebase";
 import { HomeHeader } from "../containers";
 import { Form, Aside } from "../components";
-import { BrandIcon } from "../components/icons";
+// import { BrandIcon } from "../components/icons";
 import * as ROUTES from "../constants/routes";
 import { Spinner } from "../components/loading";
 import { SignUpSuccessful } from "../components/request-success";
@@ -75,6 +75,8 @@ export default function SignUp() {
         console.log(error);
       })
   };
+  console.log(googleSignUp);
+
 
   const togglePasswordView = () => {
     let target = document.querySelector("#password");
@@ -138,7 +140,7 @@ export default function SignUp() {
               Password should be at least 6 characters.
             </Form.Text>
           </Form.Group>
-          <Form.Button form="sign-up" type="submit" disabled={isLoading}>
+          <Form.Button form="sign-up" type="submit" disabled={isLoading} style={{ marginTop: '3rem'}}>
             {isLoading ? <Spinner /> : "Sign Up"}
           </Form.Button>
         </Form>

@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom";
 
 export const LockBody = createGlobalStyle`
   body { 
-    ${'' /* overflowY: auto;
-    overflowX: none; */}
+    overflow: hidden;
   };
 `;
 export const Base = styled.div`

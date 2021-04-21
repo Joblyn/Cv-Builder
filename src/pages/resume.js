@@ -6,10 +6,14 @@ import { ResumeNav } from "../components";
 import items from "../fixtures/resume.json";
 import * as ROUTES from "../constants/routes";
 import "../app.css";
+import { PdfLoaderContext } from '../context/pdfLoader';
 
 export default function Resume({ children }) {
   const location = window.location.pathname;
   const [showNav, setShowNav] = useState(false);
+
+  const [isLoading, setIsLoading] = useState();
+
 
   const resumeNav = $("#resume-nav");
   // const arrRight = $('#arr-right');
@@ -108,7 +112,7 @@ export default function Resume({ children }) {
               <BsArrowRight />
             </ResumeNav.Icon>
             {<ResumeNav.Overlay showNav={showNav} />}
-            {showNav && <ResumeNav.LockBody />}
+            {/* {showNav && <ResumeNav.LockBody />} */}
             <ResumeNav.Base id="resume-nav" showNav={showNav}>
               <ResumeNav>
                 {items.map((item) => (
@@ -128,7 +132,7 @@ export default function Resume({ children }) {
           </>
         )}
         <div
-          className={`resume-form-cont`}
+          className={isLoading ? '' : "resume-form-cont"}
           style={
             location === ROUTES.PREVIEW_RESUME
               ? {
@@ -139,7 +143,9 @@ export default function Resume({ children }) {
               : { overflowY: `${showNav ? "hidden" : "auto"}` }
           }
         >
-          {children}
+          <PdfLoaderContext.Provider value={{ isLoading, setIsLoading }}>
+            {children}
+          </PdfLoaderContext.Provider>
         </div>
       </div>
     </>

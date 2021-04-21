@@ -171,7 +171,7 @@ export const UserNav = styled.nav`
 
 export const User = styled.div`
   position: relative;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: start;
   background: #216de0;
@@ -185,12 +185,12 @@ export const User = styled.div`
     margin-left: 5rem;
   }
 
-  @media (max-width: 992px) {
-    ${({ showOnlyOnLargeViewPort }) => showOnlyOnLargeViewPort && 'display: none'};
+  @media (min-width: 992px) {
+    ${({ showOnlyOnLargeViewPort }) => showOnlyOnLargeViewPort && 'display: flex'};
   };
 
-  @media (min-width: 992px) {
-    ${({ showOnlyOnSmallViewPort }) => showOnlyOnSmallViewPort && 'display: none'};
+  @media (max-width: 992px) {
+    ${({ showOnlyOnSmallViewPort }) => showOnlyOnSmallViewPort && 'display: flex'};
   }
 `;
 

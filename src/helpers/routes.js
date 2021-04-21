@@ -30,7 +30,7 @@ export function ProtectedRoute({ component: Component, user, children, ...restPr
       {...restProps}
       render = {({ location }) => {
         if(user) {
-          return <Component />
+          return <Component {...restProps}/>
         } 
         if(!user) {
           return (
