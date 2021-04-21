@@ -1,6 +1,7 @@
 {
   "name": "cv-builder",
   "version": "0.1.0",
+  "homepage": "https://cv-builder-c0429.web.app/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
