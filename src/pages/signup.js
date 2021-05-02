@@ -56,26 +56,26 @@ export default function SignUp() {
     };
   }, [success, history]);
 
-  const googleSignUp = () => {
-    var provider = new firebase.auth.GoogleAuthProvider(); 
-    provider.addScope('profile');
-    provider.addScope('email');
+  // const googleSignUp = () => {
+  //   var provider = new firebase.auth.GoogleAuthProvider(); 
+  //   provider.addScope('profile');
+  //   provider.addScope('email');
 
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(result => {
-        var credential = result.credential;
-        var token = credential.accessToken;
-        var user = result.user;
-        console.log('token', token);
-        console.log('user', user);
-      }) 
-      .catch(error => {
-        console.log(error);
-      })
-  };
-  console.log(googleSignUp);
+  //   firebase
+  //     .auth()
+  //     .signInWithPopup(provider)
+  //     .then(result => {
+  //       var credential = result.credential;
+  //       var token = credential.accessToken;
+  //       var user = result.user;
+  //       console.log('token', token);
+  //       console.log('user', user);
+  //     }) 
+  //     .catch(error => {
+  //       console.log(error);
+  //     })
+  // };
+  // console.log(googleSignUp);
 
   const togglePasswordView = () => {
     let target = document.querySelector("#password");

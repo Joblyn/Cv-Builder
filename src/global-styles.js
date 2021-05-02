@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components/macro';
+import { createGlobalStyle } from "styled-components/macro";
 
 export const GlobalStyles = createGlobalStyle`
   html, body {
@@ -6,7 +6,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
     height: 100%;
     width: 100%;
-    ${'' /* font-smoothing: antialised; */}
+    ${"" /* font-smoothing: antialised; */}
     -webkit-font-smoothing: antialised;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Inter', sans-serif;
@@ -14,8 +14,9 @@ export const GlobalStyles = createGlobalStyle`
     font-smooth: auto;
 
     &::-webkit-scrollbar {
-      width: 5px;
-      background-color: #fff;    }
+      width: 3px;
+      background-color: #fff;    
+      }
 
     &::-webkit-scrollbar-thumb {
       background-color: rgba(33, 109, 224, 1);

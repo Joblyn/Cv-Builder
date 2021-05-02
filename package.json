@@ -15,6 +15,7 @@
     "core-js": "^3.8.2",
     "eslint-plugin-import": "^2.22.1",
     "firebase": "^8.0.2",
+    "imagemin-pngquant": "^9.0.2",
     "jquery": "^3.5.1",
     "node-libs-browser": "^2.2.1",
     "normalize.css": "^8.0.1",
@@ -42,7 +43,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "imagemin": "node ./tools/imageOptimizer.js"
   },
   "eslintConfig": {
     "extends": "react-app"

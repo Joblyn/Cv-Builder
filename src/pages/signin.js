@@ -40,18 +40,18 @@ export default function SignUp() {
       });
   };
 
-  const googleSignIn = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
+  // const googleSignIn = () => {
+  //   var provider = new firebase.auth.GoogleAuthProvider();
       
-      firebase.auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
-      }).catch((error) => {
-        console.log(error);
-      });
-  };
-  console.log(googleSignIn); 
+  //     firebase.auth()
+  //     .signInWithPopup(provider)
+  //     .then((result) => {
+  //       /** @type {firebase.auth.OAuthCredential} */
+  //     }).catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  // console.log(googleSignIn); 
 
   return (
     <>
