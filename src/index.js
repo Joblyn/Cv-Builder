@@ -9,6 +9,8 @@ import * as serviceWorker from './serviceWorker';
 import { firebase } from './lib/firebase.prod';
 import { FirebaseContext } from './context/firebase';
 import store from './store';
+// import "../public/tools/imageOptimizer";
+// import "../public/tools/lazyLoader";
 
 ReactDOM.render(
   <Provider store={store}>

@@ -21,8 +21,8 @@ Testimonials.Text = function TestimonialText({ children, ...restProps }){
   return <Text {...restProps}>{children}</Text>
 }
 
-Testimonials.Image = function TestimonialImage({ src, ...restProps }){
-  return <Image {...restProps} src={src} alt=''/>
+Testimonials.Image = function TestimonialImage({ dataSrc, src, ...restProps }){
+  return <Image {...restProps} src={src} data-src={dataSrc} alt=''/>
 }
 
 Testimonials.Profession = function TestimonialProfession({ children, ...restProps }){

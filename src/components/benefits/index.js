@@ -14,8 +14,8 @@ Benefits.Item = function BenefitsItem({ children, ...restProps }) {
   return <Item {...restProps}>{children}</Item>
 }
 
-Benefits.Icon = function BenefitsIcon({ src, ...restProps }) {
-  return <Icon {...restProps} src={src}/>
+Benefits.Icon = function BenefitsIcon({ dataSrc, ...restProps }) {
+  return <Icon {...restProps} src="" data-src={dataSrc}/>
 }
 
 Benefits.Title = function BenefitsTitle({ children, ...restProps }) {

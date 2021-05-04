@@ -9,7 +9,7 @@ export default function BenefitsSection({ user }) {
       <Benefits.Heading className="text-center col-12">Some of our benefits</Benefits.Heading>
       {benefits.map(benefit => (
         <Benefits.Item className="col-md-4 col-sm-12 col-lg-4 text-center" key={benefit.id}>
-          <Benefits.Icon src={benefit.icon}/>
+          <Benefits.Icon data-src={benefit.icon}/>
           <Benefits.Title>{benefit.title}</Benefits.Title>
           <Benefits.Text>{benefit.text}</Benefits.Text>
         </Benefits.Item>

@@ -16,7 +16,7 @@ export default function TestimonialsSection({ user }){
               <Testimonials.Inner className="progressive">
                 <Testimonials.Text>{client.testimony}</Testimonials.Text>
                 
-                <Testimonials.Image src={client.img} data-src={client.img} alt={`testimony-${client.id}`} className="preview lazy"/>
+                <Testimonials.Image src="" dataSrc={client.img} alt={`testimony-${client.id}`} className="preview lazy"/>
               </Testimonials.Inner>
               <Testimonials.Name className="text-center">{client.name}</Testimonials.Name>
               <Testimonials.Profession className="text-center">{client.job}</Testimonials.Profession>
