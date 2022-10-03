@@ -1,1 +1,2 @@
-# Resume Builder
+# CV Builder
+CV building web application
